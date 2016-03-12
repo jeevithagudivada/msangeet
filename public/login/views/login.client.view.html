@@ -1,0 +1,36 @@
+<!-- The example view -->
+<section ng-controller="LoginController as lctrl">
+    <div id="login-card" layout="row">
+        <md-card id="general-dp-card" layout="row">
+            <img flex="40" ng-src="dp.png" class="md-card-image" alt="Washed Out">
+            <div flex="60" id="general-info-card" layout="column">
+                <md-card-content>
+                    <div layout="row" layout-align="center center">
+                        <md-button id="facebook-login-button" layout="row" layout-align="space-around center">
+                            <span class="facebook-login-button-icon">
+                                    <ng-md-icon icon="facebook" style="fill:white" size="32"></ng-md-icon>
+                                </span>
+                            <label>LOGIN WITH FACEBOOK</label>
+                        </md-button>
+                    </div>
+                    <div layout-gt-sm="column" layout-align="center center">
+                        <label>Are you under age 13?</label>
+                        <md-input-container class="md-block" flex-gt-sm="">
+                            <label>Username</label>
+                            <input ng-model="user.username">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm="">
+                            <label>Password</label>
+                            <input ng-model="user.password">
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-align="center center">
+                        <md-button id="login-button" layout="row" layout-align="space-around center center">
+                            <label>LOGIN</label>
+                        </md-button>
+                    </div>
+                </md-card-content>
+            </div>
+        </md-card>
+    </div>
+</section>

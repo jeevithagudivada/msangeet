@@ -1,8 +1,3 @@
-//var app = require('./config/lib/app');
-//var server = app.start();
-//
-//module.exports = app;
-
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('./config/lib/express'),
@@ -13,7 +8,13 @@ var db = mongoose();
 var app = express();
 var passport = passport();
 
-app.listen(3000);
-module.exports = app;
+if (module === require.main) {
+    var server = app.listen(process.env.PORT || 3000, function () {
+        var host = server.address().address;
+        var port = server.address().port;
 
-console.log('Server running at http://localhost:3000/');
+        console.log('App listening at http://%s:%s', host, port);
+    });
+}
+
+module.exports = app;

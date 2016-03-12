@@ -1,0 +1,95 @@
+<section ng-controller="LoginController">
+    <div id="content" ng-controller="UserController as uctrl">
+        <div id="general" layout="row">
+            <md-card flex="30" id="general-dp-card">
+                <img ng-src="dp.png" class="md-card-image" alt="Washed Out">
+            </md-card>
+            <md-card flex="70" id="general-info-card">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">
+        		            {{uctrl.fullname}}
+        		            <nav style="float:right">
+        		              <ng-md-icon icon="facebook-box" size="24"></ng-md-icon>
+        		              <ng-md-icon icon="twitter" size="24"></ng-md-icon>
+        		              <ng-md-icon icon="linkedin-box" size="24"></ng-md-icon>
+        		              <ng-md-icon icon="person_add" size="24"></ng-md-icon>
+        		              <ng-md-icon icon="favorite" size="24"></ng-md-icon>
+        		            </nav>                
+        		          </span>
+
+                    </md-card-title-text>
+                </md-card-title>
+                <md-divider class="general-divider"></md-divider>
+                <md-card-content>
+                    <div ng-repeat="(key,value) in uctrl.generaldetails">
+                        <div class="label"><span style="color:orange">{{key}}:</span></br>{{value}}</div>
+                        </br>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+        <md-card>
+            <md-card-content ng-hide="uctrl.read_about">
+                <div class="label"><span style="color:orange">About:</span></br>{{uctrl.about_short}}</div>
+                </br>
+                <div style="float:right">
+                    <label style="color:orange" ng-click="uctrl.read_about=true;">Read more ></label>
+                </div>
+            </md-card-content>
+            <md-card-content ng-show="uctrl.read_about">
+                <div class="label"><span style="color:orange">About:</span></br>{{uctrl.about}}</div>
+                </br>
+                <div style="float:right">
+                    <label style="color:orange" ng-click="uctrl.read_about=false;">Read less ></label>
+                </div>
+            </md-card-content>
+        </md-card>
+
+        <md-card class="card-discipleship" ng-repeat="(cardHead,subHead) in uctrl.musicdetails">
+            <div id="card-orange-span" class="md-headline">{{cardHead}}</div>
+            <md-card-content layout="column" layout-align="space-between">
+                <div class="card-media" ng-repeat="(event,description) in subHead">
+                    <span class="orangeText">{{event}}</span>
+                    <br>
+                    <div ng-repeat="(key,value) in description"><span style="font-weight: bold;">{{key}}</span>{{" - "+value+"\n"}}</div>
+                    </br>
+                    </br>
+                </div>
+            </md-card-content>
+        </md-card>
+
+        <md-card class="card-tutorship">
+            <div id="card-orange-span" class="md-headline">TUTORSHIP</div>
+            <md-card-content layout="row" layout-align="space-between">
+
+                <div class="card-media" ng-repeat="(head,fields) in uctrl.tutorship">
+                    <span class="orangeText">{{head}}</span></br>
+                    <span ng-repeat="x in fields">{{x}}</br></span> </br>
+                </div>
+            </md-card-content>
+            <!--             
+<md-card-content layout="column" layout-align="space-between" ng-repeat="(address,value) in uctrl.locations">
+    <div class="stylename" style="">{{address}}</div>
+    <span ng-repeat="(fields,val) in value"><span class="orangeText"></br>{{fields}}</br></span>
+    <span ng-repeat="x in val">{{x}}</br></span>
+    </span>
+    <span id="map"></span>
+    <script>
+        function initMap() {
+            var mapDiv = document.getElementById('map');
+            var map = new google.maps.Map(mapDiv, {
+                center: {
+                    lat: 12.939846,
+                    lng: 77.553440
+                },
+                zoom: 20
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+</md-card-content>
+ -->
+        </md-card>
+    </div>
+</section>

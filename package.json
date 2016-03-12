@@ -1,34 +1,38 @@
 {
-  "name": "msangeet",
-  "version": "0.0.1",
-  "description": "msangeet profiling module",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://gitlab.com/kmurthyhegde/msangeet.git"
-  },
-  "keywords": [
+    "name": "msangeet",
+    "version": "0.0.1",
+    "description": "msangeet profiling module",
+    "main": "server.js",
+    "private": "true",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dpkm95/msangeet.git"
+    },
+    "keywords": [
     "music"
-  ],
-  "author": "dpkm95",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://gitlab.com/kmurthyhegde/msangeet/issues"
-  },
-  "homepage": "https://gitlab.com/kmurthyhegde/msangeet#readme",
-  "dependencies": {
-    "body-parser": "^1.15.0",
-    "compress": "^0.99.0",
-    "compression": "^1.6.1",
-    "express": "^4.13.3",
-    "express-session": "^1.13.0",
-    "method-override": "^2.3.5",
-    "mongoose": "^4.4.5",
-    "morgan": "^1.7.0",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
-  }
+    ],
+    "author": "dpkm95",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dpkm95/msangeet/issues"
+    },
+    "homepage": "https://github.com/dpkm95/msangeet#readme",
+    "dependencies": {
+        "body-parser": "^1.15.0",
+        "compress": "^0.99.0",
+        "compression": "^1.6.1",
+        "connect-flash": "^0.1.1",
+        "ejs": "^2.4.1",
+        "express": "^4.13.3",
+        "express-session": "^1.13.0",
+        "method-override": "^2.3.5",
+        "mongoose": "^4.4.5",
+        "morgan": "^1.7.0",
+        "passport": "^0.3.2",
+        "passport-facebook": "^2.1.0",
+        "passport-local": "^1.0.0"
+    }
 }

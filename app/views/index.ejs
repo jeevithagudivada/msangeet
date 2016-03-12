@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org">
+
+<head>
+    <!-- Use the 'title' property to render a page title  -->
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+
+    <div id="nav-bar" class="header-container" layout="row" layout-align="space-around center" ng-cloak="">
+        <div layout="row" layout-align="start center">
+            <div>mSangeet</div>
+            <div class="search-container" layout="row" layout-align="start center">
+                <span class="search-icon">
+                    <ng-md-icon icon="search" style="fill: white" size="24"></ng-md-icon>
+                </span>
+                <input type="search" id="search" placeholder="Search..." />
+            </div>
+        </div>
+
+        <nav id="top_menu" layout="row" layout-align="end center">
+            <ul>
+                <li>Menu01</li>
+                <li>Menu02</li>
+                <li>Menu03</li>
+                <li>
+                    <md-button id="logout-button">Logout</md-button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Render AngularJS views  -->
+    <div ng-view></div>
+
+    <div id="footer">
+        <div id="footer-container" layout="column">
+            <div id="info-bar" layout="row" layout-align="space-around center">
+                <div id="info-address" layout="column">
+                    <label style="font-weight: bold">mSangeet</label>
+                    </br>
+                    <div flex="33" id="office-address" class="footer-address" style="width:200px">100 Feet Ring Road, Banashankari Stage III, Bengaluru, Karnataka 560085</div>
+                </div>
+                <div id="info-subscribe" layout="column">
+                    <label style="font-weight: bold">Subscribe for newsletter</label>
+                    <div class="subscribe-email-container" flex="33" id="subscribe" class="footer-subscribe" layout="row" layout-align="center center">
+                        <span class="email-icon">
+                                <ng-md-icon icon="email" style="fill: black" size="34"></ng-md-icon>
+                            </span>
+                        <input type="text" id="subscribe-email-input" placeholder="Enter email" />
+                        <md-button id="subscribe-button">GO</md-button>
+                    </div>
+                </div>
+                <div id="info-connect" layout="column">
+                    <label style="font-weight: bold">Connect with us</label>
+                    <div flex="33" id="follow" class="footer-follow" layout="row" layout-align="center center">
+                        <ng-md-icon icon="facebook-box" class="footer-follow-element" style="fill: white" size="34"></ng-md-icon>
+                        <ng-md-icon icon="twitter" class="footer-follow-element" style="fill: white" size="34"></ng-md-icon>
+                        <ng-md-icon icon="linkedin-box" class="footer-follow-element" style="fill: white" size="34"></ng-md-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <md-divider class="divider"></md-divider>
+        <div id="licence-bar" layout="row" layout-align="center center">
+            &copy Copyright 2015, All Rights Reserved
+        </div>
+    </div>
+
+
+    <!-- Render the user object -->
+    <script type="text/javascript">
+        window.user = <%- user || 'null' %>;
+
+    </script>
+
+    <link rel="stylesheet" href="/lib/angular-material/angular-material.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/login.css">
+
+    <!-- Load local libraries -->
+    <script type="text/javascript" src="/lib/angular/angular.js"></script>
+    <script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="/lib/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="/lib/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="/lib/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="/lib/angular-messages/angular-messages.js"></script>
+    <script type="text/javascript" src="/lib/angular-material-icons/angular-material-icons.js"></script>
+
+    <!-- Load the login module -->
+    <script type="text/javascript" src="/login/login.client.module.js"></script>
+    <script type="text/javascript" src="/login/controllers/login.client.controller.js"></script>
+    <script type="text/javascript" src="/login/config/login.client.routes.js"></script>
+
+    <!-- Load the user module -->
+    <script type="text/javascript" src="/user/user.client.module.js"></script>
+    <script type="text/javascript" src="/user/services/authentication.client.service.js"></script>
+    <script type="text/javascript" src="/user/controllers/user.client.controller.js"></script>
+    <script type="text/javascript" src="/user/services/user.client.service.js"></script>
+    <script type="text/javascript" src="/user/config/user.client.routes.js"></script>
+
+    <!-- Bootstrap AngularJS application -->
+    <script type="text/javascript" src="/application.js"></script>
+</body>
+
+</html>

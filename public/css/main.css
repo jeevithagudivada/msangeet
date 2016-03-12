@@ -1,0 +1,246 @@
+html {
+    position: relative;
+    min-height: 100%;
+    background-color: #dbd9d7;
+}
+
+body {
+    background-color: #dbd9d7;
+    text-align: center;
+}
+
+div#nav-bar {
+    height: 60px;
+    color: white;
+    background-color: #2d2d39;
+    position: fixed;
+    right: 0;
+    top: 0;
+    left: 0;
+    -webkit-box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
+    -moz-box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
+    box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
+    z-index: 9999;
+}
+
+div#content {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 60px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+div#footer {
+    text-align: center;
+    color: white;
+    background-color: #2d2d39;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+div#footer-container {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 60px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+div#licence-bar {
+    height: 40px;
+}
+
+div#info-bar {
+    height: 200px;
+    /*padding-bottom: */
+}
+
+.divider {
+    border-color: #ff6600;
+}
+
+#follow-button:before {
+    padding-right: 30px;
+}
+
+#general-info-card {
+    /*width: 75%;*/
+    float: right;
+}
+
+#general-dp-card {
+    /*width: 25%;*/
+    float: left;
+}
+
+nav {
+    display: block;
+    float: right;
+}
+
+#top_menu li {
+    display: inline-block;
+    list-style: none;
+    padding: 8px;
+}
+
+#logout-button {
+    background-color: darkseagreen;
+    padding: 0 6px 0 6px;
+    margin: 6px 8px 6px 8px;
+    min-width: 88px;
+    border-radius: 3px;
+    font-size: 14px;
+    text-align: center;
+    text-transform: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+
+#subscribe-button {
+    background-color: #ff6600;
+    padding: 0 6px 0 6px;
+    margin: 6px 8px 6px 8px;
+    min-width: 88px;
+    border-radius: 3px;
+    font-size: 14px;
+    text-align: center;
+    text-transform: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+
+.search-container {
+    width: 400px;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+    padding-left: 20px;
+}
+
+.search-container input#search {
+    width: 400px;
+    height: 30px;
+    background: #2b303b;
+    border: none;
+    font-size: 10pt;
+    float: left;
+    color: #63717f;
+    padding-left: 45px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-transition: background .55s ease;
+    -moz-transition: background .55s ease;
+    -ms-transition: background .55s ease;
+    -o-transition: background .55s ease;
+    transition: background .55s ease;
+}
+
+.search-container input#search::-webkit-input-placeholder {
+    color: #65737e;
+}
+
+.search-container input#search:-moz-placeholder {
+    /* Firefox 18- */
+    color: #65737e;
+}
+
+.search-container input#search::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #65737e;
+}
+
+.search-container input#search:-ms-input-placeholder {
+    color: #65737e;
+}
+
+.search-container .search-icon {
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 5px;
+    z-index: 1;
+    color: #4f5b66;
+}
+
+.search-container input#search:hover,
+.search-container input#search:focus,
+.search-container input#search:active {
+    outline: none;
+    background: #ffffff;
+}
+
+.subscribe-email-container {
+    width: 200px;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+}
+
+.subscribe-email-container input#subscribe-email-input {
+    width: 200px;
+    height: 38px;
+    background: #ffffff;
+    border: none;
+    font-size: 10pt;
+    float: left;
+    color: #63717f;
+    padding-left: 45px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.subscribe-email-container .email-icon {
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 5px;
+    z-index: 1;
+    color: #4f5b66;
+}
+
+.stylename {
+    color: black;
+    /*font-family: 'Droid serif', serif;*/
+    /*font-size: 12px;*/
+    font-weight: 200;
+    font-style: italic;
+    line-height: 44px;
+    margin: 0 0 12px;
+}
+
+.#ff6600Text {
+    color: #ff6600;
+    text-align: left;
+    text-decoration: none;
+    /*font-size: 20px;*/
+}
+
+#card-outer-left {
+    overflow: hidden;
+    float: left;
+    padding: 10px;
+}
+
+#card-outer-right {
+    width: 140px;
+    overflow: hidden;
+    float: right;
+    padding: 10px;
+}
+
+#card-orange-span {
+    background-color: #ff6600;
+    color: white;
+    height: 10px;
+    padding: 5px;
+    display: table;
+    float: left;
+}
