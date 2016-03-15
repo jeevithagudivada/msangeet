@@ -9,12 +9,14 @@
                     <a href="/signup">Signup</a>
                     <md-card-content>
                         <div layout="row" layout-align="center center">
-                            <md-button id="facebook-login-button" layout="row" layout-align="space-around center">
-                                <span class="facebook-login-button-icon">
+                            <form action="/oauth/facebook" method="get">
+                                <md-button type="submit" id="facebook-login-button" layout="row" layout-align="space-around center">
+                                    <span class="facebook-login-button-icon">
                                         <ng-md-icon icon="facebook" style="fill:white" size="32"></ng-md-icon>
                                     </span>
-                                <label>LOGIN WITH FACEBOOK</label>
-                            </md-button>
+                                    <label>LOGIN WITH FACEBOOK</label>
+                                </md-button>
+                            </form>
                         </div>
                         <div layout-gt-sm="column" layout-align="center center">
                             <label>Are you under age 13?</label>

@@ -2,4 +2,4 @@
 'use strict';
 
 // Create the 'user' module
-angular.module('user', []);
+angular.module('user', ['ngMdIcons', 'ngMaterial']);
