@@ -34,6 +34,7 @@ var UserSchema = new Schema({
 			}, 'Password should be longer'
 		]
     },
+    hasRegistered: Boolean,
     salt: {
         type: String
     },

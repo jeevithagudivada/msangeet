@@ -21,6 +21,7 @@ module.exports = function () {
                 email: profile.emails[0].value,
                 username: profile.username,
                 provider: 'facebook',
+                hasRegistered: false,
                 providerId: profile.id,
                 providerData: providerData
             };

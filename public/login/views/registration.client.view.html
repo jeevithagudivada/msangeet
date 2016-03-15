@@ -1,0 +1,88 @@
+<div ng-controller="LoginController as lctrl">
+    <div id="registration-card" layout="row">
+        <md-card id="general-dp-card" layout="row">
+            <img flex="25" ng-src="/public/img/dp.png" class="md-card-image" alt="Washed Out">
+            <div flex="75" id="general-info-card" layout="column">
+                <md-card-content>
+                    <md-tabs class="md-accent" md-selected="lctrl.data.selectedIndex" md-align-tabs="{{lctrl.data.bottom ? 'bottom' : 'top'}}">
+                        <md-tab id="tab1">
+                            <md-tab-label>General Information</md-tab-label>
+                            <md-tab-body>
+                                <form name="userForm" ng-submit="lctrl.submitReg()">
+
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm="">
+                                            <label>First name</label>
+                                            <input ng-model="lctrl.user.firstName">
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex-gt-sm="">
+                                            <label>Last Name</label>
+                                            <input ng-model="lctrl.user.lastName">
+                                        </md-input-container>
+
+                                        <md-datepicker ng-model="lctrl.user.dateOfBirth" md-placeholder="Date of Birth">
+                                        </md-datepicker>
+                                    </div>
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm="">
+                                            <label>City</label>
+                                            <input ng-model="lctrl.user.city">
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex-gt-sm="">
+                                            <label>State</label>
+                                            <md-select ng-model="lctrl.user.state">
+                                                <md-option ng-repeat="state in lctrl.states" value="{{state.abbrev}}">
+                                                    {{state.abbrev}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex-gt-sm="">
+                                            <label>Postal Code</label>
+                                            <input name="postalCode" ng-model="lctrl.user.postalCode" placeholder="123456" required="" ng-pattern="/^[0-9]{6}$/" md-maxlength="6">
+
+                                            <div ng-messages="userForm.postalCode.$error" role="alert" multiple="">
+                                                <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                                                <div ng-message="pattern" class="my-message">That doesn't look like a valid postal code.
+                                                </div>
+                                                <div ng-message="md-maxlength" class="my-message">
+                                                    Don't use the long version silly...we don't need to be that specific...
+                                                </div>
+                                            </div>
+                                        </md-input-container>
+                                    </div>
+                                </form>
+                            </md-tab-body>
+                        </md-tab>
+                        <md-tab id="tab2">
+                            <md-tab-label>Persona Selection</md-tab-label>
+                            <md-tab-body layout="row" layout-align="space-around center">
+                                <md-card id="persona1" layout="row">
+                                    Persona1
+                                </md-card>
+                                <md-card id="persona2" layout="row">
+                                    Persona2
+                                </md-card>
+                                <md-card id="persona3" layout="row">
+                                    Persona3
+                                </md-card>
+                            </md-tab-body>
+                        </md-tab>
+                    </md-tabs>
+                </md-card-content>
+
+                <div layout="row" layout-align="space-around center">
+                    <md-button id="previous-button" ng-click="lctrl.previous()">
+                        <label>PERVIOUS</label>
+                    </md-button>
+                    <md-button id="next-button" ng-click="lctrl.next()">
+                        <label>NEXT</label>
+                    </md-button>
+                </div>
+
+            </div>
+        </md-card>
+    </div>
+</div>

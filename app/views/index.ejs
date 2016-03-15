@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <div id="nav-bar" class="header-container" layout="row" layout-align="space-around center" ng-cloak="">
         <div layout="row" layout-align="start center">
             <div>mSangeet</div>
@@ -70,16 +69,10 @@
         </div>
     </div>
 
-
-    <!-- Render the user object -->
-    <script type="text/javascript">
-        window.user = <%- user || 'null' %>;
-
-    </script>
-
     <link rel="stylesheet" href="/lib/angular-material/angular-material.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/registration.css">
 
     <!-- Load local libraries -->
     <script type="text/javascript" src="/lib/angular/angular.js"></script>
@@ -95,10 +88,10 @@
     <script type="text/javascript" src="/login/login.client.module.js"></script>
     <script type="text/javascript" src="/login/controllers/login.client.controller.js"></script>
     <script type="text/javascript" src="/login/config/login.client.routes.js"></script>
+    <script type="text/javascript" src="/login/services/login.client.service.js"></script>
 
     <!-- Load the user module -->
     <script type="text/javascript" src="/user/user.client.module.js"></script>
-    <script type="text/javascript" src="/user/services/authentication.client.service.js"></script>
     <script type="text/javascript" src="/user/controllers/user.client.controller.js"></script>
     <script type="text/javascript" src="/user/services/user.client.service.js"></script>
     <script type="text/javascript" src="/user/config/user.client.routes.js"></script>

@@ -8,6 +8,12 @@ angular.module('login').config(['$routeProvider',
         when('/', {
             templateUrl: 'login/views/login.client.view.html'
         }).
+        when('/registration', {
+            templateUrl: 'login/views/registration.client.view.html'
+        }).
+        when('/profile', {
+            templateUrl: 'login/views/login.client.view.html'
+        }).
         otherwise({
             redirectTo: '/'
         });
