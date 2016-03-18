@@ -16,12 +16,23 @@ angular.module('user').factory('UserService', ['$http', function ($http) {
     var service = {
         isLoggedIn: false,
         userDetails: undefined,
-
+        session: function () {
+            return $http.get('/api/session')
+                .then(function (response) {
+                    service.isLoggedIn = true;
+                    console.log(response);
+                    console.log('service')
+                    service.userDetails = response.data.user;
+                    return response;
+                });
+        },
         login: function (user) {
             return $http.post('api/auth/local', user)
                 .then(function (response) {
                     service.isLoggedIn = true;
-                    service.userDetails = response.data;
+                    console.log(response);
+                    console.log('login')
+                    service.userDetails = response.data.user;
                     return response;
                 });
         }

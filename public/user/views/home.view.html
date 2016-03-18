@@ -1,0 +1,40 @@
+<div id="home" ng-controller="UserController as uctrl">
+    <div id="general" layout="row">
+        <md-card flex="30" id="general-dp-card">
+            <img ng-src="dp.png" class="md-card-image" alt="Washed Out">
+        </md-card>
+        <md-card flex="70" id="general-info-card">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">
+                        {{uctrl.fullname}}
+        		            <nav style="float:right">
+        		              <ng-md-icon icon="facebook-box" size="24"></ng-md-icon>
+        		              <ng-md-icon icon="twitter" size="24"></ng-md-icon>
+        		              <ng-md-icon icon="linkedin-box" size="24"></ng-md-icon>
+        		              <ng-md-icon icon="person_add" size="24"></ng-md-icon>
+        		              <ng-md-icon icon="favorite" size="24"></ng-md-icon>
+        		            </nav>                
+        		          </span>
+
+                </md-card-title-text>
+            </md-card-title>
+            <md-divider class="general-divider"></md-divider>
+            <md-card-content>
+                <div ng-repeat="(key,value) in uctrl.generaldetails">
+                    <div class="label"><span style="color:orange">{{key}}:</span></br>{{value}}</div>
+                    </br>
+                </div>
+                <div layout="row">
+                    <md-button id="profile-button" ng-href="#!/user">
+                        <label>View User Profile</label>
+                    </md-button>
+                    <md-button id="child-button" ng-href="#!/user/children">
+                        <label>Edit/Create Child Accounts</label>
+                    </md-button>
+                </div>
+
+            </md-card-content>
+        </md-card>
+    </div>
+</div>

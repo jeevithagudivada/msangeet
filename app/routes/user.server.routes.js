@@ -22,7 +22,16 @@ module.exports = function (app) {
     //
     //    app.param('username', user.userByUSERNAME);
     //
-    //    // Set up the 'signin' routes 
+    //    // Set up the 'signin' routes
+    var isLoggedIn = function (req, res, next) {
+        if (req.isAuthenticated()) {
+            next();
+        } else {
+            res.send({
+                msg: 'Please login to access this information'
+            }, 400);
+        }
+    };
     app.route('/signup')
         .get(user.renderSignup)
         .post(user.signup);
@@ -33,7 +42,12 @@ module.exports = function (app) {
                 res.json(req.user);
             }
         );
-
+    app.get('/api/session', isLoggedIn, function (req, res) {
+        res.send({
+            loginStatus: true,
+            user: req.user
+        });
+    });
     // Set up the Facebook OAuth routes 
     app.get('/oauth/facebook', passport.authenticate('facebook', {
         failureRedirect: '/'

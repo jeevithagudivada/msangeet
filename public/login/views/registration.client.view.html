@@ -11,12 +11,12 @@
                                 <form name="userForm" ng-submit="lctrl.submitReg()">
 
                                     <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm="">
+                                        <md-input-container class="md-block">
                                             <label>First name</label>
                                             <input ng-model="lctrl.user.firstName">
                                         </md-input-container>
 
-                                        <md-input-container class="md-block" flex-gt-sm="">
+                                        <md-input-container class="md-block">
                                             <label>Last Name</label>
                                             <input ng-model="lctrl.user.lastName">
                                         </md-input-container>
@@ -25,12 +25,12 @@
                                         </md-datepicker>
                                     </div>
                                     <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex-gt-sm="">
+                                        <md-input-container class="md-block">
                                             <label>City</label>
                                             <input ng-model="lctrl.user.city">
                                         </md-input-container>
 
-                                        <md-input-container class="md-block" flex-gt-sm="">
+                                        <md-input-container class="md-block">
                                             <label>State</label>
                                             <md-select ng-model="lctrl.user.state">
                                                 <md-option ng-repeat="state in lctrl.states" value="{{state.abbrev}}">
@@ -39,7 +39,7 @@
                                             </md-select>
                                         </md-input-container>
 
-                                        <md-input-container class="md-block" flex-gt-sm="">
+                                        <md-input-container class="md-block">
                                             <label>Postal Code</label>
                                             <input name="postalCode" ng-model="lctrl.user.postalCode" placeholder="123456" required="" ng-pattern="/^[0-9]{6}$/" md-maxlength="6">
 
@@ -59,6 +59,19 @@
                         <md-tab id="tab2">
                             <md-tab-label>Persona Selection</md-tab-label>
                             <md-tab-body layout="row" layout-align="space-around center">
+<!--
+<ul>
+    <li>
+        <div>
+            <ng-md-icon icon="facebook-box" size="24"></ng-md-icon>
+            <span>Student</span>
+        </div>
+    </li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+-->
                                 <md-card id="persona1" layout="row">
                                     Persona1
                                 </md-card>
@@ -77,8 +90,11 @@
                     <md-button id="previous-button" ng-click="lctrl.previous()">
                         <label>PERVIOUS</label>
                     </md-button>
-                    <md-button id="next-button" ng-click="lctrl.next()">
+                    <md-button id="next-button" ng-click="lctrl.next()" ng-show="lctrl.data.selectedIndex == 0;">
                         <label>NEXT</label>
+                    </md-button>
+                    <md-button id="next-button" ng-click="lctrl.register()" ng-show="lctrl.data.selectedIndex == 1;">
+                        <label>FINISH</label>
                     </md-button>
                 </div>
 

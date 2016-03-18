@@ -41,5 +41,9 @@ angular.module('login').controller('LoginController', ['$scope', 'UserService', 
             })
         };
         self.authentication = UserService.isLoggedIn;
+        self.register = function () {
+            console.log('in register');
+            $location.path('/home');
+        }
 	}
 ]);

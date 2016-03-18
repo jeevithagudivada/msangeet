@@ -1,37 +1,38 @@
 {
-    "name": "msangeet",
-    "version": "0.0.8",
-    "description": "msangeet profiling module",
-    "main": "server.js",
-    "bugs": {
-        "url": "https://github.com/dpkm95/msangeet/issues"
-    },
-    "repository": "https://github.com/dpkm95/msangeet.git",
-    "homepage": "https://github.com/dpkm95/msangeet#readme",
-    "private": true,
-    "keywords": [
+  "name": "msangeet",
+  "version": "0.0.8",
+  "description": "msangeet profiling module",
+  "main": "server.js",
+  "bugs": {
+    "url": "https://github.com/dpkm95/msangeet/issues"
+  },
+  "repository": "https://github.com/dpkm95/msangeet.git",
+  "homepage": "https://github.com/dpkm95/msangeet#readme",
+  "private": true,
+  "keywords": [
     "music"
-    ],
-    "dependencies": {
-        "body-parser": "^1.15.0",
-        "compress": "^0.99.0",
-        "compression": "^1.6.1",
-        "connect-flash": "^0.1.1",
-        "ejs": "^2.4.1",
-        "express": "^4.13.3",
-        "express-session": "^1.13.0",
-        "method-override": "^2.3.5",
-        "mongoose": "^4.4.5",
-        "morgan": "^1.7.0",
-        "passport": "^0.3.2",
-        "passport-facebook": "^2.1.0",
-        "passport-local": "^1.0.0"
-    },
-    "engines": {
-        "node": "~4.2"
-    },
-    "scripts": {
-        "start": "node server.js",
-        "deploy": "gcloud preview app deploy app.yaml"
-    }
+  ],
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "compress": "^0.99.0",
+    "compression": "^1.6.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.1",
+    "ejs": "^2.4.1",
+    "express": "^4.13.3",
+    "express-session": "^1.13.0",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.4.5",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.0",
+    "passport-local": "^1.0.0"
+  },
+  "engines": {
+    "node": "~4.2"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "deploy": "gcloud preview app deploy app.yaml"
+  }
 }

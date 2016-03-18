@@ -2,8 +2,8 @@
 'use strict';
 
 // Create the 'user' controller
-angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', 'Authentication', 'User',
-    function ($scope, $routeParams, $location, Authentication, User) {
+angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', 'UserService', 'User',
+    function ($scope, $routeParams, $location, UserService, User) {
         var self = this;
         self.fullname = "Pandit. Venkatesh Kumar";
         self.generaldetails = {
@@ -87,8 +87,15 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
             }
         };
 
-        // Expose the Authentication service
-        $scope.authentication = Authentication;
+        self.viewProfile = function () {
+            console.log(UserService.userDetails.username);
+            $location.path('/users/' + UserService.userDetails.username);
+        };
+        
+        self.children = function () {
+            console.log(UserService.userDetails.username);
+            $location.path('/users/' + UserService.userDetails.username);
+        };
 
         // Create a new controller method for creating new user
         $scope.create = function () {

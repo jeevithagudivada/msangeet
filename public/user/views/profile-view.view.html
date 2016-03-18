@@ -1,4 +1,4 @@
-<div ng-controller="UserController as uctrl">
+<div id="profile" ng-controller="UserController as uctrl">
     <div id="general" layout="row">
         <md-card flex="30" id="general-dp-card">
             <img ng-src="dp.png" class="md-card-image" alt="Washed Out">
@@ -67,28 +67,5 @@
                 <span ng-repeat="x in fields">{{x}}</br></span> </br>
             </div>
         </md-card-content>
-
-        <md-card-content layout="column" layout-align="space-between" ng-repeat="(address,value) in uctrl.locations">
-            <div class="stylename" style="">{{address}}</div>
-            <span ng-repeat="(fields,val) in value"><span class="orangeText"></br>{{fields}}</br></span>
-            <span ng-repeat="x in val">{{x}}</br></span>
-            </span>
-            <span id="map"></span>
-            <script>
-                function initMap() {
-                    var mapDiv = document.getElementById('map');
-                    var map = new google.maps.Map(mapDiv, {
-                        center: {
-                            lat: 12.939846,
-                            lng: 77.553440
-                        },
-                        zoom: 20
-                    });
-                }
-
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
-        </md-card-content>
-
     </md-card>
 </div>
