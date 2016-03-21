@@ -8,43 +8,165 @@ var mongoose = require('mongoose'),
 
 // Define a new 'UserSchema'
 var UserSchema = new Schema({
-    firstName: String,
-    lastName: String,
-    email: {
-        type: String,
-        // Validate the email format
-        match: [/.+\@.+\..+/, "Please fill a valid email address"]
-    },
-    username: {
-        type: String,
-        // Set a unique 'username' index
-        unique: true,
-        // Validate 'username' value existance
-        required: 'Username is required',
-        // Trim the 'username' field
-        trim: true
-    },
-    password: {
-        type: String,
-        // Validate the 'password' value length
-        validate: [
+	_id : Objectid,
+	salutation : String,
+	firstName: String,
+	lastName: String,
+	dateOfBirth: Date,
+	profilePhoto : { 
+					data: Buffer,
+					contentType: String 
+	},
+	aboutSummary : String,
+	username: {
+		type: String,
+		// Set a unique 'username' index
+		unique: true,
+		// Validate 'username' value existance
+		required: 'Username is required',
+		// Trim the 'username' field
+		trim: true
+	},
+	email: {
+		type: String,
+		// Validate the email format
+		match: [/.+\@.+\..+/, "Please fill a valid email address"]
+	},
+	phoneNumber : Number,
+	isChildUser : Boolean,
+	parentId : Objectid,
+	//password: {type: String, required: true},
+	
+	password: {
+		type: String,
+		// Validate the 'password' value length
+		validate: [
 
-			function (password) {
-                return password && password.length > 6;
+			function(password) {
+				return password && password.length > 6;
 			}, 'Password should be longer'
 		]
-    },
+	},
+	residenceLocation: [
+					{
+					locationId: Objectid,  
+					pinCode: Number, 
+					area: String, 
+					
+					
+					
+					gmapCoordinates/url:, 
+					
+					
+					
+					addressText: String
+					}
+	],
+	children: [
+				{
+					childUserId: Objectid
+				}
+	],
+	personas: [
+				{
+					persona: String
+				}
+	],
+	qualification: [
+				{
+				qualId: Objectid,
+				qualName: String,
+				awardingOrg: String,
+				qualYear: 
+				{
+					type: Number,
+					match: [/d{4}/,"Please fill correct year"]
+				}
+				}
+	],
+	training: [
+				{
+				trainingId:Objectid,
+				teacherUsername: String,
+				teachingInstituteName: String,
+				genre: String,
+				medium: String,
+				fromYear: {
+					type: Number,
+					match: [/d{4}/,"Please fill correct year"]
+				},
+				toYear: {
+					type: Number,
+					match: [/d{4}/,"Please fill correct year"]
+				}
+				}
+	],
+	awards: [
+				{
+				awardId: Objectid,
+				awardName: string,
+				awardingOrg: String,
+				awardYear: {
+					type: Number,
+					match: [/d{4}/,"Please fill correct year"]
+				}
+				}
+	],
+	performances: [
+				{
+				eventId: Objectid,
+				eventName: String,
+				hostorg: String,
+				eventYear: {
+					type: Number,
+					match: [/d{4}/,"Please fill correct year"]
+				}
+				}
+	],
+	books: [
+				{
+				bookId: Objectid,
+				bookName: String,
+				publisherName: String,
+				publicationYear: {
+					type: Number,
+					match: [/d{4}/,"Please fill correct year"]
+				}
+				}
+	],
+	albums: [
+				{
+				albumId: Objectid
+				albumTitle: String,
+				producerName: String,
+				releaseYear: {
+					type: Number,
+					match: [/d{4}/,"Please fill correct year"]
+				}
+				}
+	],
+	genresTaught: [
+				{
+				genreId: Objectid,
+				genreName: String
+				}
+	],
+	teachingMedium: [
+				{
+				mediumId: Objectid,
+				mediumName: String
+				}
+	],
+	studentProfiles: [
+				{
+				profileName: String
+				}
+	],
+	teaching: [trainingId: Objectid],
+	salt: {
+		type: String
+	},
     hasRegistered: Boolean,
-    salt: {
-        type: String
-    },
-    provider: {
-        type: String,
-        // Validate 'provider' value existance
-        required: 'Provider is required'
-    },
-    providerId: String,
-    providerData: {},
     created: {
         type: Date,
         // Create a default 'created' value
