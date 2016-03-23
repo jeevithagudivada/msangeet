@@ -1,6 +1,6 @@
 module.exports = {
-    //db: 'mongodb://127.0.0.1:27017/msangeet',
-    db: 'mongodb://msangeet:11msangeet!!@ds017678.mlab.com:17678/msangeet',
+    db: 'mongodb://127.0.0.1:27017/msangeet',
+    //db: 'mongodb://msangeet:11msangeet!!@ds017678.mlab.com:17678/msangeet',
     sessionSecret: 'developmentSessionSecret',
     facebook: {
         clientID: '1560367510944078',

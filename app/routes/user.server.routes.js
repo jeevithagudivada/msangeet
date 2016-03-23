@@ -33,7 +33,8 @@ module.exports = function (app) {
         }
     };
     app.route('/signup')
-        .get(user.renderSignup)
+        //        .get(user.renderSignup)
+        .get(user.signup)
         .post(user.signup);
     app.route('/api/auth/local')
         .post(
