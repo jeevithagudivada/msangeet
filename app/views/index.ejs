@@ -8,28 +8,26 @@
     </title>
 </head>
 
-<body>
-    <div id="nav-bar" class="header-container" layout="row" layout-align="space-around center" ng-cloak="">
+<body ng-cloak="">
+    <div id="nav-bar" class="header-container" layout="row" layout-align="space-around center">
         <div layout="row" layout-align="start center">
             <div>mSangeet</div>
-            <div class="search-container" layout="row" layout-align="start center">
-                <span class="search-icon">
-                    
-                    
-                    <ng-md-icon icon="search" style="fill: white" size="24"></ng-md-icon>
-                </span>
-                <input type="search" id="search" placeholder="Search..." />
-            </div>
         </div>
 
         <nav id="top_menu" layout="row" layout-align="end center">
             <ul>
-                <li>Menu01</li>
-                <li>Menu02</li>
-                <li>Menu03</li>
+                <li>
+                    <md-button type="submit" id="nav-button">Menu01</md-button>
+                </li>
+                <li>
+                    <md-button type="submit" id="nav-button">Menu01</md-button>
+                </li>
+                <li>
+                    <md-button type="submit" id="nav-button">Menu01</md-button>
+                </li>
                 <li>
                     <form action="/signout">
-                        <md-button type="submit" id="logout-button">Logout</md-button>
+                        <md-button type="submit" id="nav-button">Signup/Signin</md-button>
                     </form>
                 </li>
             </ul>
@@ -50,9 +48,6 @@
                 <div id="info-subscribe" layout="column">
                     <label style="font-weight: bold">Subscribe for newsletter</label>
                     <div class="subscribe-email-container" flex="33" id="subscribe" class="footer-subscribe" layout="row" layout-align="center center">
-                        <span class="email-icon">
-                                <ng-md-icon icon="email" style="fill: black" size="34"></ng-md-icon>
-                            </span>
                         <input type="text" id="subscribe-email-input" placeholder="Enter email" />
                         <md-button id="subscribe-button">GO</md-button>
                     </div>
@@ -69,7 +64,14 @@
         </div>
         <md-divider class="divider"></md-divider>
         <div id="licence-bar" layout="row" layout-align="center center">
-            &copy Copyright 2015, All Rights Reserved
+            <div layout="row" layout-align="start center">
+                <md-button type="submit" id="nav-button">Contribute</md-button>
+                <md-button type="submit" id="nav-button">Privacy</md-button>
+                <md-button type="submit" id="nav-button">Contact</md-button>
+            </div>
+            <div layout="row" layout-align="end center">
+                &copy Copyright 2015, All Rights Reserved
+            </div>
         </div>
     </div>
 

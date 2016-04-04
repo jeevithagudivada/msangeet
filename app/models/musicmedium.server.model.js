@@ -3,18 +3,17 @@
 
 // Load the module dependencies
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+    Schema = mongoose.Schema;
 
 //MusicMedium schema
 var MusicMedium = new Schema({
-	_id: Objectid.
-	mediumName: String
+    mediumName: String
 });
-	
+
 // Configure the 'MusicMedium' schema to use getters and virtuals when transforming to JSON
 MusicMedium.set('toJSON', {
-	getters: true,
-	virtuals: true
+    getters: true,
+    virtuals: true
 });
 
 // Create the 'MusicMedium' model out of the 'MusicMedium' schema

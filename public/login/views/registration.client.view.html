@@ -1,127 +1,117 @@
 <div ng-controller="LoginController as lctrl">
-    <div id="registration-card" layout="row">
+    <div id="registration-card" layout="row" ng-show="lctrl.page == 1">
         <md-card id="general-dp-card" layout="row">
-            <img flex="25" ng-src="/public/img/dp.png" class="md-card-image" alt="Washed Out">
+            <img flex="25" ng-src="img/dp.png" class="md-card-image" alt="Washed Out">
             <div flex="75" id="general-info-card" layout="column">
                 <md-card-content>
-                    <md-tabs class="md-accent" md-selected="lctrl.data.selectedIndex" md-align-tabs="{{lctrl.data.bottom ? 'bottom' : 'top'}}">
-                        <md-tab id="tab1">
-                            <md-tab-label>General Information</md-tab-label>
-                            <md-tab-body>
-                                <form name="userForm" ng-submit="lctrl.submitReg()">
-
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block">
-                                            <label>First name</label>
-                                            <input ng-model="lctrl.user.firstName">
-                                        </md-input-container>
-
-                                        <md-input-container class="md-block">
-                                            <label>Last Name</label>
-                                            <input ng-model="lctrl.user.lastName">
-                                        </md-input-container>
-
-                                        <md-datepicker ng-model="lctrl.user.dateOfBirth" md-placeholder="Date of Birth">
-                                        </md-datepicker>
-                                    </div>
-                                    <div layout-gt-sm="row">
-                                        <md-input-container class="md-block">
-                                            <label>City</label>
-                                            <input ng-model="lctrl.user.city">
-                                        </md-input-container>
-
-                                        <md-input-container class="md-block">
-                                            <label>State</label>
-                                            <md-select ng-model="lctrl.user.state">
-                                                <md-option ng-repeat="state in lctrl.states" value="{{state.abbrev}}">
-                                                    {{state.abbrev}}
-                                                </md-option>
-                                            </md-select>
-                                        </md-input-container>
-
-                                        <md-input-container class="md-block">
-                                            <label>Postal Code</label>
-                                            <input name="postalCode" ng-model="lctrl.user.postalCode" placeholder="123456" required="" ng-pattern="/^[0-9]{6}$/" md-maxlength="6">
-
-                                            <div ng-messages="userForm.postalCode.$error" role="alert" multiple="">
-                                                <div ng-message="required" class="my-message">You must supply a postal code.</div>
-                                                <div ng-message="pattern" class="my-message">That doesn't look like a valid postal code.
-                                                </div>
-                                                <div ng-message="md-maxlength" class="my-message">
-                                                    Don't use the long version silly...we don't need to be that specific...
-                                                </div>
-                                            </div>
-                                        </md-input-container>
-                                    </div>
-                                </form>
-                            </md-tab-body>
-                        </md-tab>
-                        <md-tab id="tab2">
-                            <md-tab-label>Persona Selection</md-tab-label>
-                            <md-tab-body layout="row" layout-align="space-around center">
-<!--
-<ul>
-    <li>
-        <div>
-            <ng-md-icon icon="facebook-box" size="24"></ng-md-icon>
-            <span>Student</span>
-        </div>
-    </li>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
--->
-                             
-<div layout="row" layout-padding layout-wrap layout-fill style="padding-top: 10px;" ng-cloak>
-  <div class="padded"style="border:1px solid #D8D8D8 "  flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-    <span> 1 </span>
-  </div>
-  <div class="padded" style="border:1px solid #D8D8D8"  flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-    <span>2</span>
-  </div>
-  <div class="padded"  style="border:1px solid #D8D8D8 "  flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-    <span>3</span>
-  </div>
-  <div class="padded" style="border:1px solid #D8D8D8 "  flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-    <span>4</span>
-  </div>
-  <div class="padded"  style="border:1px solid #D8D8D8 "   flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-    <span>5</span>
-  </div>
-  <div class="padded" style="border:1px solid #D8D8D8 "  flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-    <span>6</span>
-  </div>
-  <div class="padded"  style="border:1px solid #D8D8D8 "  flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-    <span>7   </span>
-  </div>
-  <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-    <span>8</span>
-  </div>
-  <div class="padded" style="border:1px solid #D8D8D8 "  flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-    <span>9</span>
-  </div>
- 
-</div>
-        
-                            </md-tab-body>
-                        </md-tab>
-                    </md-tabs>
+                    <div id="registration-card-1">
+                        <form name="userForm" ng-submit="lctrl.submitReg()">
+                            <div layout="row" layout-padding layout-wrap layout-fill style="padding-top: 10px;" ng-cloak>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-model="lctrl.user.firstName" placeholder="First Name">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-model="lctrl.user.firstName" placeholder="Last Name">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-model="lctrl.user.firstName" placeholder="Date of birth">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-model="lctrl.user.firstName" placeholder="Area Pincode">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-model="lctrl.user.firstName" placeholder="Mobile Number">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-model="lctrl.user.firstName" placeholder="Email">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-button id="next-button" ng-click="">
+                                        <label>Send verification code</label>
+                                    </md-button>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-button id="next-button" ng-click="">
+                                        <label>Send verification code</label>
+                                    </md-button>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-model="lctrl.user.firstName" placeholder="Enter mobile code here">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-model="lctrl.user.firstName" placeholder="Enter email code here">
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </md-card-content>
-
-                <div layout="row" layout-align="space-around center">
-                    <md-button id="previous-button" ng-click="lctrl.previous()">
-                        <label>PERVIOUS</label>
-                    </md-button>
-                    <md-button id="next-button" ng-click="lctrl.next()" ng-show="lctrl.data.selectedIndex == 0;">
-                        <label>NEXT</label>
-                    </md-button>
-                    <md-button id="next-button" ng-click="lctrl.register()" ng-show="lctrl.data.selectedIndex == 1;">
-                        <label>FINISH</label>
-                    </md-button>
-                </div>
-
             </div>
         </md-card>
+    </div>
+    <div id="registration-card" layout="row" ng-show="lctrl.page == 2">
+        <md-card layout="row">
+            <md-card-content>
+                <div layout="row" layout-padding layout-wrap layout-fill style="padding-top: 10px;" ng-cloak>
+                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
+                        <span> 1 </span>
+                    </div>
+                    <div class="padded" style="border:1px solid #D8D8D8" flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
+                        <span>2</span>
+                    </div>
+                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
+                        <span>3</span>
+                    </div>
+                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
+                        <span>4</span>
+                    </div>
+                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
+                        <span>5</span>
+                    </div>
+                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
+                        <span>6</span>
+                    </div>
+                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
+                        <span>7   </span>
+                    </div>
+                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
+                        <span>8</span>
+                    </div>
+                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
+                        <span>9</span>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div layout="row" layout-align="space-around center">
+        <md-button class="reg-nav-button" ng-click="lctrl.page = 1;" ng-show="lctrl.page == 2;" layout-align="start center">
+            <ng-md-icon icon="arrow_back" class="reg-next-arrow" style="fill: white" size="34"></ng-md-icon>
+            <label>PERVIOUS</label>
+        </md-button>
+        <label layout-align="end center" ng-show="lctrl.page == 1;">
+        </label>
+        <md-button class="reg-nav-button" ng-click="lctrl.page = 2;" ng-show="lctrl.page == 1;" layout-align="end center">
+            <label>NEXT</label>
+            <ng-md-icon icon="arrow_forward" class="reg-next-arrow" style="fill: white" size="34"></ng-md-icon>
+        </md-button>
+        <md-button class="reg-nav-button" ng-click="lctrl.register()" ng-show="lctrl.page == 2;" layout-align="end center">
+            <label>FINISH</label>
+        </md-button>
     </div>
 </div>

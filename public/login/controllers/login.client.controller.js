@@ -11,6 +11,7 @@ angular.module('login').controller('LoginController', ['$scope', 'UserService', 
             secondLocked: true,
             bottom: false
         };
+        self.page = 1;
         self.next = function () {
             self.data.selectedIndex = Math.min(self.data.selectedIndex + 1, 2);
         };

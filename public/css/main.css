@@ -1,18 +1,18 @@
 html {
     position: relative;
     min-height: 100%;
-    background-color: #dbd9d7;
+    background-color: #ffffff;
 }
 
 body {
-    background-color: #dbd9d7;
+    background-color: #ffffff;
     text-align: center;
 }
 
 div#nav-bar {
     height: 60px;
     color: white;
-    background-color: #2d2d39;
+    background-color: #000000;
     position: fixed;
     right: 0;
     top: 0;
@@ -35,7 +35,7 @@ div#content {
 div#footer {
     text-align: center;
     color: white;
-    background-color: #2d2d39;
+    background-color: #000000;
     position: relative;
     left: 0;
     bottom: 0;
@@ -61,7 +61,7 @@ div#info-bar {
 }
 
 .divider {
-    border-color: #ff6600;
+    border-color: red;
 }
 
 #follow-button:before {
@@ -89,13 +89,11 @@ nav {
     padding: 8px;
 }
 
-#logout-button {
-    background-color: darkseagreen;
+#nav-button {
     padding: 0 6px 0 6px;
     margin: 6px 8px 6px 8px;
     min-width: 88px;
     border-radius: 3px;
-    font-size: 14px;
     text-align: center;
     text-transform: none;
     text-decoration: none;
@@ -104,12 +102,11 @@ nav {
 }
 
 #subscribe-button {
-    background-color: #ff6600;
+    background-color: red;
     padding: 0 6px 0 6px;
     margin: 6px 8px 6px 8px;
     min-width: 88px;
     border-radius: 3px;
-    font-size: 14px;
     text-align: center;
     text-transform: none;
     text-decoration: none;
