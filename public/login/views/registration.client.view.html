@@ -6,7 +6,7 @@
                 <md-card-content>
                     <div id="registration-card-1">
                         <form name="userForm" ng-submit="lctrl.submitReg()">
-                            <div layout="row" layout-padding layout-wrap layout-fill style="padding-top: 10px;" ng-cloak>
+                            <div layout="row" layout-padding layout-wrap layout-fill style="padding-top: 10px;">
                                 <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
                                     <md-input-container class="md-block">
                                         <input ng-model="lctrl.user.firstName" placeholder="First Name">
@@ -64,36 +64,58 @@
             </div>
         </md-card>
     </div>
+
     <div id="registration-card" layout="row" ng-show="lctrl.page == 2">
         <md-card layout="row">
             <md-card-content>
-                <div layout="row" layout-padding layout-wrap layout-fill style="padding-top: 10px;" ng-cloak>
-                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-                        <span> 1 </span>
+                <div layout="column">
+                    <div layout layout-align="center center">What best discribes you?</div>
+                    <div layout="row">
+                        <div class="persona-unit" ng-click="lctrl.personas[1]=!lctrl.personas[1]" layout layout-align="center center">
+                            <img class="persona" src="img/Guru.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="lctrl.personas[1]"></ng-md-icon>
+                        </div>
+
+                        <div class="persona-unit" ng-click="lctrl.personas[2]=!lctrl.personas[2]" layout layout-align="center center">
+                            <img class="persona" src="img/Shishya.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="lctrl.personas[2]"></ng-md-icon>
+                        </div>
+
+                        <div class="persona-unit" ng-click="lctrl.personas[3]=!lctrl.personas[3]" layout layout-align="center center">
+                            <img class="persona" src="img/Kalaakar.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="lctrl.personas[3]"></ng-md-icon>
+                        </div>
                     </div>
-                    <div class="padded" style="border:1px solid #D8D8D8" flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-                        <span>2</span>
+                    <div layout="row">
+                        <div class="persona-unit" ng-click="lctrl.personas[4]=!lctrl.personas[4]" layout layout-align="center center">
+                            <img class="persona" src="img/Sanghataka2.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="lctrl.personas[4]"></ng-md-icon>
+                        </div>
+
+                        <div class="persona-unit" ng-click="lctrl.personas[5]=!lctrl.personas[5]" layout layout-align="center center">
+                            <img class="persona" src="img/Pandita.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="lctrl.personas[5]"></ng-md-icon>
+                        </div>
+
+                        <div class="persona-unit" ng-click="lctrl.personas[6]=!lctrl.personas[6]" layout layout-align="center center">
+                            <img class="persona" src="img/Sanghataka.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="lctrl.personas[6]"></ng-md-icon>
+                        </div>
                     </div>
-                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-                        <span>3</span>
-                    </div>
-                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-                        <span>4</span>
-                    </div>
-                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-                        <span>5</span>
-                    </div>
-                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-                        <span>6</span>
-                    </div>
-                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-                        <span>7   </span>
-                    </div>
-                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-                        <span>8</span>
-                    </div>
-                    <div class="padded" style="border:1px solid #D8D8D8 " flex-sm="33" flex-gt-sm="33" flex-gt-md="33" layout layout-align="center center">
-                        <span>9</span>
+                    <div layout="row">
+                        <div class="persona-unit" ng-click="lctrl.personas[7]=!lctrl.personas[7]" layout layout-align="center center">
+                            <img class="persona" src="img/Guru.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="lctrl.personas[7]"></ng-md-icon>
+                        </div>
+
+                        <div class="persona-unit" ng-click="lctrl.personas[8]=!lctrl.personas[8]" layout layout-align="center center">
+                            <img class="persona" src="img/Shishya.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="lctrl.personas[8]"></ng-md-icon>
+                        </div>
+                        <div class="persona-unit" ng-click="lctrl.personas[9]=!lctrl.personas[9]" layout layout-align="center center">
+                            <img class="persona" src="img/Shishya.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="lctrl.personas[9]"></ng-md-icon>
+                        </div>
                     </div>
                 </div>
             </md-card-content>
@@ -101,14 +123,14 @@
     </div>
     <div layout="row" layout-align="space-around center">
         <md-button class="reg-nav-button" ng-click="lctrl.page = 1;" ng-show="lctrl.page == 2;" layout-align="start center">
-            <ng-md-icon icon="arrow_back" class="reg-next-arrow" style="fill: white" size="34"></ng-md-icon>
+<!--            <ng-md-icon icon="arrow_back" class="reg-next-arrow" style="fill: white" size="34"></ng-md-icon>-->
             <label>PERVIOUS</label>
         </md-button>
         <label layout-align="end center" ng-show="lctrl.page == 1;">
         </label>
         <md-button class="reg-nav-button" ng-click="lctrl.page = 2;" ng-show="lctrl.page == 1;" layout-align="end center">
             <label>NEXT</label>
-            <ng-md-icon icon="arrow_forward" class="reg-next-arrow" style="fill: white" size="34"></ng-md-icon>
+<!--            <ng-md-icon icon="arrow_forward" class="reg-next-arrow" style="fill: white" size="34"></ng-md-icon>-->
         </md-button>
         <md-button class="reg-nav-button" ng-click="lctrl.register()" ng-show="lctrl.page == 2;" layout-align="end center">
             <label>FINISH</label>

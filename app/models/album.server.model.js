@@ -5,8 +5,8 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-//Albums schema
-var Albums = new Schema({
+//Album schema
+var Album = new Schema({
     albumTitle: String,
     albumDescription: String,
     publisherName: String,
@@ -18,11 +18,11 @@ var Albums = new Schema({
 	]
 });
 
-// Configure the 'Albums' schema to use getters and virtuals when transforming to JSON
-Albums.set('toJSON', {
+// Configure the 'Album' schema to use getters and virtuals when transforming to JSON
+Album.set('toJSON', {
     getters: true,
     virtuals: true
 });
 
-// Create the 'Albums' model out of the 'Albums' schema
-mongoose.model('Albums', Albums);
+// Create the 'Album' model out of the 'Album' schema
+mongoose.model('Album', Album);

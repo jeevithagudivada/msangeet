@@ -66,3 +66,22 @@ div#registration-card {
 #tab2 {
     background-color: #999999;
 }
+
+.persona {
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    /* For IE8 and earlier */
+}
+
+.persona:hover {
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    /* For IE8 and earlier */
+}
+
+.persona-unit {
+    height: 90px;
+    width: 240px;
+    padding-left: 30px;
+    padding-right: 30px;
+}

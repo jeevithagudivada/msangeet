@@ -12,14 +12,6 @@ var MusicTraining = new Schema({
     orgName: String,
     teacherId: Schema.Types.ObjectId,
     locationId: Schema.Types.ObjectId,
-    pinCode: {
-        type: Number,
-        match: [/d{6}/, "Please fil the valid pincode"]
-    },
-    area: String,
-    City: String,
-    Country: String,
-    addressText: String,
     fromYear: {
         type: Number,
         match: [/d{4}/, "Please fill correct year"]
@@ -41,8 +33,8 @@ var MusicTraining = new Schema({
                 {
                     type: String
 				}
-				]
-			}
+            ]
+        }
 	],
     students: [
         {
@@ -59,9 +51,8 @@ var MusicTraining = new Schema({
                 type: Number,
                 match: [/d{4}/, "Please fill correct year"]
             }
-			}
-	],
-
+        }
+	]
 });
 
 // Configure the 'MusicTraining' schema to use getters and virtuals when transforming to JSON

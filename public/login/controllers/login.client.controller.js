@@ -12,6 +12,8 @@ angular.module('login').controller('LoginController', ['$scope', 'UserService', 
             bottom: false
         };
         self.page = 1;
+        self.personas = {};
+        for (var i = 1; i < 10; ++i) self.personas[i] = false;
         self.next = function () {
             self.data.selectedIndex = Math.min(self.data.selectedIndex + 1, 2);
         };

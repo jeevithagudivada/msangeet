@@ -63,112 +63,31 @@ var UserSchema = new Schema({
     phoneNumber: Number,
     isChildUser: Boolean,
     parentId: Schema.Types.ObjectId,
-    residenceLocation: [
-        {
-            locationId: Schema.Types.ObjectId,
-            pinCode: Number,
-            area: String,
-            addressText: String
-					}
-	],
-    children: [
-        {
-            childUserId: Schema.Types.ObjectId
-				}
-	],
-    personas: [
-        {
-            persona: String
-				}
-	],
-    qualification: [
-        {
-            qualId: Schema.Types.ObjectId,
-            qualName: String,
-            awardingOrg: String,
-            qualYear: {
-                type: Number,
-                match: [/d{4}/, "Please fill correct year"]
-            }
-				}
-	],
-    training: [
-        {
-            trainingId: Schema.Types.ObjectId,
-            teacherUsername: String,
-            teachingInstituteName: String,
-            genre: String,
-            medium: String,
-            fromYear: {
-                type: Number,
-                match: [/d{4}/, "Please fill correct year"]
-            },
-            toYear: {
-                type: Number,
-                match: [/d{4}/, "Please fill correct year"]
-            }
-				}
-	],
-    awards: [
-        {
-            awardId: Schema.Types.ObjectId,
-            awardName: String,
-            awardingOrg: String,
-            awardYear: {
-                type: Number,
-                match: [/d{4}/, "Please fill correct year"]
-            }
-				}
-	],
-    performances: [
-        {
-            eventId: Schema.Types.ObjectId,
-            eventName: String,
-            hostorg: String,
-            eventYear: {
-                type: Number,
-                match: [/d{4}/, "Please fill correct year"]
-            }
-				}
-	],
-    books: [
-        {
-            bookId: Schema.Types.ObjectId,
-            bookName: String,
-            publisherName: String,
-            publicationYear: {
-                type: Number,
-                match: [/d{4}/, "Please fill correct year"]
-            }
-				}
-	],
-    albums: [
-        {
-            albumId: Schema.Types.ObjectId,
-            albumTitle: String,
-            producerName: String,
-            releaseYear: {
-                type: Number,
-                match: [/d{4}/, "Please fill correct year"]
-            }
-				}
-	],
+    residenceLocation: Schema.Types.ObjectId,
+    children: [Schema.Types.ObjectId],
+    personas: [String],
+    qualification: [Schema.Types.ObjectId],
+    training: [Schema.Types.ObjectId],
+    awards: [Schema.Types.ObjectId],
+    performances: [Schema.Types.ObjectId],
+    books: [Schema.Types.ObjectId],
+    albums: [Schema.Types.ObjectId],
     genresTaught: [
         {
             genreId: Schema.Types.ObjectId,
             genreName: String
-				}
+        }
 	],
     teachingMedium: [
         {
             mediumId: Schema.Types.ObjectId,
             mediumName: String
-				}
+        }
 	],
     studentProfiles: [
         {
             profileName: String
-				}
+        }
 	],
     teaching: [TrainingSchema],
     salt: {

@@ -12,7 +12,7 @@ var Organization = new Schema({
     orgInterests: [
         {
             type: String
-					}
+        }
 	],
     profilePhoto: {
         data: Buffer,
@@ -21,47 +21,16 @@ var Organization = new Schema({
     aboutSummary: String,
     parentOrgId: Schema.Types.ObjectId,
     location: {
-        locationId: Schema.Types.ObjectId,
-        pinCode: {
-            type: Number,
-            match: [/d{6}/, "Please fill correct year"]
-        },
-        area: String,
-        addressText: String,
-        city: String,
-        country: String
+        locationId: Schema.Types.ObjectId
     },
     degreesOffered: [
-        {
-            _id: Schema.Types.ObjectId,
-            degreeName: String,
-            genre: [
-                {
-                    type: String
-					}
-			],
-            medium: [
-                {
-                    type: String
-					}
-			],
-            syllabus: [
-                {
-                    _id: Schema.Types.ObjectId,
-                    syllabusName: String
-                }
-			]
-			}
+        Schema.Types.ObjectId
 	],
     awardsOffered: [
-        {
-            _id: Schema.Types.ObjectId,
-            awardName: String
-			}
+        Schema.Types.ObjectId
 	],
     eventsConducted: [
         {
-            _id: Schema.Types.ObjectId,
             eventName: String,
             eventFromDate: Date,
             eventEndDate: Date,
@@ -73,6 +42,7 @@ var Organization = new Schema({
                     sessions: [
                         {
                             sessionName: String,
+                            //concert, lec-dem, book-release, cd release etc.
                             sessionType: String,
                             artistes: [
                                 {
@@ -89,41 +59,18 @@ var Organization = new Schema({
 	],
     books: [
         {
-            bookId: Schema.Types.ObjectId,
-            bookName: String,
-            publisherName: String,
-            publicationYear: {
-                type: Number,
-                match: [/d{4}/, "Please fill correct year"]
-            },
-			}
+            bookId: Schema.Types.ObjectId
+        }
 	],
     albums: [
         {
-            albumId: Schema.Types.ObjectId,
-            albumTitle: String,
-            producerName: String,
-            releaseYear: {
-                type: Number,
-                match: [/d{4}/, "Please fill correct year"]
-            },
-            artists: [
-                {
-                    artisteName: String
-						}
-			]
-			}
+            albumId: Schema.Types.ObjectId
+        }
 	],
     awardsReceived: [
         {
-            awardId: Schema.Types.ObjectId,
-            awardName: String,
-            awardingOrg: String,
-            awardYear: {
-                type: Number,
-                match: [/d{4}/, "Please fill correct year"]
-            }
-			}
+            awardId: Schema.Types.ObjectId
+        }
 	],
     teachers: [
         {
@@ -139,10 +86,10 @@ var Organization = new Schema({
             interests: [
                 {
                     type: String
-						}
+				}
 			],
             addressText: String
-			}
+        }
 	],
     students: [
         {
@@ -158,7 +105,7 @@ var Organization = new Schema({
             },
             genre: String,
             medium: String
-			}
+        }
 	]
 });
 

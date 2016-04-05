@@ -5,8 +5,8 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-//Books schema
-var Books = new Schema({
+//Book schema
+var Book = new Schema({
     bookName: String,
     publisherName: String,
     publicationYear: {
@@ -15,16 +15,17 @@ var Books = new Schema({
     },
     authors: [
         {
+            authorId: Schema.Types.ObjectId,
             authorName: String
 		}
 	]
 });
 
-// Configure the 'Books' schema to use getters and virtuals when transforming to JSON
-Books.set('toJSON', {
+// Configure the 'Book' schema to use getters and virtuals when transforming to JSON
+Book.set('toJSON', {
     getters: true,
     virtuals: true
 });
 
-// Create the 'Books' model out of the 'Books' schema
-mongoose.model('Books', Books);
+// Create the 'Book' model out of the 'Book' schema
+mongoose.model('Book', Book);
