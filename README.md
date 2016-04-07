@@ -2,13 +2,13 @@
 ```bash
 $ npm install
 $ npm install -g bower
-$ npm install passport-google-oauth
 $ bower install
 ```
 
-## Running Your Application
+## Running the Web Application
 ```bash
-
 $ mongod
 $ node server.js
 ```
+
+open http://localhost:3000 in browser
