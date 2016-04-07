@@ -1,16 +1,31 @@
 html {
     position: relative;
     min-height: 100%;
-    background-color: #ffffff;
+    background-color: #fffafa;
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #fffafa;
     text-align: center;
 }
 
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+div#logo {
+    font-weight: bold;
+    font-size: 16px;
+}
+
 div#nav-bar {
-    height: 60px;
+    height: 40px;
     color: white;
     background-color: #000000;
     position: fixed;
@@ -20,7 +35,7 @@ div#nav-bar {
     -webkit-box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
     -moz-box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
     box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
-    z-index: 9999;
+    z-index: 99999;
 }
 
 div#content {
@@ -89,13 +104,15 @@ nav {
     padding: 8px;
 }
 
-#nav-button {
+.nav-button {
     padding: 0 6px 0 6px;
     margin: 6px 8px 6px 8px;
     min-width: 88px;
     border-radius: 3px;
     text-align: center;
     text-transform: none;
+    font-weight: bold;
+    font-size: 16px;
     text-decoration: none;
     border: none;
     outline: none;
@@ -189,7 +206,7 @@ nav {
     font-size: 10pt;
     float: left;
     color: #63717f;
-    padding-left: 45px;
+    padding-left: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -213,8 +230,8 @@ nav {
     margin: 0 0 12px;
 }
 
-.#ff6600Text {
-    color: #ff6600;
+.redText {
+    color: red;
     text-align: left;
     text-decoration: none;
     /*font-size: 20px;*/
@@ -233,8 +250,8 @@ nav {
     padding: 10px;
 }
 
-#card-orange-span {
-    background-color: #ff6600;
+#card-red-span {
+    background-color: red;
     color: white;
     height: 10px;
     padding: 5px;

@@ -2,31 +2,27 @@
 <div ng-controller="LoginController as lctrl">
     <div id="login-card" layout="row">
         <md-card id="general-dp-card" layout="row">
-            <img flex="40" ng-src="dp.png" class="md-card-image" alt="Washed Out">
+            <img flex="40" ng-src="img/dp.png" class="md-card-image" alt="Washed Out">
             <div flex="60" id="general-info-card" layout="column">
-                <form ng-submit="lctrl.login()">
-                    <!--                <form action="/api/auth/local" method="post">-->
-                    <a href="/signup">Signup</a>
-                    <md-card-content>
-                        <div layout="row" layout-align="center center">
-                            <form action="/oauth/facebook" method="get">
-                                <md-button type="submit" id="facebook-login-button" layout="row" layout-align="space-around center">
-                                    <span class="facebook-login-button-icon">
-                                        <ng-md-icon icon="facebook" style="fill:white" size="32"></ng-md-icon>
-                                    </span>
-                                    <label>LOGIN WITH FACEBOOK</label>
-                                </md-button>
-                            </form>
-                        </div>
+                <md-card-content>
+                    <form name="loginForm" ng-submit="lctrl.login('facebook')" layout="row" layout-align="center center">
+                        <md-button type="submit" id="facebook-login-button" layout="row" layout-align="space-around center">
+                            <span class="facebook-login-button-icon">
+                                <ng-md-icon icon="facebook" style="fill:white" size="32"></ng-md-icon>
+                            </span>
+                            <label>LOGIN WITH FACEBOOK</label>
+                        </md-button>
+                    </form>
+                    <form name="loginForm" ng-submit="lctrl.login()">
                         <div layout-gt-sm="column" layout-align="center center">
                             <label>Are you under age 13?</label>
                             <md-input-container class="md-block" flex-gt-sm="">
                                 <label>Username</label>
-                                <input name="username" ng-model="lctrl.user.username">
+                                <input name="username" ng-model="lctrl.user.username" required>
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-sm="">
                                 <label>Password</label>
-                                <input type="password" name="password" ng-model="lctrl.user.password">
+                                <input type="password" name="password" ng-model="lctrl.user.password" required>
                             </md-input-container>
                         </div>
                         <div layout="row" layout-align="center center">
@@ -34,8 +30,9 @@
                                 <label>LOGIN</label>
                             </md-button>
                         </div>
-                    </md-card-content>
-                </form>
+                    </form>
+                </md-card-content>
+
             </div>
         </md-card>
     </div>

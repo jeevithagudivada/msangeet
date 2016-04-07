@@ -1,0 +1,43 @@
+<div class="content" ng-controller="ChildController as cctrl">
+    <div layout="row">
+        <md-card style="height:160px;width:160px;">
+            <input type="file" id="fileinput" />
+        </md-card>
+        <md-card layout="column">
+            <md-card-content>
+                <div style="background-color:red;">
+                    <span style="font-size:20;color:white;font-weight:bold"><br>Create New Child Account<br></span>
+                </div>
+                <form name="userForm " ng-submit="cctrl.createChild">
+                    <div layout="row " layout-padding layout-wrap layout-fill style="padding-top: 10px; ">
+                        <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                            <md-input-container class="md-block ">
+                                <input ng-model="cctrl.childDetails.firstName " placeholder="First Name" required>
+                            </md-input-container>
+                        </div>
+                        <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                            <md-input-container class="md-block ">
+                                <input ng-model="cctrl.childDetails.lastName " placeholder="Last Name" required>
+                            </md-input-container>
+                        </div>
+                        <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                            <md-input-container class="md-block ">
+                                <input ng-model="cctrl.childDetails.dateOfBirth " placeholder="Date of birth" required>
+                            </md-input-container>
+                        </div>
+                        <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                            <md-input-container class="md-block ">
+                                <input ng-model="cctrl.childDetails.pinCode " placeholder="Area Pincode" required>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div layout="row" layout-align="end center">
+                        <md-button type="submit" class="reg-nav-button ">
+                            <label>CREATE</label>
+                        </md-button>
+                    </div>
+                </form>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>

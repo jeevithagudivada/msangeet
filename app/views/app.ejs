@@ -8,50 +8,40 @@
     </title>
 </head>
 
-<body ng-app="indexApp" ng-cloak>
+<body ng-controller="MainController as mctrl" ng-cloak="">
     <div id="nav-bar" class="header-container" layout="row" layout-align="space-around center">
-        <div layout="row" layout-align="center center">
-            Welcome to mSangeet
+        <div layout="row" layout-align="start center">
+            <div id="logo"><span style="color:red">m</span>Sangeet</div>
         </div>
+
+        <nav id="top_menu" layout="row" layout-align="end center">
+            <ul>
+                <li>
+                    <md-button class="nav-button">
+                        <a style="text-decoration:none;color:#ffffff;" href="#!/home">Home</a>
+                    </md-button>
+                </li>
+                <li>
+                    <md-button class="nav-button">
+                        <a style="text-decoration:none;color:#ffffff;" href="#!/profile">Profile</a>
+                    </md-button>
+                </li>
+                <li>
+                    <md-button class="nav-button">
+                        <a style="text-decoration:none;color:#ffffff;" href="#!/child">Child</a>
+                    </md-button>
+                </li>
+                <li>
+                    <form action="/signout" layout="row" layout-align="center center">
+                        <md-button type="submit" class="nav-button">Logout</md-button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
     </div>
 
-    <div id="login-card" layout="row">
-        <md-card id="general-dp-card" layout="row">
-            <img flex="40" ng-src="img/dp.png" class="md-card-image" alt="Washed Out">
-            <div flex="60" id="general-info-card" layout="column">
-                <md-card-content>
-                    <form name="loginForm" action="/oauth/facebook" layout="row" layout-align="center center">
-                        <md-button type="submit" id="facebook-login-button" layout="row" layout-align="space-around center">
-                            <span class="facebook-login-button-icon">
-                                <ng-md-icon icon="facebook" style="fill:white" size="32"></ng-md-icon>
-                            </span>
-                            <label>LOGIN WITH FACEBOOK</label>
-                        </md-button>
-                    </form>
-                    <form name="loginForm" action="/auth/local" method="post">
-                        <div layout-gt-sm="column" layout-align="center center">
-                            <label>Are you under age 13?</label>
-                            <md-input-container class="md-block" flex-gt-sm="">
-                                <label>Username</label>
-                                <input name="username" required>
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-sm="">
-                                <label>Password</label>
-                                <input type="password" name="password" required>
-                            </md-input-container>
-                        </div>
-                        <div layout="row" layout-align="center center">
-                            <md-button type="submit" id="login-button" layout="row" layout-align="space-around center center">
-                                <label>LOGIN</label>
-                            </md-button>
-                        </div>
-                    </form>
-                </md-card-content>
-            </div>
-        </md-card>
-    </div>
-
-
+    <!-- Render AngularJS views  -->
+    <div ng-view></div>
 
     <div id="footer">
         <div id="footer-container" layout="column">
@@ -70,7 +60,7 @@
                 </div>
                 <div id="info-connect" layout="column">
                     <label style="font-weight: bold">Connect with us</label>
-                    <div flex="33" id="follow" class="footer-follow" layout="row" layout-align="center center">
+                    <div flex="33" id="follow" class="footer-follow" layout="row" layout-align="space-around center">
                         <ng-md-icon icon="facebook-box" class="footer-follow-element" style="fill: white" size="34"></ng-md-icon>
                         <ng-md-icon icon="twitter" class="footer-follow-element" style="fill: white" size="34"></ng-md-icon>
                         <ng-md-icon icon="linkedin-box" class="footer-follow-element" style="fill: white" size="34"></ng-md-icon>
@@ -79,11 +69,11 @@
             </div>
         </div>
         <md-divider class="divider"></md-divider>
-        <div id="licence-bar" layout="row" layout-align="center center">
+        <div id="licence-bar" layout="row" layout-align="space-around center">
             <div layout="row" layout-align="start center">
-                <md-button type="submit" id="nav-button">Contribute</md-button>
-                <md-button type="submit" id="nav-button">Privacy</md-button>
-                <md-button type="submit" id="nav-button">Contact</md-button>
+                <md-button class="nav-button" type="submit">Contribute</md-button>
+                <md-button class="nav-button" type="submit">Privacy</md-button>
+                <md-button class="nav-button" type="submit">Contact</md-button>
             </div>
             <div layout="row" layout-align="end center">
                 &copy Copyright 2015, All Rights Reserved
@@ -94,22 +84,31 @@
     <link rel="stylesheet" href="/lib/angular-material/angular-material.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/registration.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/profile.css">
 
     <!-- Load local libraries -->
     <script type="text/javascript" src="/lib/angular/angular.js"></script>
+    <script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>
     <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="/lib/angular-animate/angular-animate.js"></script>
     <script type="text/javascript" src="/lib/angular-aria/angular-aria.js"></script>
     <script type="text/javascript" src="/lib/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="/lib/angular-messages/angular-messages.js"></script>
     <script type="text/javascript" src="/lib/angular-material-icons/angular-material-icons.js"></script>
 
-    <script type="text/javascript">
-        angular.module('indexApp', ['ngMdIcons', 'ngMaterial'])
-            .controller('MainCtrl', [function() {
-                var self = this;
-            }]);
+    <!-- Load the user module -->
+    <script type="text/javascript" src="/user/user.client.module.js"></script>
+    <script type="text/javascript" src="/user/controllers/user.client.controller.js"></script>
+    <script type="text/javascript" src="/user/controllers/registration.client.controller.js"></script>
+    <script type="text/javascript" src="/user/controllers/child.client.controller.js"></script>
+    <script type="text/javascript" src="/user/services/user.client.service.js"></script>
+    <script type="text/javascript" src="/user/services/search.client.service.js"></script>
+    <script type="text/javascript" src="/user/config/user.client.routes.js"></script>
 
-    </script>
+    <!-- Bootstrap AngularJS application -->
+    <script type="text/javascript" src="/application.js"></script>
 </body>
 
 </html>

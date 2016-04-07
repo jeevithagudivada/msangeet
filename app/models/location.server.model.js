@@ -5,8 +5,8 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-//Locations schema
-var Locations = new Schema({
+//Location schema
+var Location = new Schema({
     locationName: String,
     pinCode: {
         type: Number,
@@ -18,11 +18,11 @@ var Locations = new Schema({
     country: String
 });
 
-// Configure the 'Locations' schema to use getters and virtuals when transforming to JSON
-Locations.set('toJSON', {
+// Configure the 'Location' schema to use getters and virtuals when transforming to JSON
+Location.set('toJSON', {
     getters: true,
     virtuals: true
 });
 
-// Create the 'Locations' model out of the 'Locations' schema
-mongoose.model('Locations', Locations);
+// Create the 'Location' model out of the 'Location' schema
+mongoose.model('Location', Location);

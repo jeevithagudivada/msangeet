@@ -1,0 +1,80 @@
+<div class="home" ng-controller="UserController as uctrl">
+    <div id="general" layout="row">
+        <md-card style="height:160px" id="general-dp-card">
+            <img ng-src="img/dp.png" class="dp-image" alt="Washed Out">
+        </md-card>
+        <md-card flex="100">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">
+                        {{uctrl.fullname}}
+        		          <nav style="float:right">
+                              <ng-md-icon icon="facebook" size="24"></ng-md-icon>
+        		              <ng-md-icon icon="twitter" size="24"></ng-md-icon>
+        		              <ng-md-icon icon="google-plus" size="20"></ng-md-icon>
+        		          </nav>                
+        		          </span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-divider class="general-divider"></md-divider>
+            <md-card-content>
+                <div ng-repeat="(key,value) in uctrl.generaldetails">
+                    <div class="label"><span style="color:red">{{key}}:</span></br>{{value}}</div>
+                    </br>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+    <md-card layout="column">
+        <md-card-title>
+            <md-card-title-text>
+                Invite Friends
+            </md-card-title-text>
+        </md-card-title>
+        <md-divider class="general-divider"></md-divider>
+        <md-card-content>
+
+        </md-card-content>
+    </md-card>
+    <md-card layout="column">
+        <md-card-title>
+            <md-card-title-text>
+                Search for guru
+            </md-card-title-text>
+        </md-card-title>
+        <md-divider class="general-divider"></md-divider>
+        <md-card-content>
+            <form name="searchForm" ng-submit="uctrl.searchGuru()">
+                <div layout="row" layout-padding layout-wrap layout-fill style="padding-top: 10px;">
+                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                        <md-input-container class="md-block ">
+                            <input ng-model="uctrl.searchDetails.genre" placeholder="Genre">
+                        </md-input-container>
+                    </div>
+                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                        <md-input-container class="md-block ">
+                            <input ng-model="uctrl.searchDetails.medium" placeholder="Medium">
+                        </md-input-container>
+                    </div>
+                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                        <md-input-container class="md-block ">
+                            <input ng-model="uctrl.searchDetails.maxRadialDistance" placeholder="Max Radial Distance">
+                        </md-input-container>
+                    </div>
+                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                        <md-input-container class="md-block ">
+                            <input ng-model="uctrl.searchDetails.resultCount" placeholder="Number of Results">
+                        </md-input-container>
+                    </div>
+                </div>
+                <div layout="row" layout-align="end center">
+                    <md-button type="submit" class="reg-nav-button ">
+                        <label>SEARCH</label>
+                    </md-button>
+                </div>
+                <md-divider class="general-divider"></md-divider>
+                <div id="googleMap"></div>
+            </form>
+        </md-card-content>
+    </md-card>
+</div>

@@ -7,8 +7,7 @@ div#registration-card {
     text-align: center;
 }
 
-#general-dp-card {
-    width: 1000px;
+#general-info-card {
     text-align: center;
 }
 
@@ -59,10 +58,6 @@ div#registration-card {
     margin-left: 0;
 }
 
-#general-dp-card {
-    width: 1000px;
-}
-
 #tab2 {
     background-color: #999999;
 }
@@ -84,4 +79,9 @@ div#registration-card {
     width: 240px;
     padding-left: 30px;
     padding-right: 30px;
+}
+
+.dp-image {
+    height: 160px;
+    width: 160px;
 }

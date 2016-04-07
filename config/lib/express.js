@@ -11,15 +11,12 @@ var config = require('../config'),
     passport = require('passport'),
     cookieParser = require('cookie-parser');
 
-module.exports = function ()
-{
+module.exports = function () {
     var app = express();
 
-    if (process.env.NODE_ENV === 'development')
-    {
+    if (process.env.NODE_ENV === 'development') {
         app.use(morgan('dev'));
-    } else if (process.env.NODE_ENV === 'production')
-    {
+    } else if (process.env.NODE_ENV === 'production') {
         app.use(compress());
     }
     app.use(bodyParser.urlencoded({
@@ -51,6 +48,7 @@ module.exports = function ()
 
     require('../../app/routes/index.server.routes.js')(app);
     require('../../app/routes/user.server.routes.js')(app);
+    require('../../app/routes/search.server.routes.js')(app);
 
     app.use(express.static('./public'));
 

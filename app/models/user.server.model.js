@@ -101,14 +101,14 @@ var UserSchema = new Schema({
     }
 });
 
-// Set the 'fullname' virtual property
-UserSchema.virtual('fullName').get(function () {
-    return this.firstName + ' ' + this.lastName;
-}).set(function (fullName) {
-    var splitName = fullName.split(' ');
-    this.firstName = splitName[0] || '';
-    this.lastName = splitName[1] || '';
-});
+//// Set the 'fullname' virtual property
+//UserSchema.virtual('fullName').get(function () {
+//    return this.firstName + ' ' + this.lastName;
+//}).set(function (fullName) {
+//    var splitName = fullName.split(' ');
+//    this.firstName = splitName[0] || '';
+//    this.lastName = splitName[1] || '';
+//});
 
 // Use a pre-save middleware to hash the password
 UserSchema.pre('save', function (next) {

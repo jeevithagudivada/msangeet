@@ -2,10 +2,11 @@
 'use strict';
 
 // Create the 'user' controller
-angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', 'UserService', 'User',
-    function ($scope, $routeParams, $location, UserService, User) {
+angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', 'UserService', 'SearchService',
+    function ($scope, $routeParams, $location, UserService, SearchService) {
         var self = this;
-        self.fullname = "Pandit. Venkatesh Kumar";
+        self.searchDetails = {};
+        self.fullname = "Venkatesh Kumar";
         self.generaldetails = {
             'Location': 'Bangalore, Karnataka-56',
             'Musical Skills': 'Hindustani Classical, Khya, Devotional',
@@ -87,11 +88,26 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
             }
         };
 
+        self.searchGuru = function () {
+            console.log('searchGuru')
+            $scope.searchDetails = self.searchDetails;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    $scope.$apply(function () {
+                        $scope.searchDetails.latitude = position.coords.latitude;
+                        $scope.searchDetails.longitude = position.coords.longitude;
+                        console.log($scope.searchDetails);
+                        SearchService.searchGuru($scope.searchDetails);
+                    });
+                });
+            }
+        }
+
         self.viewProfile = function () {
             console.log(UserService.userDetails.username);
             $location.path('/users/' + UserService.userDetails.username);
         };
-        
+
         self.children = function () {
             console.log(UserService.userDetails.username);
             $location.path('/users/' + UserService.userDetails.username);
@@ -161,5 +177,5 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
                 });
             }
         };
-    }
-]);
+                }
+                ]);

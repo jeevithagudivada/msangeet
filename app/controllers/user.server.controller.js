@@ -33,21 +33,6 @@ var getErrorMessage = function (err) {
     return message;
 };
 
-// Create a new controller method that renders the signin page
-exports.renderSignin = function (req, res, next) {
-    // If user is not connected render the signin page, otherwise redirect the user back to the main application page
-    if (!req.user) {
-        // Use the 'response' object to render the signin page
-        res.render('signin', {
-            // Set the page title variable
-            title: 'Sign-in Form',
-            // Set the flash message variable
-            messages: req.flash('error') || req.flash('info')
-        });
-    } else {
-        return res.redirect('/');
-    }
-};
 
 // Create a new controller method that renders the signup page
 exports.renderSignup = function (req, res, next) {
@@ -70,17 +55,17 @@ exports.signup = function (req, res, next) {
     // If user is not connected, create and login a new user, otherwise redirect the user back to the main application page
     if (!req.user) {
         // Create a new 'User' model instance
-       var user = new User(req.body);
-//        var user = new User({
-//            salutation: 'Pandit',
-//            firstName: 'Venkatesh',
-//            lastName: 'Kumar',
-//            aboutSummary: "Pandit M. Venkatesh Kumar (born 1 July 1953 in Lakshmipura in the Dharwad region of northern Karnataka), is an Indian Hindustani classical vocalist.[1][2] He is renowned for his husk, vibrant classical singing style, He is also popular in singing Dasara Padas & Devotional songs. Venkatesh Kumar's father late Huleppa was a folk singer leather puppet artist . In 1968, when he was 12, Kumar was taken by his uncle Sri Belagallu Veeranna to the Veereshwara Punyashrama in Gadag (central Karnataka), run by Puttaraja Gawai, the religious saint and Hindustani musician. Kumar lived and learned at the ashram for the next 12 years.",
-//            username: 'vkumar',
-//            email: 'vkumar@gmail.com',
-//            phoneNumber: 9999999999,
-//            password: 'vkumar123'
-//        });
+        var user = new User(req.body);
+        //        var user = new User({
+        //            salutation: 'Pandit',
+        //            firstName: 'Venkatesh',
+        //            lastName: 'Kumar',
+        //            aboutSummary: "Pandit M. Venkatesh Kumar (born 1 July 1953 in Lakshmipura in the Dharwad region of northern Karnataka), is an Indian Hindustani classical vocalist.[1][2] He is renowned for his husk, vibrant classical singing style, He is also popular in singing Dasara Padas & Devotional songs. Venkatesh Kumar's father late Huleppa was a folk singer leather puppet artist . In 1968, when he was 12, Kumar was taken by his uncle Sri Belagallu Veeranna to the Veereshwara Punyashrama in Gadag (central Karnataka), run by Puttaraja Gawai, the religious saint and Hindustani musician. Kumar lived and learned at the ashram for the next 12 years.",
+        //            username: 'vkumar',
+        //            email: 'vkumar@gmail.com',
+        //            phoneNumber: 9999999999,
+        //            password: 'vkumar123'
+        //        });
         var message = null;
 
         // Set the user provider property
@@ -156,9 +141,7 @@ exports.saveOAuthUserProfile = function (req, profile, done) {
 exports.signout = function (req, res) {
     // Use the Passport 'logout' method to logout
     req.logout();
-
-    // Redirect the user back to the main application page
-    res.redirect('/');
+    return res.redirect('/');
 };
 
 // Create a new controller middleware that is used to authorize authenticated operations 

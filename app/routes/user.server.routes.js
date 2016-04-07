@@ -6,8 +6,7 @@ var user = require('../../app/controllers/user.server.controller'),
     passport = require('passport');
 
 // Define the routes module' method
-module.exports = function (app)
-{
+module.exports = function (app) {
     // Set up the 'signup' routes 
 
     //    app.route('/api/user')
@@ -24,13 +23,10 @@ module.exports = function (app)
     //    app.param('username', user.userByUSERNAME);
     //
     //    // Set up the 'signin' routes
-    var isLoggedIn = function (req, res, next)
-    {
-        if (req.isAuthenticated())
-        {
+    var isLoggedIn = function (req, res, next) {
+        if (req.isAuthenticated()) {
             next();
-        } else
-        {
+        } else {
             res.send({
                 msg: 'Please login to access this information'
             }, 400);
@@ -41,17 +37,15 @@ module.exports = function (app)
         .get(user.renderSignup)
         .post(user.signup);
 
-    app.route('/api/auth/local')
+    app.route('/auth/local')
         .post(
             passport.authenticate('local'),
-            function (req, res)
-            {
-                res.json(req.user);
+            function (req, res) {
+                res.redirect('/');
             }
         );
 
-    app.get('/api/session', isLoggedIn, function (req, res)
-    {
+    app.get('/api/session', isLoggedIn, function (req, res) {
         res.send({
             loginStatus: true,
             user: req.user

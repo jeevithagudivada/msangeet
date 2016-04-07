@@ -5,11 +5,52 @@
 angular.module('user').config(['$routeProvider',
 	function ($routeProvider) {
         $routeProvider.
-        when('/user/children', {
-            templateUrl: 'user/views/child-accounts.view.html'
+        when('/', {
+            templateUrl: 'user/views/home.client.view.html',
+            resolve: {
+                auth: ['$q', '$location', 'UserService',
+                       function ($q, $location, UserService) {
+                        return UserService.session().then(
+                            function (success) {
+                                if (!UserService.userDetails.hasRegistered) {
+                                    $location.path('/registration');
+                                    $location.replace();
+                                } else {
+                                    $location.path('/home');
+                                    $location.replace();
+                                }
+                            },
+                            function (err) {
+                                //return $q.reject(err);
+                            });
+                       }]
+            }
+        }).
+        when('/registration', {
+            templateUrl: 'user/views/registration.client.view.html',
+            resolve: {
+                auth: ['$q', '$location', 'UserService',
+                       function ($q, $location, UserService) {
+                        return UserService.session().then(
+                            function (success) {
+                                if (UserService.userDetails.hasRegistered) {
+                                    $location.path('/home');
+                                    $location.replace();
+                                }
+                            },
+                            function (err) {
+                                $location.path('/login');
+                                $location.replace();
+                                return $q.reject(err);
+                            });
+                       }]
+            }
+        }).
+        when('/child', {
+            templateUrl: 'user/views/child-accounts.client.view.html'
         }).
         when('/user/:username', {
-            templateUrl: 'user/views/profile-view.view.html',
+            templateUrl: 'user/views/profile-view.client.view.html',
             resolve: {
                 auth: ['$q', '$location', 'UserService',
                   function ($q, $location, UserService) {
@@ -24,10 +65,10 @@ angular.module('user').config(['$routeProvider',
             }
         }).
         when('/user/:username/edit', {
-            templateUrl: 'user/views/profile-update.view.html'
+            templateUrl: 'user/views/profile-update.client.view.html'
         }).
         when('/home', {
-            templateUrl: 'user/views/home.view.html',
+            templateUrl: 'user/views/home.client.view.html',
             resolve: {
                 auth: ['$q', '$location', 'UserService',
                        function ($q, $location, UserService) {
@@ -41,13 +82,15 @@ angular.module('user').config(['$routeProvider',
                        }]
             }
         }).
-        when('/user', { //temporary for demo
-            templateUrl: 'user/views/profile-view.view.html',
+        when('/profile', { //temporary for demo
+            templateUrl: 'user/views/profile-view.client.view.html',
             resolve: {
                 auth: ['$q', '$location', 'UserService',
                        function ($q, $location, UserService) {
                         return UserService.session().then(
-                            function (success) {},
+                            function (success) {
+                                $location.path('/user/' + UserService.userDetails.username);
+                            },
                             function (err) {
                                 $location.path('/login');
                                 $location.replace();
@@ -55,6 +98,9 @@ angular.module('user').config(['$routeProvider',
                             });
                        }]
             }
+        }).
+        otherwise({
+            redirectTo: '/'
         });
 	}
 ]);

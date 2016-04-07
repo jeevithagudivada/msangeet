@@ -1,0 +1,120 @@
+<div class="content" ng-controller="RegistrationController as rctrl">
+    <div layout="row" ng-show="rctrl.page == 1">
+        <md-card style="height:160px;width:160px;">
+            <input type="file" id="fileinput" />
+        </md-card>
+        <md-card layout="row">
+            <div id="general-info-card" layout="column">
+                <md-card-content>
+                    <div id="registration-card-1">
+                        <form name="userForm" ng-submit="rctrl.submitReg()">
+                            <div layout="row" layout-padding layout-wrap layout-fill style="padding-top: 10px;">
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-bind="rctrl.userDetails.firstName" ng-model="rctrl.userDetails.firstName" placeholder="First Name">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-bind="rctrl.userDetails.lastName" ng-model="rctrl.userDetails.lastName" placeholder="Last Name">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-bind="rctrl.userDetails.dateOfBirth" ng-model="rctrl.userDetails.dateOfBirth" placeholder="Date of birth">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-bind="rctrl.userDetails.pinCode" ng-model="rctrl.userDetails.pinCode" placeholder="Area Pincode">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-bind="rctrl.userDetails.phoneNumber" ng-model="rctrl.userDetails.phoneNumber" placeholder="Mobile Number">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-bind="rctrl.userDetails.email" ng-model="rctrl.userDetails.email" placeholder="Email">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-button id="next-button" ng-click="rctrl.sendMobileVerificationCode()">
+                                        <label>Send verification code</label>
+                                    </md-button>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-button id="next-button" ng-click="rctrl.sendEmailVerificationCode()">
+                                        <label>Send verification code</label>
+                                    </md-button>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-model="rctrl.mobileVC" placeholder="Enter mobile code here">
+                                    </md-input-container>
+                                </div>
+                                <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                                    <md-input-container class="md-block">
+                                        <input ng-model="rctrl.emailVC" placeholder="Enter email code here">
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </md-card-content>
+            </div>
+        </md-card>
+    </div>
+
+    <div layout="row" ng-show="rctrl.page == 2">
+        <md-card layout="row">
+            <md-card-content>
+                <div layout="column">
+                    <div layout layout-align="center center">What best discribes you?</div>
+                    <div layout="row">
+                        <div class="persona-unit" ng-click="rctrl.personas['Guru']=!rctrl.personas['Guru']" layout layout-align="center center">
+                            <img class="persona" src="img/Guru.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="rctrl.personas['Guru']"></ng-md-icon>
+                        </div>
+
+                        <div class="persona-unit" ng-click="rctrl.personas['Shishya']=!rctrl.personas['Shishya']" layout layout-align="center center">
+                            <img class="persona" src="img/Shishya.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="rctrl.personas['Shishya']"></ng-md-icon>
+                        </div>
+
+                        <div class="persona-unit" ng-click="rctrl.personas['Kalaakar']=!rctrl.personas['Kalaakar']" layout layout-align="center center">
+                            <img class="persona" src="img/Kalaakar.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="rctrl.personas['Kalaakar']"></ng-md-icon>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div class="persona-unit" ng-click="rctrl.personas['Sanghataka']=!rctrl.personas['Sanghataka']" layout layout-align="center center">
+                            <img class="persona" src="img/Sanghataka.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="rctrl.personas['Sanghataka']"></ng-md-icon>
+                        </div>
+
+                        <div class="persona-unit" ng-click="rctrl.personas['Pandita']=!rctrl.personas['Pandita']" layout layout-align="center center">
+                            <img class="persona" src="img/Pandita.jpg" alt="not found" />
+                            <ng-md-icon icon="done" class="check-icon" style="fill: green" size="34" ng-show="rctrl.personas['Pandita']"></ng-md-icon>
+                        </div>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div layout="row" layout-align="space-between center">
+        <md-button class="reg-nav-button" ng-click="rctrl.page = 1;" ng-show="rctrl.page == 2;">
+            <label>PERVIOUS</label>
+        </md-button>
+        <label layout-align="end center" ng-show="rctrl.page == 1;">
+        </label>
+        <md-button class="reg-nav-button" ng-click="rctrl.checkVC()" ng-show="rctrl.page == 1;">
+            <label>NEXT</label>
+        </md-button>
+        <md-button class="reg-nav-button" ng-click="rctrl.register()" ng-show="rctrl.page == 2;">
+            <label>FINISH</label>
+        </md-button>
+    </div>
+</div>

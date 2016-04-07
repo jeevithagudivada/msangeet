@@ -2,26 +2,15 @@
 'use strict';
 
 // Create the 'login' controller
-angular.module('login').controller('LoginController', ['$scope', 'UserService', 'SigninService', '$location',
-	function ($scope, UserService, SigninService, $location) {
+angular.module('user').controller('RegistrationController', ['$scope', 'UserService', '$location',
+	function ($scope, UserService, $location) {
         // Expose the authentication service
         var self = this;
-        self.data = {
-            selectedIndex: 0,
-            secondLocked: true,
-            bottom: false
-        };
         self.page = 1;
         self.personas = {};
         self.mobileVC = undefined;
         self.emailVC = undefined;
         for (var i = 1; i < 10; ++i) self.personas[i] = false;
-        self.next = function () {
-            self.data.selectedIndex = Math.min(self.data.selectedIndex + 1, 2);
-        };
-        self.previous = function () {
-            self.data.selectedIndex = Math.max(self.data.selectedIndex - 1, 0);
-        };
         self.login = function (provider) {
             UserService.login(self.user).then(function (success) {
                 if (success.data.hasRegistered)
