@@ -8,5 +8,7 @@ $ bower install
 
 ## Running Your Application
 ```bash
+
+$ mongod
 $ node server.js
 ```
