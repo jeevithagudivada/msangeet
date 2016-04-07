@@ -2,8 +2,8 @@
 ```bash
 $ npm install
 $ npm install -g bower
-$ bower install
 $ npm install passport-google-oauth
+$ bower install
 ```
 
 ## Running Your Application
