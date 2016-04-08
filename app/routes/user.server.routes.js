@@ -33,9 +33,9 @@ module.exports = function (app) {
         }
     };
 
-    app.route('/signup')
-        .get(user.renderSignup)
-        .post(user.signup);
+//    app.route('/signup')
+//        .get(user.renderSignup)
+//        .post(user.signup);
 
     app.route('/auth/local')
         .post(

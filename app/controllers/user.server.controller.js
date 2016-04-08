@@ -116,28 +116,28 @@ exports.updateUser = function (req, res, next) {
         var message = null;
 
         // Try saving the updated user document
-//        user.update(function (err) {
-            //            // If an error occurs, use flash messages to report the error
-            //            if (err) {
-            //                // Use the error handling method to get the error message
-            //                var message = getErrorMessage(err);
-            //                console.log(err);
-            //                // Set the flash messages
-            //                req.flash('error', message);
-            //
-            //                // Redirect the user back to the signup page
-            //                return res.redirect('/signup');
-            //            }
-            //
-            //            // If the user was created successfully use the Passport 'login' method to login
-            //            req.login(user, function (err) {
-            //                // If a login error occurs move to the next middleware
-            //                if (err) return next(err);
-            //
-            //                // Redirect the user back to the main application page
-            //                return res.redirect('/');
-            //            });
-            //        });
+        //        user.update(function (err) {
+        //            // If an error occurs, use flash messages to report the error
+        //            if (err) {
+        //                // Use the error handling method to get the error message
+        //                var message = getErrorMessage(err);
+        //                console.log(err);
+        //                // Set the flash messages
+        //                req.flash('error', message);
+        //
+        //                // Redirect the user back to the signup page
+        //                return res.redirect('/signup');
+        //            }
+        //
+        //            // If the user was created successfully use the Passport 'login' method to login
+        //            req.login(user, function (err) {
+        //                // If a login error occurs move to the next middleware
+        //                if (err) return next(err);
+        //
+        //                // Redirect the user back to the main application page
+        //                return res.redirect('/');
+        //            });
+        //        });
     } else {
         return res.redirect('/');
     }
