@@ -50,38 +50,30 @@ exports.renderSignup = function (req, res, next) {
     }
 };
 
-// Create a new controller method that creates new 'regular' user
-exports.signup = function (req, res, next) {
+// Create a new controller method that creates new user
+exports.createUser = function (req, res, next) {
     // If user is not connected, create and login a new user, otherwise redirect the user back to the main application page
     if (!req.user) {
         // Create a new 'User' model instance
         var user = new User(req.body);
-        //        var user = new User({
-        //            salutation: 'Pandit',
-        //            firstName: 'Venkatesh',
-        //            lastName: 'Kumar',
-        //            aboutSummary: "Pandit M. Venkatesh Kumar (born 1 July 1953 in Lakshmipura in the Dharwad region of northern Karnataka), is an Indian Hindustani classical vocalist.[1][2] He is renowned for his husk, vibrant classical singing style, He is also popular in singing Dasara Padas & Devotional songs. Venkatesh Kumar's father late Huleppa was a folk singer leather puppet artist . In 1968, when he was 12, Kumar was taken by his uncle Sri Belagallu Veeranna to the Veereshwara Punyashrama in Gadag (central Karnataka), run by Puttaraja Gawai, the religious saint and Hindustani musician. Kumar lived and learned at the ashram for the next 12 years.",
-        //            username: 'vkumar',
-        //            email: 'vkumar@gmail.com',
-        //            phoneNumber: 9999999999,
-        //            password: 'vkumar123'
-        //        });
         var message = null;
 
         // Set the user provider property
-        user.provider = 'local';
-        user.hasRegistered = false;
+        if (user.provider != 'facebook') {
+            user.provider = 'local';
+            user.hasRegistered = true;
+        } else {
+            user.hasRegistered = false;
+        }
+
         // Try saving the new user document
         user.save(function (err) {
             // If an error occurs, use flash messages to report the error
             if (err) {
                 // Use the error handling method to get the error message
                 var message = getErrorMessage(err);
-                console.log(err);
-                // Set the flash messages
-                req.flash('error', message);
-
-                // Redirect the user back to the signup page
+                console.log('createUser failed')
+                console.log(message);
                 return res.redirect('/signup');
             }
 
@@ -94,6 +86,58 @@ exports.signup = function (req, res, next) {
                 return res.redirect('/');
             });
         });
+    } else {
+        return res.redirect('/');
+    }
+};
+
+// Create a new controller method that renders the signup page
+exports.renderSignup = function (req, res, next) {
+    // If user is not connected render the signup page, otherwise redirect the user back to the main application page
+    if (!req.user) {
+        // Use the 'response' object to render the signup page
+        res.render('signup', {
+            // Set the page title variable
+            title: 'Sign-up Form',
+            // Set the flash message variable
+            messages: req.flash('error')
+        });
+    } else {
+        return res.redirect('/');
+    }
+};
+
+// Create a new controller method that updates user profile
+exports.updateUser = function (req, res, next) {
+    // If user is not connected, create and login a new user, otherwise redirect the user back to the main application page
+    if (!requser) {
+        // Create a new 'User' model instance
+        var user = new User(req.body);
+        var message = null;
+
+        // Try saving the updated user document
+//        user.update(function (err) {
+            //            // If an error occurs, use flash messages to report the error
+            //            if (err) {
+            //                // Use the error handling method to get the error message
+            //                var message = getErrorMessage(err);
+            //                console.log(err);
+            //                // Set the flash messages
+            //                req.flash('error', message);
+            //
+            //                // Redirect the user back to the signup page
+            //                return res.redirect('/signup');
+            //            }
+            //
+            //            // If the user was created successfully use the Passport 'login' method to login
+            //            req.login(user, function (err) {
+            //                // If a login error occurs move to the next middleware
+            //                if (err) return next(err);
+            //
+            //                // Redirect the user back to the main application page
+            //                return res.redirect('/');
+            //            });
+            //        });
     } else {
         return res.redirect('/');
     }

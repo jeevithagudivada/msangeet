@@ -6,7 +6,7 @@ exports.searchGuru = function (req, res, next) {
     console.log('search controller');
     console.log(req.body.genre);
     console.log(req.body.medium);
-    console.log(req.body.maxDistance);
+    console.log(req.body.maxRadialDistance);
     console.log(req.body.resultCount);
     console.log(req.body.longitude);
     console.log(req.body.latitude);

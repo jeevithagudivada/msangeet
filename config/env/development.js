@@ -1,6 +1,6 @@
 module.exports = {
-    db: 'mongodb://127.0.0.1:27017/msangeet',
-    //db: 'mongodb://msangeet:11msangeet!!@ds017678.mlab.com:17678/msangeet',
+    //db: 'mongodb://127.0.0.1:27017/msangeet',
+    db: 'mongodb://msangeet:11msangeet11@ds015730.mlab.com:15730/msangeeta',
     sessionSecret: 'developmentSessionSecret',
     facebook: {
         clientID: '1528748510753908',
@@ -13,8 +13,8 @@ module.exports = {
         callbackURL: 'http://localhost:3000/oauth/google/callback'
     },
     twitter: {
-        consumerKey:'x0InzzwEJZ7oIkudQrSqBlsdm',
-        consumerSecret:'EsU0PeL3ctXYOWXD6mGZdnZuIpBn0buDnK0rRL5nXoHJ4KRNXP',
+        consumerKey: 'x0InzzwEJZ7oIkudQrSqBlsdm',
+        consumerSecret: 'EsU0PeL3ctXYOWXD6mGZdnZuIpBn0buDnK0rRL5nXoHJ4KRNXP',
         callbackURL: 'http://localhost:3000/oauth/twitter/callback'
     }
 };
