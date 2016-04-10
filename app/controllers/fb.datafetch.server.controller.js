@@ -7,10 +7,10 @@ var https = require('https');
 // Get the data from Facebook for a given graph query path.
 exports.getFBData = function (accessToken, apiPath, callback)
 {
-    if (apiPath.indexOf('search')!=-1)
+    if (apiPath.indexOf('search')||apiPath.indexOf('fields=bio')!=-1)
         accessToken = '&access_token=' + accessToken;
     else
-        accessToken = '?access_token=' + accessToken;
+        accessToken = '&access_token=' + accessToken;
 
     var options =
     {
