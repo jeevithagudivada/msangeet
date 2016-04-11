@@ -220,6 +220,23 @@ exports.listChildren = function (req, res) {
     });
 };
 
+// Create a new controller middleware that retrieves a single existing user
+exports.userByUSERNAME = function(req, res, next, u) {  
+	User.findOne(
+	{    
+		username: u
+	},
+	function(err, user) 
+	{    
+		if (err){      
+			return next(err);    
+		}else {      
+			req.user = user;      
+			next();    
+		}  
+	});
+};
+
 // Create a new controller method that returns an existing article
 exports.read = function (req, res) {
     res.json(req.user);
