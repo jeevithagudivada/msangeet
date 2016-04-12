@@ -8,21 +8,24 @@ var user = require('../../app/controllers/user.server.controller'),
 // Define the routes module' method
 module.exports = function (app) {
     // Set up the 'signup' routes 
-
-    //    app.route('/api/user')
-    //        .get(user.list)
-    //        .post(user.create)
-    //
-    //    app.route('/api/user/create')
-    //        .post(user.create);
-    //
-    //    app.route('/api/user/:username')
-    //        .get(user.read)
+    app.param('username', user.userByUsername);
+    app.route('/api/user')
+        //        .get(user.list)
+        .post(user.createChildUser)
+        //
+        //    app.route('/api/user/create')
+        //        .post(user.create);
+        //
+    app.route('/api/user/:username')
+        .get(user.read);
     //        .put(user.requiresLogin, user.hasAuthorization, user.update)
     //
     //    app.param('username', user.userByUSERNAME);
     //
     //    // Set up the 'signin' routes
+
+    // Set up the 'articleId' parameter middleware   
+
     var isLoggedIn = function (req, res, next) {
         if (req.isAuthenticated()) {
             next();
@@ -33,9 +36,9 @@ module.exports = function (app) {
         }
     };
 
-//    app.route('/signup')
-//        .get(user.renderSignup)
-//        .post(user.signup);
+    //    app.route('/signup')
+    //        .get(user.renderSignup)
+    //        .post(user.signup);
 
     app.route('/auth/local')
         .post(
@@ -51,6 +54,9 @@ module.exports = function (app) {
             user: req.user
         });
     });
+
+    app.post('/api/photo', user.uploadPhoto);
+
 
     // Set up the Twitter OAuth routes
     app.get('/oauth/twitter', passport.authenticate('twitter', {

@@ -43,6 +43,14 @@ module.exports = function () {
     app.use(passport.initialize());
     app.use(passport.session());
 
+    // Twilio Credentials 
+    var accountSid = 'AC55135cfe0b0aa15279ba5196abb00a69';
+    var authToken = '7b3a3369ad2c8bfa7f3fa018d55f786d';
+    //render the signup page
+
+    //require the Twilio module and create a REST client 
+    var twilio_client = require('twilio')(accountSid, authToken);
+
     app.set('views', './app/views');
     app.set('view engine', 'ejs');
 

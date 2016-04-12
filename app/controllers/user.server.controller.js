@@ -3,7 +3,26 @@
 
 // Load the module dependencies
 var User = require('mongoose').model('User'),
-    passport = require('passport');
+    TwilioUser = require('mongoose').model('TwilioUser'),
+    passport = require('passport'),
+    multer = require('multer');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, './uploads');
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.fieldname + '-' + Date.now());
+    }
+});
+
+var upload = multer({
+    storage: storage
+}, {
+    limits: {
+        fileSize: 102400
+    }
+}).single('userPhoto');
 
 // Create a new error handling controller method
 var getErrorMessage = function (err) {
@@ -51,20 +70,46 @@ exports.renderSignup = function (req, res, next) {
 };
 
 // Create a new controller method that creates new user
+exports.createChildUser = function (req, res, next) {
+    // If user is not connected, create and login a new user, otherwise redirect the user back to the main application page
+
+    // Create a new 'User' model instance
+    var user = new User(req.body);
+    console.log(user);
+    var message = null;
+
+    user.provider = 'local';
+    user.hasRegistered = true;
+    user.username = req.body.newusername;
+
+    // Try saving the new user document
+    user.save(function (err) {
+        // If an error occurs, use flash messages to report the error
+        if (err) {
+            // Use the error handling method to get the error message
+            var message = getErrorMessage(err);
+            console.log('createChildUser failed')
+            console.log(message);
+            return res.json({
+                faliure: ""
+            })
+        }
+        return res.json({
+            success: user
+        });
+    });
+};
+
+// Create a new controller method that creates new user
 exports.createUser = function (req, res, next) {
     // If user is not connected, create and login a new user, otherwise redirect the user back to the main application page
     if (!req.user) {
         // Create a new 'User' model instance
         var user = new User(req.body);
+        console.log(user);
         var message = null;
 
-        // Set the user provider property
-        if (user.provider != 'facebook') {
-            user.provider = 'local';
-            user.hasRegistered = true;
-        } else {
-            user.hasRegistered = false;
-        }
+        user.hasRegistered = false;
 
         // Try saving the new user document
         user.save(function (err) {
@@ -222,50 +267,7 @@ exports.listChildren = function (req, res) {
 
 // Create a new controller method that returns an existing article
 exports.read = function (req, res) {
-    res.json(req.user);
-};
-
-//// Create a new controller method that creates new users
-//exports.create = function(req, res) {
-//	// Create a new user object
-//	var user = new User(req.body);
-//
-//	// Set the user's 'userName' property
-//	user.userName = req.userName;
-//
-//	// Try saving the user
-//	user.save(function(err) {
-//		if (err) {
-//			// If an error occurs send the error message
-//			return res.status(400).send({
-//				message: getErrorMessage(err)
-//			});
-//		} else {
-//			// Send a JSON representation of the article 
-//			res.json(user);
-//		}
-//	});
-//};
-// Create a new controller method that creates new users
-exports.create = function (req, res) {
-    // Create a new user object
-    var user = new User(req.body);
-
-    // Set the user's 'userName' property
-    user.userName = req.userName;
-
-    // Try saving the user
-    user.save(function (err) {
-        if (err) {
-            // If an error occurs send the error message
-            return res.status(400).send({
-                message: getErrorMessage(err)
-            });
-        } else {
-            // Send a JSON representation of the article 
-            res.json(user);
-        }
-    });
+    res.json(req.userDetails);
 };
 
 // Create a new controller method that updates an existing user
@@ -330,5 +332,80 @@ exports.delete = function (req, res) {
             // Send a JSON representation of the user 
             res.json(user);
         }
+    });
+};
+
+
+// Create a new controller middleware that retrieves a single existing userDetails
+exports.userByUsername = function (req, res, next, id) {
+    // Use the model 'findById' method to find a single article 
+    User.find({
+        username: id
+    }).exec(function (err, userDetails) {
+        if (err) return next(err);
+        if (!userDetails) return next(new Error('Failed to load article ' + id));
+
+        // If an article is found use the 'request' object to pass it to the next middleware
+        req.userDetails = userDetails[0];
+
+        // Call the next middleware
+        next();
+    });
+};
+
+
+function sendTwilioCode(req, res, next, phone_number) {
+    var code = Math.floor(Math.random() * 10000);
+    client.messages.create({
+        to: phone_number, // get the phone number from the signup page
+        from: "+16187900624",
+        body: "Your  verification code is" + code, //+code 
+        // mediaUrl: "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg",  
+    }, function (err, message) {
+        if (err) {
+            console.log("please give correct number");
+        } else {
+            console.log(message.sid);
+            var user = new TwilioUser();
+            user.phone = phone_number;
+            user.verified = false;
+            user.code = Math.floor(Math.random() * 10000);
+            user.save(function (err, user_Saved) {
+                if (err) {
+                    throw err;
+                } else {
+                    console.log('saved');
+                }
+            });
+        }
+    });
+}
+
+function checkTwilioCode(req, res, next, phone_number, code) {
+    var a = User.find({
+        code: code
+    }, function (err, user) {
+        if (err) throw err;
+        for (var i = 0; i < user.length; i++) {
+            if (user[i].code == code) {
+                console.log("user exists");
+            } else {
+                console.log("sry");
+            }
+        }
+        // object of the user
+        //console.log(user[1]);
+        //user.end(user); how to display on webpage
+    });
+}
+
+exports.uploadPhoto = function (req, res) {
+    upload(req, res, function (err) {
+        if (err) {
+            //res.end(err);
+            console.log(err);
+            return res.send("Error uploading file.");
+        }
+        //res.send("File is uploaded");
     });
 };

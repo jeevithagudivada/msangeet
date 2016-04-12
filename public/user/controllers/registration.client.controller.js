@@ -2,17 +2,22 @@
 'use strict';
 
 // Create the 'login' controller
-angular.module('user').controller('RegistrationController', ['$scope', 'UserService', '$location',
-	function ($scope, UserService, $location) {
+angular.module('user').controller('RegistrationController', ['$scope', 'SessionService', 'UserService', '$location',
+	function ($scope, SessionService, UserService, $location) {
         // Expose the authentication service
         var self = this;
         self.page = 1;
         self.personas = {};
         self.mobileVC = undefined;
         self.emailVC = undefined;
+        self.dp = undefined;
         for (var i = 1; i < 10; ++i) self.personas[i] = false;
+
+        self.showdp = function () {
+            console.log(self.dp);
+        }
         self.login = function (provider) {
-            UserService.login(self.user).then(function (success) {
+            SessionService.login(self.user).then(function (success) {
                 if (success.data.hasRegistered)
                     $location.path('/home');
                 else {
@@ -23,7 +28,7 @@ angular.module('user').controller('RegistrationController', ['$scope', 'UserServ
                 self.errorMessage = error.data.msg;
             })
         };
-        self.userDetails = UserService.userDetails;
+        self.userDetails = SessionService.userDetails;
         console.log(self.userDetails);
         self.sendMobileVerificationCode = function () {
 
@@ -35,9 +40,23 @@ angular.module('user').controller('RegistrationController', ['$scope', 'UserServ
             console.log(self.mobileVC, self.emailVC);
             self.page = 2;
         };
-        self.register = function () {
-            console.log(self.personas);
+        self.regNext = function () {
+            self.page = 2;
+        };
+        self.regFinish = function () {
+            self.page = 3;
+        };
+        self.gotoHome = function () {
             $location.path('/home');
+        };
+        self.gotoProfile = function () {
+            $location.path('/profile');
+        };
+        self.gotoChild = function () {
+            $location.path('/child');
+        };
+        self.gotoInvite = function () {
+            $location.path('/invite');
         };
 	}
 ]);

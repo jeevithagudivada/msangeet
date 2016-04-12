@@ -6,10 +6,6 @@ var mongoose = require('mongoose'),
     crypto = require('crypto'),
     Schema = mongoose.Schema;
 
-var TrainingSchema = new Schema({
-    _id: Schema.Types.ObjectId
-});
-
 // Define a new 'UserSchema'
 var UserSchema = new Schema({
     salutation: String,
@@ -57,39 +53,191 @@ var UserSchema = new Schema({
     dateOfBirth: Date,
     profilePhoto: {
         data: Buffer,
+        location: String,
         contentType: String
     },
     aboutSummary: String,
     phoneNumber: Number,
     isChildUser: Boolean,
-    parentId: Schema.Types.ObjectId,
-    residenceLocation: Schema.Types.ObjectId,
-    children: [Schema.Types.ObjectId],
+    parentId: {
+        id: Schema.Types.ObjectId,
+        profilePhoto: {
+            data: Buffer,
+            location: String,
+            contentType: String
+        },
+        username: String,
+        firstName: String,
+        lastName: String
+    },
+    residenceLocation: {
+        locationName: String,
+        pinCode: {
+            type: Number,
+            match: [/d{6}/, "Please fill correct year"]
+        },
+        area: String,
+        addressText: String,
+        city: String,
+        country: String,
+        latitute: Number,
+        longitude: Number
+    },
+    children: [{
+        id: Schema.Types.ObjectId,
+        profilePhoto: {
+            data: Buffer,
+            location: String,
+            contentType: String
+        },
+        username: String,
+        firstName: String,
+        lastName: String
+    }],
     personas: [String],
-    qualification: [Schema.Types.ObjectId],
-    training: [Schema.Types.ObjectId],
-    awards: [Schema.Types.ObjectId],
-    performances: [Schema.Types.ObjectId],
-    books: [Schema.Types.ObjectId],
-    albums: [Schema.Types.ObjectId],
-    genresTaught: [
+    qualification: [{
+        qualificationName: String,
+        musicForm: {
+            genre: String,
+            medium: String
+        },
+        awardingOrg: String,
+        qualificationYear: {
+            type: Number,
+            match: [/d{4}/, "Please fill correct year"]
+        }
+    }],
+    training: [{
+        teachingTitle: String,
+        orgName: String,
+        teacherId: {
+            id: Schema.Types.ObjectId,
+            profilePhoto: {
+                data: Buffer,
+                location: String,
+                contentType: String
+            },
+            username: String,
+            firstName: String,
+            lastName: String
+        },
+        locationId: {
+            locationName: String,
+            pinCode: {
+                type: Number,
+                match: [/d{6}/, "Please fill correct year"]
+            },
+            area: String,
+            addressText: String,
+            city: String,
+            country: String,
+            latitute: Number,
+            longitude: Number
+        },
+        fromYear: Number,
+        toYear: Number,
+        conductsIndividualClass: Boolean,
+        classDuration: Number,
+        monthlyFee: Number,
+        schedule: {
+            frequency: String,
+            fromTime: Date,
+            toTime: Date,
+            days: [String]
+        },
+        students: [
+            {
+                id: Schema.Types.ObjectId,
+                profilePhoto: {
+                    data: Buffer,
+                    location: String,
+                    contentType: String
+                },
+                username: String,
+                firstName: String,
+                lastName: String
+                }
+	   ]
+    }],
+    awards: [{
+        awardName: String,
+        awardingOrg: String,
+        awardYear: Number
+    }],
+    performances: [{
+        eventName: String,
+        hostorg: String,
+        eventYear: Number
+    }],
+    books: [{
+        bookName: String,
+        publisherName: String,
+        publicationYear: Number
+    }],
+    albums: [{
+        albumTitle: String,
+        publisherName: String,
+        releaseYear: Date
+    }],
+    musicFormsTaught: [
         {
-            genreId: Schema.Types.ObjectId,
+            mediumName: String,
             genreName: String
         }
 	],
-    teachingMedium: [
-        {
-            mediumId: Schema.Types.ObjectId,
-            mediumName: String
-        }
-	],
-    studentProfiles: [
-        {
-            profileName: String
-        }
-	],
-    teaching: [TrainingSchema],
+    //student learning details
+    teaching: [{
+        teachingTitle: String,
+        orgName: String,
+        teacherId: {
+            id: Schema.Types.ObjectId,
+            profilePhoto: {
+                data: Buffer,
+                location: String,
+                contentType: String
+            },
+            username: String,
+            firstName: String,
+            lastName: String
+        },
+        locationId: {
+            locationName: String,
+            pinCode: {
+                type: Number,
+                match: [/d{6}/, "Please fill correct year"]
+            },
+            area: String,
+            addressText: String,
+            city: String,
+            country: String,
+            latitute: Number,
+            longitude: Number
+        },
+        fromYear: Number,
+        toYear: Number,
+        conductsIndividualClass: Boolean,
+        classDuration: Number,
+        monthlyFee: Number,
+        schedule: {
+            frequency: String,
+            fromTime: Date,
+            toTime: Date,
+            days: [String]
+        },
+        students: [
+            {
+                id: Schema.Types.ObjectId,
+                profilePhoto: {
+                    data: Buffer,
+                    location: String,
+                    contentType: String
+                },
+                username: String,
+                firstName: String,
+                lastName: String
+                }
+	   ]
+    }],
     salt: {
         type: String
     },
@@ -100,15 +248,6 @@ var UserSchema = new Schema({
         default: Date.now
     }
 });
-
-//// Set the 'fullname' virtual property
-//UserSchema.virtual('fullName').get(function () {
-//    return this.firstName + ' ' + this.lastName;
-//}).set(function (fullName) {
-//    var splitName = fullName.split(' ');
-//    this.firstName = splitName[0] || '';
-//    this.lastName = splitName[1] || '';
-//});
 
 // Use a pre-save middleware to hash the password
 UserSchema.pre('save', function (next) {

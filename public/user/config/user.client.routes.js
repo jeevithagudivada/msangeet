@@ -8,11 +8,11 @@ angular.module('user').config(['$routeProvider',
         when('/', {
             templateUrl: 'user/views/home.client.view.html',
             resolve: {
-                auth: ['$q', '$location', 'UserService',
-                       function ($q, $location, UserService) {
-                        return UserService.session().then(
+                auth: ['$q', '$location', 'SessionService',
+                       function ($q, $location, SessionService) {
+                        return SessionService.session().then(
                             function (success) {
-                                if (!UserService.userDetails.hasRegistered) {
+                                if (!SessionService.userDetails.hasRegistered) {
                                     $location.path('/registration');
                                     $location.replace();
                                 } else {
@@ -29,11 +29,11 @@ angular.module('user').config(['$routeProvider',
         when('/registration', {
             templateUrl: 'user/views/registration.client.view.html',
             resolve: {
-                auth: ['$q', '$location', 'UserService',
-                       function ($q, $location, UserService) {
-                        return UserService.session().then(
+                auth: ['$q', '$location', 'SessionService',
+                       function ($q, $location, SessionService) {
+                        return SessionService.session().then(
                             function (success) {
-                                if (UserService.userDetails.hasRegistered) {
+                                if (SessionService.userDetails.hasRegistered) {
                                     $location.path('/home');
                                     $location.replace();
                                 }
@@ -52,9 +52,9 @@ angular.module('user').config(['$routeProvider',
         when('/user/:username', {
             templateUrl: 'user/views/profile-view.client.view.html',
             resolve: {
-                auth: ['$q', '$location', 'UserService',
-                  function ($q, $location, UserService) {
-                        return UserService.session().then(
+                auth: ['$q', '$location', 'SessionService',
+                  function ($q, $location, SessionService) {
+                        return SessionService.session().then(
                             function (success) {},
                             function (err) {
                                 $location.path('/login');
@@ -70,9 +70,9 @@ angular.module('user').config(['$routeProvider',
         when('/home', {
             templateUrl: 'user/views/home.client.view.html',
             resolve: {
-                auth: ['$q', '$location', 'UserService',
-                       function ($q, $location, UserService) {
-                        return UserService.session().then(
+                auth: ['$q', '$location', 'SessionService',
+                       function ($q, $location, SessionService) {
+                        return SessionService.session().then(
                             function (success) {},
                             function (err) {
                                 $location.path('/login');
@@ -85,11 +85,11 @@ angular.module('user').config(['$routeProvider',
         when('/profile', { //temporary for demo
             templateUrl: 'user/views/profile-view.client.view.html',
             resolve: {
-                auth: ['$q', '$location', 'UserService',
-                       function ($q, $location, UserService) {
-                        return UserService.session().then(
+                auth: ['$q', '$location', 'SessionService',
+                       function ($q, $location, SessionService) {
+                        return SessionService.session().then(
                             function (success) {
-                                $location.path('/user/' + UserService.userDetails.username);
+                                $location.path('/user/' + SessionService.userDetails.username);
                             },
                             function (err) {
                                 $location.path('/login');

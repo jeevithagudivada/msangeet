@@ -2,8 +2,8 @@
 'use strict';
 
 // Create the 'user' controller
-angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', 'UserService', 'SearchService',
-    function ($scope, $routeParams, $location, UserService, SearchService) {
+angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', 'SessionService', 'UserService', 'SearchService',
+    function ($scope, $routeParams, $location, SessionService, UserService, SearchService) {
         var self = this;
         self.searchDetails = {};
         self.fullname = "Venkatesh Kumar";
@@ -104,13 +104,13 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
         }
 
         self.viewProfile = function () {
-            console.log(UserService.userDetails.username);
-            $location.path('/users/' + UserService.userDetails.username);
+            console.log(SessionService.userDetails.username);
+            $location.path('/users/' + SessionService.userDetails.username);
         };
 
         self.children = function () {
-            console.log(UserService.userDetails.username);
-            $location.path('/users/' + UserService.userDetails.username);
+            console.log(SessionService.userDetails.username);
+            $location.path('/users/' + SessionService.userDetails.username);
         };
 
         // Create a new controller method for creating new user
@@ -134,15 +134,17 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
         // Create a new controller method for retrieving a list of user
         $scope.find = function () {
             // Use the user 'query' method to send an appropriate GET request
-            $scope.user = User.query();
+            $scope.user = UserService.query();
+
         };
 
         // Create a new controller method for retrieving a single user
-        $scope.findOne = function () {
+        self.findOne = function () {
             // Use the user 'get' method to send an appropriate GET request
-            $scope.user = User.get({
+            $scope.user = UserService.get({
                 username: $routeParams.username
             });
+            console.log($scope.user);
         };
 
         // Create a new controller method for updating a single user

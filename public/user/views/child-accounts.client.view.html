@@ -1,14 +1,20 @@
 <div class="content" ng-controller="ChildController as cctrl">
     <div layout="row">
-        <md-card style="height:160px;width:160px;">
-            <input type="file" id="fileinput" />
+        <md-card style="height:160px;width:160px;" ng-show="!cctrl.childDetails.profilePhoto">
+            <input type="file" fileread="cctrl.childDetails.profilePhoto" />
         </md-card>
-        <md-card layout="column">
-            <md-card-content>
-                <div style="background-color:red;">
-                    <span style="font-size:20;color:white;font-weight:bold"><br>Create New Child Account<br></span>
-                </div>
-                <form name="userForm " ng-submit="cctrl.createChild">
+        <md-card style="height:160px;width:160px;" ng-show="cctrl.childDetails.profilePhoto">
+            <img data-ng-src="{{cctrl.childDetails.profilePhoto}}"></img>
+        </md-card>
+        <form name="userForm " ng-submit="cctrl.createChild()">
+            <md-card layout="column">
+                <md-card-title>
+                    <md-card-title-text>
+                        Create Child Account
+                    </md-card-title-text>
+                </md-card-title>
+                <md-divider class="general-divider"></md-divider>
+                <md-card-content>
                     <div layout="row " layout-padding layout-wrap layout-fill style="padding-top: 10px; ">
                         <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
                             <md-input-container class="md-block ">
@@ -30,14 +36,26 @@
                                 <input ng-model="cctrl.childDetails.pinCode " placeholder="Area Pincode" required>
                             </md-input-container>
                         </div>
+                        <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                            <md-input-container class="md-block ">
+                                <input ng-model="cctrl.childDetails.newusername " placeholder="Username" required>
+                            </md-input-container>
+                        </div>
+                        <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                            <md-input-container class="md-block ">
+                                <input type="password" ng-model="cctrl.childDetails.password " placeholder="Password" required>
+                            </md-input-container>
+                        </div>
                     </div>
-                    <div layout="row" layout-align="end center">
-                        <md-button type="submit" class="reg-nav-button ">
-                            <label>CREATE</label>
-                        </md-button>
-                    </div>
-                </form>
-            </md-card-content>
-        </md-card>
+
+
+                </md-card-content>
+            </md-card>
+            <div layout="row" layout-align="end center">
+                <md-button type="submit" class="reg-nav-button ">
+                    <label>CREATE</label>
+                </md-button>
+            </div>
+        </form>
     </div>
 </div>
