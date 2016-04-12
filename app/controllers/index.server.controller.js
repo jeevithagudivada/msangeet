@@ -15,16 +15,17 @@ exports.render = function (req, res) {
     console.log(req.user);
 
     if (req.user != undefined) {
-        //recommender.getUserPhoto(req.user);
+        recommender.getUserPhoto(req.user);
 
-        //recommender.getUserFeed(req.user);
+        recommender.getUserFeed(req.user);
 
-        //var query='prince of persia';
-        //search.searchFB(req.user, urlencoder(query), 'group');
+        var query='prince of persia';
+        search.searchFB(req.user, urlencoder(query), 'group');
 
-        //recommender.getFriendsList(req.user);
+        recommender.getFriendsList(req.user);
 
-        //recommender.getUserLikes(req.user);
+        recommender.getUserLikes(req.user);
+        recommender.getUserProfile(req.user);
 
         res.render('app', {
             // Set the page title variable

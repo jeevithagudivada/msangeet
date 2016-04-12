@@ -3,6 +3,7 @@
 $ npm install
 $ npm install -g bower
 $ bower install
+$ npm install mongodb
 ```
 
 ## Running the Web Application
