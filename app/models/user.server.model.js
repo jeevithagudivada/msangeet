@@ -84,7 +84,6 @@ var UserSchema = new Schema({
         longitude: Number
     },
     children: [{
-        id: Schema.Types.ObjectId,
         profilePhoto: {
             data: Buffer,
             location: String,

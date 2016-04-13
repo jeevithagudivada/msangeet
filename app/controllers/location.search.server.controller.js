@@ -14,29 +14,46 @@ exports.searchGuru = function (req, res, next) {
     console.log(req.body.longitude);
     console.log(req.body.latitude);
 
-    //get guru location from mongodb based on medium & genre & city
-	exports.listTeachers(req,res,next){
-		User.find({
-			$and: [
-			{ Personas: { "$in": ["Guru"]} },
-			{ $or:[
-				genre: req.body.genre,
-				medium: req.body.medium,
-				city: req.body.city]}
-			]
-		},	function(err, teacher) {    
-			if (err) 
-			{      
-				return next(err);    
-			} 
-			else 
-			{      
-				res.json(teacher);   
-			}  
-		});
-  };
-	
     //search logic
 
     res.json({});
+};
+
+//get guru location from mongodb based on medium & genre & city
+exports.listTeachers = function (req, res, next) {
+    User.find({
+        $and: [
+            {
+                Personas: {
+                    "$in": ["Guru"]
+                }
+            },
+            {
+                $or: [
+
+                    {
+                        genre: {
+                            $eq: req.body.genre
+                        }
+                    },
+                    {
+                        medium: {
+                            $eq: req.body.medium
+                        }
+                    },
+                    {
+                        city: {
+                            $eq: req.body.city
+                        }
+                    }
+                ]
+            }
+        ]
+    }, function (err, teacher) {
+        if (err) {
+            return next(err);
+        } else {
+            res.json(teacher);
+        }
+    });
 };
