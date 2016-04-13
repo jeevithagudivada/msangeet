@@ -11,33 +11,10 @@ var UserSchema = new Schema({
     salutation: String,
     firstName: String,
     lastName: String,
-    email: {
-        type: String,
-        // Validate the email format
-        match: [/.+\@.+\..+/, "Please fill a valid email address"]
-    },
-    username: {
-        type: String,
-        // Set a unique 'username' index
-        unique: true,
-        // Validate 'username' value existance
-        required: 'Username is required',
-        // Trim the 'username' field
-        trim: true
-    },
-    password: {
-        type: String,
-        // Validate the 'password' value length
-        validate: [
-
-			function (password) {
-                return password && password.length > 6;
-			}, 'Password should be longer'
-		]
-    },
-    salt: {
-        type: String
-    },
+    email: String,
+    username: String,
+    password: String,
+    salt: String,
     provider: {
         type: String,
         // Validate 'provider' value existance
@@ -45,6 +22,7 @@ var UserSchema = new Schema({
     },
     providerId: String,
     providerData: {},
+    hasRegistered: Boolean,
     created: {
         type: Date,
         // Create a default 'created' value
@@ -52,14 +30,12 @@ var UserSchema = new Schema({
     },
     dateOfBirth: Date,
     profilePhoto: {
-        data: Buffer,
-        location: String,
-        contentType: String
+        data: Buffer
     },
     aboutSummary: String,
     phoneNumber: Number,
     isChildUser: Boolean,
-    parentId: {
+    parent: {
         id: Schema.Types.ObjectId,
         profilePhoto: {
             data: Buffer,
@@ -84,6 +60,7 @@ var UserSchema = new Schema({
         longitude: Number
     },
     children: [{
+        id: Schema.Types.ObjectId,
         profilePhoto: {
             data: Buffer,
             location: String,
@@ -114,18 +91,16 @@ var UserSchema = new Schema({
             medium: String
         },
         orgName: String,
-        teacherId: {
+        teacher: {
             id: Schema.Types.ObjectId,
             profilePhoto: {
-                data: Buffer,
-                location: String,
-                contentType: String
+                data: Buffer
             },
             username: String,
             firstName: String,
             lastName: String
         },
-        locationId: {
+        location: {
             locationName: String,
             pinCode: {
                 type: Number,
@@ -153,14 +128,12 @@ var UserSchema = new Schema({
             {
                 id: Schema.Types.ObjectId,
                 profilePhoto: {
-                    data: Buffer,
-                    location: String,
-                    contentType: String
+                    data: Buffer
                 },
                 username: String,
                 firstName: String,
                 lastName: String
-                }
+            }
 	   ]
     }],
     awards: [{
@@ -191,23 +164,21 @@ var UserSchema = new Schema({
 	],
     teaching: [{
         teachingTitle: String,
-        orgName: String,
         musicForm: {
             genre: String,
             medium: String
         },
-        teacherId: {
+        orgName: String,
+        teacher: {
             id: Schema.Types.ObjectId,
             profilePhoto: {
-                data: Buffer,
-                location: String,
-                contentType: String
+                data: Buffer
             },
             username: String,
             firstName: String,
             lastName: String
         },
-        locationId: {
+        location: {
             locationName: String,
             pinCode: {
                 type: Number,
@@ -235,25 +206,14 @@ var UserSchema = new Schema({
             {
                 id: Schema.Types.ObjectId,
                 profilePhoto: {
-                    data: Buffer,
-                    location: String,
-                    contentType: String
+                    data: Buffer
                 },
                 username: String,
                 firstName: String,
                 lastName: String
-                }
+            }
 	   ]
-    }],
-    salt: {
-        type: String
-    },
-    hasRegistered: Boolean,
-    created: {
-        type: Date,
-        // Create a default 'created' value
-        default: Date.now
-    }
+    }]
 });
 
 // Use a pre-save middleware to hash the password
