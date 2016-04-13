@@ -106,8 +106,13 @@ var UserSchema = new Schema({
             match: [/d{4}/, "Please fill correct year"]
         }
     }],
+    //student learning details
     training: [{
         teachingTitle: String,
+        musicForm: {
+            genre: String,
+            medium: String
+        },
         orgName: String,
         teacherId: {
             id: Schema.Types.ObjectId,
@@ -180,14 +185,17 @@ var UserSchema = new Schema({
     }],
     musicFormsTaught: [
         {
-            mediumName: String,
-            genreName: String
+            medium: String,
+            genre: String
         }
 	],
-    //student learning details
     teaching: [{
         teachingTitle: String,
         orgName: String,
+        musicForm: {
+            genre: String,
+            medium: String
+        },
         teacherId: {
             id: Schema.Types.ObjectId,
             profilePhoto: {

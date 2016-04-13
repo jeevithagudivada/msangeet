@@ -13,47 +13,64 @@ exports.searchGuru = function (req, res, next) {
     console.log(req.body.resultCount);
     console.log(req.body.longitude);
     console.log(req.body.latitude);
+    console.log(req.body.teachers);
 
     //search logic
 
     res.json({});
 };
 
-//get guru location from mongodb based on medium & genre & city
+//get guru location from mongodb based on medium & genre
 exports.listTeachers = function (req, res, next) {
-    User.find({
-        $and: [
+    User.aggregate([
             {
-                Personas: {
-                    "$in": ["Guru"]
-                }
-            },
-            {
-                $or: [
+                $match: {
+                    $and: [
+                        {
+                            personas: {
+                                $elemMatch: {
+                                    $eq: "guru"
+                                }
+                            }
+                    },
+                        {
+                            teaching: {
+                                $elemMatch: {
+                                    "musicForm.genre": req.body.genre,
+                                    "musicForm.medium": req.body.medium
+                                }
+                            }
 
-                    {
-                        genre: {
-                            $eq: req.body.genre
-                        }
-                    },
-                    {
-                        medium: {
-                            $eq: req.body.medium
-                        }
-                    },
-                    {
-                        city: {
-                            $eq: req.body.city
-                        }
-                    }
-                ]
-            }
-        ]
-    }, function (err, teacher) {
-        if (err) {
-            return next(err);
-        } else {
-            res.json(teacher);
+                            }
+                        ]
+                }
+            }, {
+                $project: {
+                    _id: 0,
+                    firstName: 1,
+                    lastName: 1,
+                    username: 1,
+                    profilePhoto: 1,
+                    teaching: 1
+                }
         }
-    });
+    ]),
+        function (err, results) {
+            var teachers = {
+
+            }
+            for (teacher in results) {
+                doc = {
+                    name: teacher.firstName + " " + teacher.lastName
+                };
+                for (_class in teacher.teaching) {
+                    if (_class.musicForm.genre == req.body.genre && _class.musicForm.medium == req.body.medium) {
+                        doc["location"] = _class.musicForm.location;
+                    }
+                }
+                teachers.push(doc);
+            }
+            req.teachers = teachers;
+            next();
+        });
 };
