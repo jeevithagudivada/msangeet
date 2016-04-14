@@ -23,7 +23,6 @@
         "method-override": "^2.3.5",
         "mongoose": "^4.4.5",
         "morgan": "^1.7.0",
-        "nodemailer": "^2.3.2",
         "passport": "^0.3.2",
         "passport-facebook": "^2.1.0",
         "passport-google-oauth": "^1.0.0",
@@ -31,6 +30,14 @@
         "passport-twitter": "^1.0.4",
         "twilio": "^2.9.1",
         "urlencode": "^1.1.0"
+    },
+    ,
+    "devDependencies": {
+        "should": "~4.0.4",
+        "supertest": "~0.13.0",
+        "karma": "~0.12.23",
+        "karma-jasmine": "~0.2.2",
+        "karma-phantomjs-launcher": "~0.1.4"
     },
     "engines": {
         "node": "~4.2"

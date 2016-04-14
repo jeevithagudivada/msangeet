@@ -13,31 +13,35 @@
         <div layout="row" layout-align="start center">
             <div id="logo"><span style="color:red">m</span>Sangeet</div>
         </div>
-
-        <nav id="top_menu" layout="row" layout-align="end center">
-            <ul>
-                <li>
-                    <md-button class="nav-button">
-                        <a style="text-decoration:none;color:#ffffff;" href="#!/home">Home</a>
-                    </md-button>
-                </li>
-                <li>
-                    <md-button class="nav-button">
-                        <a style="text-decoration:none;color:#ffffff;" href="#!/profile">Profile</a>
-                    </md-button>
-                </li>
-                <li>
-                    <md-button class="nav-button">
-                        <a style="text-decoration:none;color:#ffffff;" href="#!/child">Child</a>
-                    </md-button>
-                </li>
-                <li>
-                    <form action="/signout" layout="row" layout-align="center center">
-                        <md-button type="submit" class="nav-button">Logout</md-button>
-                    </form>
-                </li>
-            </ul>
-        </nav>
+        <% for(var i in messages) { %>
+            <div class="flash">
+                <%= messages[i] %>
+            </div>
+            <% } %>
+                <nav id="top_menu" layout="row" layout-align="end center">
+                    <ul>
+                        <li>
+                            <md-button class="nav-button">
+                                <a style="text-decoration:none;color:#ffffff;" href="#!/home">Home</a>
+                            </md-button>
+                        </li>
+                        <li>
+                            <md-button class="nav-button">
+                                <a style="text-decoration:none;color:#ffffff;" href="#!/profile">Profile</a>
+                            </md-button>
+                        </li>
+                        <li>
+                            <md-button class="nav-button">
+                                <a style="text-decoration:none;color:#ffffff;" href="#!/child">Child</a>
+                            </md-button>
+                        </li>
+                        <li>
+                            <form action="/signout" layout="row" layout-align="center center">
+                                <md-button type="submit" class="nav-button">Logout</md-button>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
     </div>
 
     <!-- Render AngularJS views  -->

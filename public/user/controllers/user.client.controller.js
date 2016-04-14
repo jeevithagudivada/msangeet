@@ -5,88 +5,111 @@
 angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', 'SessionService', 'UserService', 'SearchService',
     function ($scope, $routeParams, $location, SessionService, UserService, SearchService) {
         var self = this;
-        self.searchDetails = {};
-        self.fullname = "Venkatesh Kumar";
+        self.userDetails = SessionService.userDetails;
+        self.fullname = self.userDetails.firstName + " " + self.userDetails.lastName;
+        self.profilePhoto = self.userDetails.profilePhoto;
+        console.log(self.userDetails.profilePhoto);
         self.generaldetails = {
-            'Location': 'Bangalore, Karnataka-56',
-            'Musical Skills': 'Hindustani Classical, Khya, Devotional',
-            'Gharana': 'Kirana'
-        }
-        self.about = "Bhimsen Gururaj Joshi was born in a town called Ron, in the erstwhile Dharwad (today Gadag) district of Karnataka on 4 February 1922 to Gururaj Joshi (who had authoorange a Kannada-English dictionary) and Godavaribai, a home-maker.[4][page needed][5][6] Bhimsen was the eldest among 16 siblings. He lost his mother at a young age and was raised by his stepmother.[7][page needed]. As a child, Bhimsen was fascinated with music and musical instruments like the harmonium and tanpura[8] and would often follow processions accompanied by music bands. This exercise often tiorange him and he would curl up somewhere and sleep, forcing his parents to go to the police after efforts to trace him failed. Fed up, his father Gururajacharya Joshi come up with the solution, writing (son of teacher Joshi) on Bhimsen's shirts. This worked and those who found the boy sleeping would safely deposit him back to his house.[9]"
-        self.about_short = self.about.substring(0, self.about.indexOf('.') + 1);
+            'Location': self.userDetails.residenceLocation.addressText,
+            'Musical Interests': self.userDetails.interests.join(),
+            'Influences': self.userDetails.influences.join()
+        };
+        self.about = self.userDetails.aboutSummary;
+        self.about_short = self.about.substring(0, 100);
         self.read_about = false;
 
+        self.qualification = {};
+        var qual = self.userDetails.qualification;
+        for (var i in qual) {
+            var skill = qual[i].musicForm.genre + " " + qual[i].musicForm.medium;
+            self.qualification[qual[i].qualificationName] = skill + "-" + qual[i].awardingOrg + "-" + qual[i].qualificationYear.toString();
+        }
+        self.training = {};
+        var _training = self.userDetails.training;
+        for (var i in _training) {
+            var teacher_name = _training[i].teacher.firstName + " " + _training[i].teacher.lastName;
+            var skill = _training[i].musicForm.genre + " " + _training[i].musicForm.medium;
+            var duration = _training[i].fromYear.toString() + " to " + _training[i].toYear.toString();
+            self.training[teacher_name] = skill + "-" + qual[i].awardingOrg + "-" + qual[i].qualificationYear.toString();
+        }
+        self.awards = {};
+        var _awards = self.userDetails.awards;
+        for (var i in _awards) {
+            self.awards[_awards[i].awardName] = _awards[i].awardingOrg + "-" + _awards[i].awardYear.toString();
+        }
+        self.performances = {};
+        var _performances = self.userDetails.performances;
+        for (var i in _performances) {
+            self.performances[_performances[i].eventName] = _performances[i].hostorg + "-" + _performances[i].eventYear.toString();
+        }
+        self.books = {};
+        var _books = self.userDetails.books;
+        for (var i in _books) {
+            self.books[_books[i].bookName] = _books[i].publisherName + "-" + _books[i].publicationYear.toString();
+        }
+        self.albums = {};
+        var _albums = self.userDetails.albums;
+        for (var i in _albums) {
+            var date = new Date(_albums[i].releaseYear)
+            self.albums[_albums[i].albumTitle] = _albums[i].publisherName + "-" + _albums[i].releaseYear;
+        }
+        self.albums = {};
+        var _albums = self.userDetails.albums;
+        for (var i in _albums) {
+            var date = new Date(_albums[i].releaseYear);
+            console.log(date.getDate(), date.getMonth(), date.getFullYear());
+            self.albums[_albums[i].albumTitle] = _albums[i].publisherName + "-" + _albums[i].releaseYear;
+        }
         self.musicdetails = {
             'DISCIPLESHIP': {
-                'Formal Musical Educational Qualifications': {
-                    'Junior Grade': 'Hindustani Music - secondary ed board - 1984',
-                    'Sangeeth Prabhakar': 'Hindustani Music - 1990',
-                    'Visharad': 'Hindustani Music - 2001'
-                },
-                'Musical Training': {
-                    'Puttaraja Gavai': '1978-1998',
-                    'Shankar Mahadevan Academy': '1993-1995'
-                }
-
+                'Formal Musical Educational Qualifications': self.qualification,
+                'Musical Training': self.training
             },
-
             'ARTISTRY': {
-                'Awards and Felicitation': {
-                    'Padmashree': 'Govt of India 2016',
-                    'Karnataka Rajyotsava Award': '1998',
-                    'Suramani': 'Gandharva Mahavidhyalaya'
-                },
-                'Musical Concerts and Performences': {
-                    'All Night Musical Mefti': '2006',
-                    'Soorya festival': 'coimbatore',
-                    'Dadar Matunga Cultural Center': '2009'
-                },
-                'Books': {
-                    'Hindustani Sangeeth Praveshika': '2015'
-                },
-                'Recordings': {
-                    'Sangeeth Mala': '2014'
-                }
+                'Awards and Felicitation': self.awards,
+                'Musical Concerts and Performences': self.performances,
+                'Books': self.books,
+                'Albums': self.albums
             }
 
         };
 
-
-        self.tutorship = {
-            'Genres Taught': ['Hindustani Classical',
-                        'Sugama Sangeetha - Kannada'
-                    ],
-
-            'Teaching Medium': ['Vocals',
-                        'Keyboard',
-                        'Harmonium'
-                    ],
-
-            'Student Profile Admitted': ['Beginers',
-                        'Intermediate',
-                        'Advanced Learners'
-                    ]
-        };
-
-        self.locations = {
-            'full address #1': {
-                'Location': ['Race Course Road, Banglore'],
-                'Schedule': {
-                    'Days': ['Saturday', 'Sunday'],
-                    'Frequency': ['Every Week'],
-                    'Timing': {
-                        'start': '8:00 AM',
-                        'end': '12:00 PM'
-                    }
-                },
-                'Additional Info': {
-                    'Class Type': ['Group', 'Individual'],
-                    'Class Duration': '60 minutes',
-                    'Monthly Fee': 'INR 500'
-                }
-
+        var teaching = {};
+        var _teaching = self.userDetails.teaching;
+        self.students = [];
+        for (var i in _teaching) {
+            var duration = _teaching[i].fromYear.toString() + " to ";
+            if (_teaching[i].toYear == undefined) duration += "present";
+            else duration += _teaching[i].toYear.toString();
+            var title = _teaching[i].teachingTitle + " - " + _teaching[i].orgName + " - " + duration;
+            var _class = {};
+            _class['Location'] = {
+                'Address': _teaching[i].location.locationName
+            };
+            _class['Schedule'] = {
+                'Days': _teaching[i].schedule.days.join(),
+                'Frequency': _teaching[i].schedule.frequency,
+                'Timing': _teaching[i].schedule.fromTime + " to " + _teaching[i].schedule.toTime
+            };
+            var type = [];
+            if (_teaching[i].conductsGroupClass) type.push("Groups");
+            if (_teaching[i].conductsIndividualClass) type.push("Individual");
+            _class['Additional Info'] = {
+                'Class Type': type.join(),
+                'Class Duration': _teaching[i].classDuration.toString() + " mins",
+                'Monthly Fee': "INR " + _teaching[i].monthlyFee.toString()
             }
-        };
+            _class['Students'] = [];
+            for (var j in _teaching[i].students)
+                _class['Students'].push(_teaching[i].students[j]);
+
+            teaching[title] = _class;
+        }
+        self.tutorship = teaching;
+
+        self.redirect = function (site) {
+            //            if(site=='facebook')
+        }
 
         self.searchGuru = function () {
             console.log('searchGuru')
@@ -179,5 +202,4 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
                 });
             }
         };
-                }
-                ]);
+}]);

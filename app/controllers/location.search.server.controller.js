@@ -72,5 +72,5 @@ exports.listTeachers = function (req, res, next) {
             }
             req.teachers = teachers;
             next();
-        });
+        };
 };

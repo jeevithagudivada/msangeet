@@ -23,25 +23,24 @@ var UserSchema = new Schema({
     providerId: String,
     providerData: {},
     hasRegistered: Boolean,
+    socialNetworkHandlers: {
+        twitter: String,
+        facebook: String,
+        googleplus: String
+    },
     created: {
         type: Date,
         // Create a default 'created' value
         default: Date.now
     },
     dateOfBirth: Date,
-    profilePhoto: {
-        data: Buffer
-    },
+    profilePhoto: Buffer,
     aboutSummary: String,
     phoneNumber: Number,
     isChildUser: Boolean,
     parent: {
         id: Schema.Types.ObjectId,
-        profilePhoto: {
-            data: Buffer,
-            location: String,
-            contentType: String
-        },
+        profilePhoto: Buffer,
         username: String,
         firstName: String,
         lastName: String
@@ -61,11 +60,7 @@ var UserSchema = new Schema({
     },
     children: [{
         id: Schema.Types.ObjectId,
-        profilePhoto: {
-            data: Buffer,
-            location: String,
-            contentType: String
-        },
+        profilePhoto: Buffer,
         username: String,
         firstName: String,
         lastName: String
@@ -93,9 +88,7 @@ var UserSchema = new Schema({
         orgName: String,
         teacher: {
             id: Schema.Types.ObjectId,
-            profilePhoto: {
-                data: Buffer
-            },
+            profilePhoto: Buffer,
             username: String,
             firstName: String,
             lastName: String
@@ -115,15 +108,6 @@ var UserSchema = new Schema({
         },
         fromYear: Number,
         toYear: Number,
-        conductsIndividualClass: Boolean,
-        classDuration: Number,
-        monthlyFee: Number,
-        schedule: {
-            frequency: String,
-            fromTime: Date,
-            toTime: Date,
-            days: [String]
-        },
         students: [
             {
                 id: Schema.Types.ObjectId,
@@ -156,12 +140,6 @@ var UserSchema = new Schema({
         publisherName: String,
         releaseYear: Date
     }],
-    musicFormsTaught: [
-        {
-            medium: String,
-            genre: String
-        }
-	],
     teaching: [{
         teachingTitle: String,
         musicForm: {
@@ -169,15 +147,6 @@ var UserSchema = new Schema({
             medium: String
         },
         orgName: String,
-        teacher: {
-            id: Schema.Types.ObjectId,
-            profilePhoto: {
-                data: Buffer
-            },
-            username: String,
-            firstName: String,
-            lastName: String
-        },
         location: {
             locationName: String,
             pinCode: {
@@ -194,20 +163,19 @@ var UserSchema = new Schema({
         fromYear: Number,
         toYear: Number,
         conductsIndividualClass: Boolean,
+        conductsGroupClass: Boolean,
         classDuration: Number,
         monthlyFee: Number,
         schedule: {
             frequency: String,
-            fromTime: Date,
-            toTime: Date,
+            fromTime: String,
+            toTime: String,
             days: [String]
         },
         students: [
             {
                 id: Schema.Types.ObjectId,
-                profilePhoto: {
-                    data: Buffer
-                },
+                profilePhoto: Buffer,
                 username: String,
                 firstName: String,
                 lastName: String

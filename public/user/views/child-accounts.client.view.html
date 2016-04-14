@@ -1,20 +1,19 @@
 <div class="content" ng-controller="ChildController as cctrl">
     <div layout="row">
-        <md-card style="height:160px;width:160px;" ng-show="!cctrl.childDetails.profilePhoto">
-            <input type="file" fileread="cctrl.childDetails.profilePhoto" />
+        <md-card style="height:160px;width:160px">
+            <input type="file" ng-show="!cctrl.childDetails.profilePhoto" fileread="cctrl.childDetails.profilePhoto" />
+            <img data-ng-src="{{cctrl.childDetails.profilePhoto}}" ng-show="cctrl.childDetails.profilePhoto"></img>
         </md-card>
-        <md-card style="height:160px;width:160px;" ng-show="cctrl.childDetails.profilePhoto">
-            <img data-ng-src="{{cctrl.childDetails.profilePhoto}}"></img>
-        </md-card>
-        <form name="userForm " ng-submit="cctrl.createChild()">
-            <md-card layout="column">
-                <md-card-title>
-                    <md-card-title-text>
-                        Create Child Account
-                    </md-card-title-text>
-                </md-card-title>
-                <md-divider class="general-divider"></md-divider>
-                <md-card-content>
+
+        <md-card layout="column">
+            <md-card-title>
+                <md-card-title-text>
+                    Create Child Account
+                </md-card-title-text>
+            </md-card-title>
+            <md-divider class="general-divider"></md-divider>
+            <md-card-content>
+                <form name="userForm " ng-submit="cctrl.createChild()">
                     <div layout="row " layout-padding layout-wrap layout-fill style="padding-top: 10px; ">
                         <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
                             <md-input-container class="md-block ">
@@ -48,14 +47,14 @@
                         </div>
                     </div>
 
+                    <div layout="row" layout-align="end center">
+                        <md-button type="submit" class="reg-nav-button ">
+                            <label>CREATE</label>
+                        </md-button>
+                    </div>
+                </form>
+            </md-card-content>
+        </md-card>
 
-                </md-card-content>
-            </md-card>
-            <div layout="row" layout-align="end center">
-                <md-button type="submit" class="reg-nav-button ">
-                    <label>CREATE</label>
-                </md-button>
-            </div>
-        </form>
     </div>
 </div>

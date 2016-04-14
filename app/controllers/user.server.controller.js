@@ -81,6 +81,7 @@ exports.createChildUser = function (req, res, next) {
     user.provider = 'local';
     user.hasRegistered = true;
     user.username = req.body.newusername;
+    user.isChildUser = true;
 
     // Try saving the new user document
     user.save(function (err) {
@@ -263,23 +264,6 @@ exports.listChildren = function (req, res) {
             res.json(child);
         }
     });
-};
-
-// Create a new controller middleware that retrieves a single existing user
-exports.userByUSERNAME = function(req, res, next, u) {  
-	User.findOne(
-	{    
-		username: u
-	},
-	function(err, user) 
-	{    
-		if (err){      
-			return next(err);    
-		}else {      
-			req.user = user;      
-			next();    
-		}  
-	});
 };
 
 // Create a new controller method that returns an existing article

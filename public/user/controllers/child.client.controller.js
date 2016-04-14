@@ -6,8 +6,16 @@ angular.module('user').controller('ChildController', ['$scope', 'SessionService'
 	function ($scope, SessionService, UserService, $location) {
         // Expose the authentication service
         var self = this;
-        self.childDetails = {};
-        self.dp = undefined;
+        self.childDetails = {
+            parent: {
+                id: undefined,
+                profilePhoto: undefined,
+                username: undefined,
+                firstName: undefined,
+                lastName: undefined
+            },
+            isChildUser: true
+        };
         self.childDetails.personas = ['Sishya'];
         self.createChild = function () {
             var user = new UserService(self.childDetails);
@@ -16,17 +24,17 @@ angular.module('user').controller('ChildController', ['$scope', 'SessionService'
             user.$save(function (response) {
                 // If an article was created successfully, redirect the user to the article's page 
                 console.log("user successfully added");
-//                SessionService.userDetails.children.append({
-            //                        profilePhoto: {
-            //                            data: self.childDetails.profilePhoto,
-            //                            location: String,
-            //                            contentType: String
-            //                        },
-            //                        username: self.childDetails.username,
-            //                        firstName: self.childDetails.firstName,
-            //                        lastName: self.childDetails.lastName
-            //                    })
-                    //$location.path('user/' + response.username);
+                //                SessionService.userDetails.children.append({
+                //                        profilePhoto: {
+                //                            data: self.childDetails.profilePhoto,
+                //                            location: String,
+                //                            contentType: String
+                //                        },
+                //                        username: self.childDetails.username,
+                //                        firstName: self.childDetails.firstName,
+                //                        lastName: self.childDetails.lastName
+                //                    })
+                //$location.path('user/' + response.username);
             }, function (errorResponse) {
                 // Otherwise, present the user with the error message
                 $scope.error = errorResponse.data.message;

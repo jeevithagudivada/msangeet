@@ -12,10 +12,11 @@ module.exports = function () {
             }
             if (!user) {
                 return done(null, false, {
-                    message: 'Unknown user'
+                    error: 'Incorrect username or password.'
                 });
             }
             if (!user.authenticate(password)) {
+                console.log(user);
                 return done(null, false, {
                     message: 'Invalid password'
                 });
