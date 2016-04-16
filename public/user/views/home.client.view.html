@@ -10,9 +10,9 @@
                         {{uctrl.fullname}}
         		          <nav style="float:right">
                               <ng-md-icon icon="facebook" size="24"></ng-md-icon>
-        		              <ng-md-icon icon="twitter" size="24"></ng-md-icon>
-        		              <ng-md-icon icon="google-plus" size="20"></ng-md-icon>
-        		          </nav>                
+                              <ng-md-icon icon="twitter" size="24"></ng-md-icon>
+                              <ng-md-icon icon="google-plus" size="20"></ng-md-icon>
+                          </nav>
         		          </span>
                 </md-card-title-text>
             </md-card-title>
@@ -33,7 +33,7 @@
         </md-card-title>
         <md-divider class="general-divider"></md-divider>
         <md-card-content>
-
+            <input type="button" name="invite_button" ng-click="uctrl.sendRequestViaMultiFriendSelector()" value="Click here"/>
         </md-card-content>
     </md-card>
     <md-card layout="column">
@@ -46,22 +46,26 @@
         <md-card-content>
             <form name="searchForm" ng-submit="uctrl.searchGuru()">
                 <div layout="row" layout-padding layout-wrap layout-fill style="padding-top: 10px;">
-                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout
+                         layout-align="center center">
                         <md-input-container class="md-block ">
                             <input ng-model="uctrl.searchDetails.genre" placeholder="Genre">
                         </md-input-container>
                     </div>
-                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout
+                         layout-align="center center">
                         <md-input-container class="md-block ">
                             <input ng-model="uctrl.searchDetails.medium" placeholder="Medium">
                         </md-input-container>
                     </div>
-                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout
+                         layout-align="center center">
                         <md-input-container class="md-block ">
                             <input ng-model="uctrl.searchDetails.maxRadialDistance" placeholder="Max Radial Distance">
                         </md-input-container>
                     </div>
-                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
+                    <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout
+                         layout-align="center center">
                         <md-input-container class="md-block ">
                             <input ng-model="uctrl.searchDetails.resultCount" placeholder="Number of Results">
                         </md-input-container>
