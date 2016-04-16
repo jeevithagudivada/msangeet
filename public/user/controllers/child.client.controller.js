@@ -2,10 +2,25 @@
 'use strict';
 
 // Create the 'login' controller
-angular.module('user').controller('ChildController', ['$scope', 'SessionService', 'UserService', '$location',
-	function ($scope, SessionService, UserService, $location) {
+angular.module('user').controller('ChildController', ['$scope', '$mdBottomSheet', 'SessionService', 'UserService', '$location',
+	function ($scope, $mdBottomSheet, SessionService, UserService, $location) {
         // Expose the authentication service
         var self = this;
+        self.userDetails = SessionService.userDetails;
+        //        self.children = self.userDetails.children;
+        self.children = [
+            {
+                fullName: "Gautham BA",
+                username: "gautham"
+            }, {
+                fullName: "Harshit G",
+                username: "harshit"
+            }, {
+                fullName: "Anusha S",
+                username: "anusha"
+            }
+        ];
+
         self.childDetails = {
             parent: {
                 id: undefined,
@@ -17,6 +32,19 @@ angular.module('user').controller('ChildController', ['$scope', 'SessionService'
             isChildUser: true
         };
         self.childDetails.personas = ['Sishya'];
+        self.goToChild = function (username) {
+            console.log(username);
+            $location.path('/user/' + username);
+        }
+        self.showCreateChild = function () {
+            $mdBottomSheet.show({
+                templateUrl: 'user/views/create-child.client.view.html',
+                controller: 'ListBottomSheetCtrl'
+            }).then(function () {
+                console.log('create user');
+                console.log(self.childDetails);
+            });
+        };
         self.createChild = function () {
             var user = new UserService(self.childDetails);
 
@@ -41,4 +69,9 @@ angular.module('user').controller('ChildController', ['$scope', 'SessionService'
             });
         };
 	}
-]);
+]).controller('ListBottomSheetCtrl', function ($scope, $mdBottomSheet) {
+    $scope.listItemClick = function ($index) {
+        var clickedItem = $scope.items[$index];
+        $mdBottomSheet.hide(clickedItem);
+    };
+});

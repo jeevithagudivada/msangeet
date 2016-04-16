@@ -24,6 +24,14 @@ var upload = multer({
     }
 }).single('userPhoto');
 
+// Twilio Credentials 
+var accountSid = 'AC55135cfe0b0aa15279ba5196abb00a69';
+var authToken = '7b3a3369ad2c8bfa7f3fa018d55f786d';
+//render the signup page
+
+//require the Twilio module and create a REST client 
+var client = require('twilio')(accountSid, authToken);
+
 // Create a new error handling controller method
 var getErrorMessage = function (err) {
     // Define the error message variable
@@ -355,10 +363,11 @@ exports.userByUsername = function (req, res, next, id) {
 };
 
 
-function sendTwilioCode(req, res, next, phone_number) {
+exports.sendTwilioCode = function (req, res, next) {
     var code = Math.floor(Math.random() * 10000);
+    console.log(code);
     client.messages.create({
-        to: phone_number, // get the phone number from the signup page
+        to: "+919008661140",
         from: "+16187900624",
         body: "Your  verification code is" + code, //+code 
         // mediaUrl: "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg",  
@@ -368,9 +377,10 @@ function sendTwilioCode(req, res, next, phone_number) {
         } else {
             console.log(message.sid);
             var user = new TwilioUser();
-            user.phone = phone_number;
+            user.username = req.body.username;
+            user.phone = req.body.phone;
             user.verified = false;
-            user.code = Math.floor(Math.random() * 10000);
+            user.code = code;
             user.save(function (err, user_Saved) {
                 if (err) {
                     throw err;
@@ -382,23 +392,37 @@ function sendTwilioCode(req, res, next, phone_number) {
     });
 }
 
-function checkTwilioCode(req, res, next, phone_number, code) {
-    var a = User.find({
-        code: code
-    }, function (err, user) {
-        if (err) throw err;
-        for (var i = 0; i < user.length; i++) {
-            if (user[i].code == code) {
-                console.log("user exists");
-            } else {
-                console.log("sry");
-            }
-        }
-        // object of the user
-        //console.log(user[1]);
-        //user.end(user); how to display on webpage
-    });
-}
+exports.checkTwilioCode = function (req, res, next) {
+    console.log(req.body.code);
+    console.log(req.body.username);
+    TwilioUser.find({
+            $and: [{
+                username: req.body.username
+                    }, {
+                code: req.body.code
+                    }]
+        },
+        function (err, user) {
+            if (err) throw err;
+            //        for (var i = 0; i < user.length; i++) {
+            //            if (user[i].code == code) {
+            //                console.log("user exists");
+            //            } else {
+            //                console.log("sry");
+            //            }
+            //        }
+            // object of the user
+            console.log(user);
+            TwilioUser.remove({
+                _id: user._id
+            }, function (err, op) {
+                if (err) throw err;
+                console.log("removed user code" + user.code);
+                res.json(1);
+            });
+        })
+};
+
 
 exports.uploadPhoto = function (req, res) {
     upload(req, res, function (err) {

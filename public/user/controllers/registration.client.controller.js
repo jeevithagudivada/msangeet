@@ -2,14 +2,15 @@
 'use strict';
 
 // Create the 'login' controller
-angular.module('user').controller('RegistrationController', ['$scope', 'SessionService', 'UserService', '$location',
-	function ($scope, SessionService, UserService, $location) {
+angular.module('user').controller('RegistrationController', ['$scope', 'VerificationService', 'SessionService', 'UserService', '$location',
+	function ($scope, VerificationService, SessionService, UserService, $location) {
         // Expose the authentication service
         var self = this;
         self.page = 1;
         self.personas = {};
         self.mobileVC = undefined;
         self.emailVC = undefined;
+        self.invalidVC = false;
         self.dp = undefined;
         for (var i = 1; i < 10; ++i) self.personas[i] = false;
 
@@ -30,18 +31,31 @@ angular.module('user').controller('RegistrationController', ['$scope', 'SessionS
         };
         self.userDetails = SessionService.userDetails;
         console.log(self.userDetails);
-        self.sendMobileVerificationCode = function () {
-
-        };
-        self.sendEmailVerificationCode = function () {
-
+        self.sendVerificationCode = function () {
+            // Use the form fields to create a new user $resource object
+            console.log(self.userDetails.phoneNumber);
+            var verify = VerificationService.sendVerificationCode({
+                phone: self.userDetails.phoneNumber,
+                username: self.userDetails.username
+            });
+            console.log(verify);
         };
         self.checkVC = function () {
-            console.log(self.mobileVC, self.emailVC);
-            self.page = 2;
+            console.log(self.mobileVC);
+            var check = new VerificationService({
+                code: self.mobileVC,
+                username: self.userDetails.username
+            });
+            check.$save(function (response) {
+                console.log(response);
+                self.page = 2;
+            }, function (errorResponse) {
+                self.invalidVC = true;
+            });
         };
         self.regNext = function () {
-            self.page = 2;
+            self.checkVC();
+            //self.page = 2;
         };
         self.regFinish = function () {
             self.page = 3;

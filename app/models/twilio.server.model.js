@@ -6,6 +6,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var TwilioUser = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
     phone: {
         type: String,
         required: true

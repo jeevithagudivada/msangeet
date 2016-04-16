@@ -56,6 +56,8 @@ module.exports = function (app) {
     });
 
     app.post('/api/photo', user.uploadPhoto);
+    app.post('/api/verification/create', user.sendTwilioCode);
+    app.post('/api/verification/check', user.checkTwilioCode);
 
 
     // Set up the Twitter OAuth routes

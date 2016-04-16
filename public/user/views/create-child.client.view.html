@@ -1,0 +1,53 @@
+<md-bottom-sheet class="md-grid" layout="column" ng-cloak>
+    <!--        <md-card-title>-->
+    <!--            <md-card-title-text>-->
+    Create Child Account
+    <!--            </md-card-title-text>-->
+    <!--        </md-card-title>-->
+    <md-divider class="general-divider"></md-divider>
+    <md-card-content layout="column" layout-align="space-around center">
+        <!--            <md-card style="height:160px;width:160px">-->
+        <input type="file" ng-show="!cctrl.childDetails.profilePhoto" fileread="cctrl.childDetails.profilePhoto" />
+        <img data-ng-src="{{cctrl.childDetails.profilePhoto}}" ng-show="cctrl.childDetails.profilePhoto"></img>
+        <!--            </md-card>-->
+        <form name="userForm " ng-submit="cctrl.createChild()">
+            <div layout="row " layout-padding layout-wrap layout-fill style="padding-top: 10px; ">
+                <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                    <md-input-container class="md-block ">
+                        <input ng-model="cctrl.childDetails.firstName " placeholder="First Name" required>
+                    </md-input-container>
+                </div>
+                <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                    <md-input-container class="md-block ">
+                        <input ng-model="cctrl.childDetails.lastName " placeholder="Last Name" required>
+                    </md-input-container>
+                </div>
+                <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                    <md-input-container class="md-block ">
+                        <input ng-model="cctrl.childDetails.dateOfBirth " placeholder="Date of birth" required>
+                    </md-input-container>
+                </div>
+                <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                    <md-input-container class="md-block ">
+                        <input ng-model="cctrl.childDetails.pinCode " placeholder="Area Pincode" required>
+                    </md-input-container>
+                </div>
+                <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                    <md-input-container class="md-block ">
+                        <input ng-model="cctrl.childDetails.newusername " placeholder="Username" required>
+                    </md-input-container>
+                </div>
+                <div class="padded " flex-sm="50 " flex-gt-sm="50 " flex-gt-md="50 " layout layout-align="center center ">
+                    <md-input-container class="md-block ">
+                        <input type="password" ng-model="cctrl.childDetails.password " placeholder="Password" required>
+                    </md-input-container>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="end center">
+                <md-button type="submit" class="reg-nav-button ">
+                    <label>CREATE</label>
+                </md-button>
+            </div>
+        </form>
+</md-bottom-sheet>
