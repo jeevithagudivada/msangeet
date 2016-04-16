@@ -240,15 +240,6 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
                 });
             }
         };
-        self.sendRequestToRecipients = function ()
-        {
-            var user_ids = document.getElementsByName("user_ids")[0].value;
-            FB.ui({
-                method: 'apprequests',
-                message: 'Awesome Application try it once',
-                to: user_ids
-            }, requestCallback);
-        };
 
         self.sendRequestViaMultiFriendSelector = function ()
         {
