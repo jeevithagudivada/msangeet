@@ -6,7 +6,6 @@ div#profile {
     margin: 0 auto;
     text-align: left;
 }
-
 .listdemoListControls md-divider {
     margin-top: 0;
     margin-bottom: 0;
@@ -74,3 +73,10 @@ div#profile {
 .bottomSheetdemoBasicUsage md-toast > * {
     font-weight: bolder;
 }
+div#child
+{
+	background-color:#ff3232;
+	color:white;
+	text-align:center;
+}
+

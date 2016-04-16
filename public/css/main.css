@@ -48,7 +48,7 @@ div#content {
 }
 
 div#footer {
-    text-align: center;
+    text-align:center;
     color: white;
     background-color: #000000;
     position:relative;
@@ -61,9 +61,9 @@ div#footer-container {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    padding-top:30px;
+    padding-top:60px;
     margin: 0 auto;
-    text-align: left;
+    text-align:left;
 }
 
 div#licence-bar {
