@@ -1,17 +1,19 @@
 div#login-card {
     margin-left: auto;
     margin-right: auto;
-    padding-top: 60px;
+    padding-top: 70px;
+	padding-bottom:30px;
     width: 600px;
     margin: 0 auto;
     text-align: center;
+	color:red;
 }
 
 #facebook-login-button {
     background-color: #3b5998;
     color: white;
     width: 300px;
-    padding: 0 6px 0 6px;
+    padding: 5px 20px 0px 20px;
     margin: 6px 8px 6px 8px;
     min-width: 88px;
     border-radius: 3px;
@@ -19,6 +21,7 @@ div#login-card {
     text-align: center;
     text-transform: none;
     text-decoration: none;
+	font-weight:bolder;
     border: none;
     outline: none;
 }
@@ -27,7 +30,7 @@ div#login-card {
     background-color: red;
     color: white;
     width: 300px;
-    padding: 0 6px 0 6px;
+    padding: 5px 6px 5px 6px;
     margin: 6px 8px 6px 8px;
     min-width: 88px;
     border-radius: 3px;
@@ -37,4 +40,5 @@ div#login-card {
     text-decoration: none;
     border: none;
     outline: none;
+	font-weight:bolder;
 }

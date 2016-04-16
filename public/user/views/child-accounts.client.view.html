@@ -25,8 +25,8 @@
 
  <div class="content" flex-gt-sm="50" ng-controller="ChildController as cctrl" flex>
     <md-toolbar layout="row" class="md-hue-3">
-      <div class="md-toolbar-tools">
-        <span>Child Acoounts</span>
+      <div id="child" class="md-toolbar-tools">
+        <span>Child Accounts</span>
       </div>
     </md-toolbar>
     <md-content>
@@ -34,7 +34,7 @@
         <md-subheader class="md-no-sticky" ng-show="cctrl.childDetails.parent.username">{{cctrl.childDetails.parent.username}}'s child accounts</md-subheader>
         <md-list-item class="md-3-line" ng-repeat="child in cctrl.children" ng-click="cctrl.goToChild(child.username)">
           <img ng-src="{{ child.img }}" ng-show='{{child.img}}' class="md-avatar" alt="" />
-          <img ng-src="img/dp.png" ng-hide='{{child.img}}' class="md-avatar" alt="" />
+          <img ng-src="img/dp1.png" ng-hide='{{child.img}}' class="md-avatar" alt="" />
           <div class="md-list-item-text" layout="column">
             <h3>{{ child.fullName }}</h3>
             <h4>{{ child.username }}</h4>
