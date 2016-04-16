@@ -11,14 +11,15 @@ module.exports = function (app) {
     app.param('username', user.userByUsername);
     app.route('/api/user')
         //        .get(user.list)
-        .post(user.createChildUser)
-        //
-        //    app.route('/api/user/create')
-        //        .post(user.create);
-        //
+        .post(user.createChildUser);
+    //
+    //    app.route('/api/user/create')
+    //        .post(user.create);
+    //
     app.route('/api/user/:username')
-        .get(user.read);
-    //        .put(user.requiresLogin, user.hasAuthorization, user.update)
+        .get(user.read)
+        .put(user.update);
+    //        .put(user.requiresLogin, user.hasAuthorization, user.update);
     //
     //    app.param('username', user.userByUSERNAME);
     //

@@ -30,7 +30,7 @@ exports.listTeachers = function (req, res, next) {
                     {
                         personas: {
                             $elemMatch: {
-                                $eq: "guru"
+                                $eq: "Guru"
                             }
                         }
                     },
@@ -56,20 +56,32 @@ exports.listTeachers = function (req, res, next) {
         }
     ]).exec(function (err, results) {
         if (err) throw err;
-        var teachers = {};
-        console.log(results.length);
-        for (teacher in results) {
-            doc = {
+        var teachers = [];
+        console.log(results);
+        for (var i = 0; i < results.length; ++i) {
+            var teacher = results[i];
+            var doc = {
                 name: teacher.firstName + " " + teacher.lastName
             };
-            for (_class in teacher.teaching) {
+            for (var _class in teacher.teaching) {
                 if (_class.musicForm.genre == req.body.genre && _class.musicForm.medium == req.body.medium) {
                     doc["location"] = _class.musicForm.location;
                 }
             }
             teachers.push(doc);
         }
-        req.teachers = teachers;
+
+        console.log("line 74");
+        console.log(teachers);
+        req.teachers = [{
+            name: "VK",
+            username: "vkumar",
+            location: {
+                "locationName": "Race Course Road, Bangalore",
+                "latitute": "12.96181949",
+                "longitude": "77.61596739"
+            }
+        }];
         next();
     });
 }

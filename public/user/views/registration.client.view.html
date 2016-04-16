@@ -19,30 +19,33 @@
                         <div id="registration-card-1">
                             <div layout-gt-sm="row" layout-align="space-around center">
                                 <md-input-container class="md-block">
-                                    <input ng-bind="rctrl.userDetails.firstName" ng-model="rctrl.userDetails.firstName" placeholder="First Name">
+                                    <input ng-bind="rctrl.userDetails.firstName" ng-model="rctrl.userDetails.firstName" placeholder="First Name" required>
                                 </md-input-container>
 
                                 <md-input-container class="md-block">
-                                    <input ng-bind="rctrl.userDetails.lastName" ng-model="rctrl.userDetails.lastName" placeholder="Last Name">
+                                    <input ng-bind="rctrl.userDetails.lastName" ng-model="rctrl.userDetails.lastName" placeholder="Last Name" required>
                                 </md-input-container>
                             </div>
                             <div layout-gt-sm="row" layout-align="space-around center">
                                 <md-input-container class="md-block">
-                                    <input ng-bind="rctrl.userDetails.dateOfBirth" ng-model="rctrl.userDetails.dateOfBirth" placeholder="Date of birth dd-mm-yyyy">
+                                    <label>Date of birth</label>
+                                    <input ng-bind="rctrl.userDetails.dateOfBirth" ng-model="rctrl.userDetails.dateOfBirth" placeholder="yyyy-mm-dd" required>
                                 </md-input-container>
 
                                 <md-input-container class="md-block">
-                                    <input ng-bind="rctrl.userDetails.pinCode" ng-model="rctrl.userDetails.pinCode" placeholder="Area Pincode">
+                                    <label>Area Pincode</label>
+                                    <input ng-bind="rctrl.userDetails.pinCode" ng-model="rctrl.userDetails.residenceLocation.pinCode" placeholder="xxxxxx" required>
                                 </md-input-container>
                             </div>
                             <div layout-gt-sm="row" layout-align="space-around center">
 
                                 <md-input-container class="md-block">
-                                    <input ng-bind="rctrl.userDetails.phoneNumber" ng-model="rctrl.userDetails.phoneNumber" placeholder="Mobile Number">
+                                    <label>Moblie Number</label>
+                                    <input ng-bind="rctrl.userDetails.phoneNumber" ng-model="rctrl.userDetails.phoneNumber" placeholder="+91xxxxxxxxxx" required>
                                 </md-input-container>
 
                                 <md-input-container class="md-block">
-                                    <input ng-bind="rctrl.userDetails.email" ng-model="rctrl.userDetails.email" placeholder="Email">
+                                    <input ng-bind="rctrl.userDetails.email" ng-model="rctrl.userDetails.email" placeholder="Email" required>
                                 </md-input-container>
                             </div>
                             <div layout-gt-sm="row" layout-align="space-around center">
@@ -52,12 +55,11 @@
                             </div>
                             <div layout-gt-sm="row" layout-align="space-around center">
                                 <md-input-container class="md-block">
-                                    <input ng-model="rctrl.mobileVC" placeholder="Enter mobile code here">
+                                    <input ng-model="rctrl.mobileVC" placeholder="Enter mobile code here" required>
                                 </md-input-container>
-
-                                <md-input-container class="md-block">
-                                    <input ng-model="rctrl.emailVC" placeholder="Enter email code here">
-                                </md-input-container>
+                            </div>
+                            <div layout-gt-sm="row" layout-align="space-around center" ng-show="rctrl.invalidVC">
+                                Invalid code. Please try again.
                             </div>
                         </div>
                     </md-card-content>

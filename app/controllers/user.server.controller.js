@@ -4,6 +4,7 @@
 // Load the module dependencies
 var User = require('mongoose').model('User'),
     TwilioUser = require('mongoose').model('TwilioUser'),
+    mongoose = require('mongoose'),
     passport = require('passport'),
     multer = require('multer');
 
@@ -282,37 +283,13 @@ exports.read = function (req, res) {
 // Create a new controller method that updates an existing user
 exports.update = function (req, res) {
     // Get the user from the 'request' object
-    var user = req.user;
-
-    // Update the user fields
-    user.userName = req.body.userName;
-    user.firstName = req.body.firstName;
-    user.latName = req.body.lastName;
-    user.salutation = req.body.salutation;
-    user.dateOfBirth = req.body.dateOfBirth;
-    user.profilePhoto = req.body.profilePhoto;
-    user.aboutSummary = req.body.aboutSummary;
-    user.email = req.body.email;
-    user.phoneNumber = req.body.phoneNumber;
-    user.isChildUser = req.body.isChildUser;
-    user.parentId = req.body.parentId;
-    user.password = req.body.password;
-    user.residenceLocation = req.body.residenceLocation;
-    user.children = req.body.children;
-    user.personas = req.body.personas;
-    user.qualification = req.body.qualification;
-    user.training = req.body.training;
-    user.awards = req.body.awards;
-    user.performances = req.body.performances;
-    user.books = req.body.books;
-    user.albums = req.body.albums;
-    user.genresTaught = req.body.genresTaught;
-    user.teachingMedium = req.body.teachingMedium;
-    user.studentProfiles = req.body.studentProfiles;
-    user.teaching = req.body.teaching;
-
-    // Try saving the updated user
-    user.save(function (err) {
+    console.log(req.body);
+    var user = req.body;
+    console.log(user);
+    user.hasRegistered = true;
+    User.update({
+        _id: mongoose.Types.ObjectId(user._id)
+    }, user, function (err) {
         if (err) {
             // If an error occurs send the error message
             return res.status(400).send({
@@ -320,7 +297,7 @@ exports.update = function (req, res) {
             });
         } else {
             // Send a JSON representation of the user
-            res.json(user);
+            res.send(user);
         }
     });
 };
@@ -366,61 +343,75 @@ exports.userByUsername = function (req, res, next, id) {
 exports.sendTwilioCode = function (req, res, next) {
     var code = Math.floor(Math.random() * 10000);
     console.log(code);
-    client.messages.create({
-        to: "+919008661140",
-        from: "+16187900624",
-        body: "Your  verification code is" + code, //+code 
-        // mediaUrl: "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg",  
-    }, function (err, message) {
-        if (err) {
-            console.log("please give correct number");
-        } else {
-            console.log(message.sid);
-            var user = new TwilioUser();
-            user.username = req.body.username;
-            user.phone = req.body.phone;
-            user.verified = false;
-            user.code = code;
-            user.save(function (err, user_Saved) {
-                if (err) {
-                    throw err;
-                } else {
-                    console.log('saved');
-                }
-            });
-        }
-    });
+    res.send("done");
+    //    client.messages.create({
+    //        to: "+919008661140",
+    //        from: "+16187900624",
+    //        body: "Your  verification code is" + code, //+code 
+    //        // mediaUrl: "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg",  
+    //    }, function (err, message) {
+    //        if (err) {
+    //            console.log("please give correct number");
+    //        } else {
+    //            console.log(message.sid);
+    //            var user = new TwilioUser();
+    //            user.username = req.body.username;
+    //            user.phone = req.body.phone;
+    //            user.verified = false;
+    //            user.code = code;
+    //            user.save(function (err, user_Saved) {
+    //                if (err) {
+    //                    throw err;
+    //                } else {
+    //                    console.log('saved');
+    //                    res.send();
+    //                }
+    //            });
+    //        }
+    //    });
 }
 
 exports.checkTwilioCode = function (req, res, next) {
     console.log(req.body.code);
     console.log(req.body.username);
-    TwilioUser.find({
-            $and: [{
-                username: req.body.username
-                    }, {
-                code: req.body.code
-                    }]
+    TwilioUser.findOne({
+            username: req.body.username,
+            code: req.body.code,
+            verified: false
         },
         function (err, user) {
-            if (err) throw err;
-            //        for (var i = 0; i < user.length; i++) {
-            //            if (user[i].code == code) {
-            //                console.log("user exists");
-            //            } else {
-            //                console.log("sry");
-            //            }
-            //        }
-            // object of the user
-            console.log(user);
-            TwilioUser.remove({
-                _id: user._id
-            }, function (err, op) {
-                if (err) throw err;
-                console.log("removed user code" + user.code);
-                res.json(1);
-            });
-        })
+            if (err) {
+                res.send({
+                    "data": "failure"
+                });
+                throw err
+            };
+            console.log(user)
+            if (user == null) {
+                res.send({
+                    "data": "failure"
+                });
+            } else {
+                res.send({
+                    "data": "success"
+                });
+            }
+            TwilioUser.update({
+                    username: req.body.username,
+                    code: req.body.code,
+                    verified: false
+                }, {
+                    $set: {
+                        "verified": true
+                    }
+                },
+                function (err, user) {
+                    if (err) {
+                        throw err
+                    };
+                    console.log(user);
+                });
+        });
 };
 
 
