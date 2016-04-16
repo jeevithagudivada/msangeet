@@ -13,7 +13,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding-top: 60px;
-    padding-bottom: 60px;width: 800px;
+    padding-bottom: 60px;
+	width: 800px;
     margin: 0 auto;
     text-align: center;
 }
@@ -50,7 +51,7 @@ div#footer {
     text-align: center;
     color: white;
     background-color: #000000;
-    position: relative;
+    position:relative;
     left: 0;
     bottom: 0;
     right: 0;
@@ -60,7 +61,7 @@ div#footer-container {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 60px;
+    padding-top:30px;
     margin: 0 auto;
     text-align: left;
 }
