@@ -5,6 +5,7 @@ angular.module('user').factory('SessionService', ['$resource', '$http',
     function ($resource, $http) {
         var service = {
             userDetails: undefined,
+            searchResults: undefined,
             session: function () {
                 return $http.get('api/session')
                     .then(function (response) {

@@ -122,12 +122,59 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
                         $scope.searchDetails.latitude = position.coords.latitude;
                         $scope.searchDetails.longitude = position.coords.longitude;
                         console.log($scope.searchDetails);
-                        SearchService.searchGuru($scope.searchDetails);
+//                        SearchService.searchGuru($scope.searchDetails);
+                        var check = new SearchService($scope.searchDetails);
+                        check.$save(function (response) {
+                            SessionService.searchResults = response.data;
+                            console.log(response.data);
+                            drawOnMap(position.coords,response.data);
+                        }, function (errorResponse) {
+                            
+                        });
                     });
                 });
             }
         }
+        
+        self.markClosestTeachers = function (LatLng){
+            var teacherCenter=new google.maps.LatLng(LatLng[0],LatLng[1]);
+            var mymarker=new google.maps.Marker({
+              position:teacherCenter,
+              });
 
+            mymarker.setMap(map);
+        };
+
+        
+       self.drawOnMap = function (position,lat_long) {
+        var closest_teachers=[];   
+        for(var i=0;i<lat_long.length;++i)   
+          closest_teachers.push([lat_long[i]["location"]["latitude"],lat_long[i]["location"]["longitude"]]);
+		var maps = document.getElementById("googleMap");
+	    maps.style.width=window.innerWidth+"px";
+	    maps.style.height=window.innerHeight+"px";
+	    var myCenter=new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
+	    var mapProp = {
+	        center:myCenter,
+	        zoom:12,
+        var mapTypeId:google.maps.MapTypeId.ROADMAP
+	      };
+	    var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+	    var image = 'https://image.spreadshirtmedia.com/image-server/v1/designs/12108165,width=178,height=178,version=1348666398/Google-Map-marker.png';
+  		var mymarker=new google.maps.Marker({
+	      position:myCenter,
+	      map: map,
+    	  icon: image
+	      });
+	    mymarker.setMap(map);
+	    for(var i=0;i<closest_teachers.length;i++){
+	    	console.log(closest_teachers[i]);
+	    	markClosestTeachers(closest_teachers[i]);
+	    }
+	};
+
+
+	
         self.viewProfile = function () {
             console.log(SessionService.userDetails.username);
             $location.path('/users/' + SessionService.userDetails.username);
