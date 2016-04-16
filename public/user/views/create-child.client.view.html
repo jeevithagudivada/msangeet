@@ -1,11 +1,14 @@
-<md-bottom-sheet class="md-grid" layout="column" ng-cloak>
-    <!--        <md-card-title>-->
-    <!--            <md-card-title-text>-->
-    Create Child Account
-    <!--            </md-card-title-text>-->
-    <!--        </md-card-title>-->
+
+
+
+<md-bottom-sheet class="md-list md-has-header" layout="column" ng-cloak>
+    <md-toolbar layout="row" class="md-hue-3">
+      <div class="md-toolbar-tools">
+        <span>Create Child Acoount</span>
+      </div>
+    </md-toolbar>
     <md-divider class="general-divider"></md-divider>
-    <md-card-content layout="column" layout-align="space-around center">
+    <md-card-content layout="row" layout-align="space-around center">
         <!--            <md-card style="height:160px;width:160px">-->
         <input type="file" ng-show="!cctrl.childDetails.profilePhoto" fileread="cctrl.childDetails.profilePhoto" />
         <img data-ng-src="{{cctrl.childDetails.profilePhoto}}" ng-show="cctrl.childDetails.profilePhoto"></img>

@@ -6,15 +6,17 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
     function ($scope, $routeParams, $location, SessionService, UserService, SearchService) {
         var self = this;
         self.userDetails = SessionService.userDetails;
-        self.fullname = self.userDetails.firstName + " " + self.userDetails.lastName;
+        self.fullName = self.userDetails.firstName + " " + self.userDetails.lastName;
         self.profilePhoto = self.userDetails.profilePhoto;
         console.log(self.userDetails.profilePhoto);
-        self.generaldetails = {
-            'Location': self.userDetails.residenceLocation.addressText,
-            'Musical Interests': self.userDetails.interests.join(),
-            'Influences': self.userDetails.influences.join()
-        };
-        self.about = self.userDetails.aboutSummary;
+        //self.generaldetails = {
+        //    'Location': self.userDetails.residenceLocation.addressText,
+        //    'Musical Interests': self.userDetails.interests.join(),
+        //    'Influences': self.userDetails.influences.join()
+        //};
+
+        //self.about = self.userDetails.aboutSummary;
+        self.about="John the bookmaker was an Indian bookmaker who gave money to Australian cricketers Mark Waugh and Shane Warne in 1994–95 for pitch and weather information. One of the most publicised betting controversies in cricket in the 1990s, the matter was initially covered up by the Australian Cricket Board (ACB), which reported it to the International Cricket Council and quietly fined the players. The players and the ACB were later widely condemned by the media and public, but not generally by the sports community. The ACB requested an independent inquiry and appointed Rob O'Regan QC, who wrote that a suspension for a  would have been a more appropriate penalty. He strongly condemned the players' behaviour and recommended that cricketers be educated about the dangers of gambling and unauthorised bookmakers. The controversy prompted Pakistan to ask the two Australian players to appear in front of their own judicial inquiry into corruption; the hearings were held in Australia.";
         self.about_short = self.about.substring(0, 100);
         self.read_about = false;
 
