@@ -7,5 +7,5 @@ module.exports = function (app) {
     var search = require('../controllers/location.search.server.controller');
 
     // Mount the 'search' controller's 'render' method
-    app.post('/search/guru', search.searchGuru);
+    app.post('/search/guru', search.listTeachers, search.searchGuru);
 };

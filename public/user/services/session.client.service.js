@@ -12,6 +12,14 @@ angular.module('user').factory('SessionService', ['$resource', '$http',
                         return response;
                     });
             },
+            sendVerificationCode: function (codeDetails) {
+                console.log(codeDetails);
+                return $http.post('api/verification/create', codeDetails)
+                    .then(function (response) {
+                        console.log(response);
+                        return response;
+                    });
+            }
         };
         return service;
   }]);
