@@ -1,9 +1,9 @@
 // Invoke 'strict' JavaScript mode
+'use strict';
 
-var fbinit
 // Create the 'user' controller
-angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', 'SessionService', 'UserService', 'SearchService',
-    function ($scope, $routeParams, $location, SessionService, UserService, SearchService)
+angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', '$window', 'SessionService', 'UserService', 'SearchService',
+    function ($scope, $routeParams, $location, $window, SessionService, UserService, SearchService)
     {
         var self = this;
         self.userDetails = SessionService.userDetails;
@@ -248,7 +248,7 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
                 message: 'Awesome Application try it once',
                 to: user_ids
             }, requestCallback);
-        }
+        };
 
         self.sendRequestViaMultiFriendSelector = function ()
         {
@@ -259,9 +259,10 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
                 message: 'Awesome application try it once'
             }, function ()
             {
-
+                $window.location.href = 'https://poised-shuttle-122514.appspot.com/';
             });
-        }
+        };
+
         self.initFB = function ()
         {
             FB.init({
