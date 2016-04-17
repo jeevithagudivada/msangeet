@@ -9,7 +9,7 @@ angular.module('user',['ngMdIcons']).controller('UserController', ['$scope', '$r
         self.userDetails = SessionService.userDetails;
         self.fullName = self.userDetails.firstName + " " + self.userDetails.lastName;
         self.profilePhoto = self.userDetails.profilePhoto;
-        console.log(self.userDetails)
+        console.log("user details:");console.log(self.userDetails)
         if(!self.userDetails.residenceLocation)self.userDetails.residenceLocation={'addressText':''};
         if(!self.userDetails.interests)self.userDetails.interests=[];
         if(!self.userDetails.influences)self.userDetails.influences=[]; 
@@ -33,6 +33,7 @@ angular.module('user',['ngMdIcons']).controller('UserController', ['$scope', '$r
             var skill = qual[i].musicForm.genre + " " + qual[i].musicForm.medium;
             self.qualification[qual[i].qualificationName] = skill + "-" + qual[i].awardingOrg + "-" + qual[i].qualificationYear.toString();
         }
+        console.log("qual"+self.qualification)
         self.training = {};
         var _training = self.userDetails.training;
         for (var i in _training)
@@ -42,6 +43,7 @@ angular.module('user',['ngMdIcons']).controller('UserController', ['$scope', '$r
             var duration = _training[i].fromYear.toString() + " to " + _training[i].toYear.toString();
             self.training[teacher_name] = skill + "-" + qual[i].awardingOrg + "-" + qual[i].qualificationYear.toString();
         }
+
         self.awards = {};
         var _awards = self.userDetails.awards;
         for (var i in _awards)
@@ -177,7 +179,7 @@ angular.module('user',['ngMdIcons']).controller('UserController', ['$scope', '$r
 	    var mapProp = {
 	        center:myCenter,
 	        zoom:12,
-        var mapTypeId:google.maps.MapTypeId.ROADMAP
+            mapTypeId:google.maps.MapTypeId.ROADMAP
 	      };
 	    var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
 	    var image = 'https://image.spreadshirtmedia.com/image-server/v1/designs/12108165,width=178,height=178,version=1348666398/Google-Map-marker.png';
@@ -316,11 +318,49 @@ angular.module('user',['ngMdIcons']).controller('UserController', ['$scope', '$r
 
 
         self.tutorshipEdit=false;
+        self.discipleshipEdit=false;
+        self.artistryEdit=false;
         self.setEditOption=function(option){
-            if(option=='tutorship')self.tutorshipEdit=true;
+            if(option=='DISCIPLESHIP')self.discipleshipEdit=true;
+            if(option=='ARTISTRY')self.artistryEdit=true;
+            if(option=='TUTORSHIP')self.tutorshipEdit=true;
         }
         self.resetEditOption=function(option){
-            if(option=='tutorship')self.tutorshipEdit=false;
+            if(option=='DISCIPLESHIP')self.discipleshipEdit=false;
+            if(option=='ARTISTRY')self.artistryEdit=false;
+            if(option=='TUTORSHIP')self.tutorshipEdit=false;
+        }
+
+        self.getEditVar=function(cardHead){
+            if(cardHead=='DISCIPLESHIP') return self.discipleshipEdit;
+            if(cardHead=='ARTISTRY') return self.artistryEdit;
+            if(cardHead=='TUTORSHIP') return self.tutorshipEdit;
+
+        }
+
+        function isEmpty(obj) {
+            for(var prop in obj) {
+                if(obj.hasOwnProperty(prop))
+                    return false;
+            }
+            return true;
+        }
+
+        self.fillFormData=function(field){
+            console.log("fill form for "+field);
+            // fetching data from form goes here..
+            var form=document.forms['editForm'];
+            if(field=='DISCIPLESHIP'){
+                    console.log(form[0].value+form[1].value);
+                    // store form[0].value in self.userDetails.qualification
+                    // store form[1].value in self.userDetails.training
+            }
+            else if(field=="ARTISTRY"){
+                    console.log(form[0].value+form[1].value+form[2].value+form[3].value);
+            }
+            
+            
+            self.resetEditOption(field);
         }
 
         self.initFB();
