@@ -305,7 +305,7 @@ angular.module('user', ['ngMdIcons']).controller('UserController', ['$scope', '$
                 message: 'Awesome application try it once'
             }, function ()
             {
-                $window.location.href = 'https://poised-shuttle-122514.appspot.com/';
+
             });
         };
 
