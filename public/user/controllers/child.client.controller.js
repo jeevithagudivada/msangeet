@@ -41,7 +41,6 @@ angular.module('user').controller('ChildController', ['$scope', '$mdBottomSheet'
                 templateUrl: 'user/views/create-child.client.view.html',
                 controller: 'ListBottomSheetCtrl'
             }).then(function () {
-                console.log('create user');
                 console.log(self.childDetails);
             });
         };

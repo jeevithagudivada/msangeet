@@ -1,21 +1,48 @@
-<div class="content" ng-controller="ChildController as cctrl">
+<!--<div class="content" ng-controller="ChildController as cctrl">
     <div layout="row" layout-align="space-around center">
         <md-card layout="column" style="width:640px">
-            <md-card-title>
+            
+        <md-card-title>
                 <md-card-title-text>
                     Child Accounts
                 </md-card-title-text>
             </md-card-title>
             <md-divider class="general-divider"></md-divider>
             <md-card-content flex="100" layout="column" layout-align="space-around center">
-                <md-list>
-                    <md-list-item ng-repeat="child in cctrl.children" ng-click="cctrl.goToChild(child.username)" class="noright">
-                        <img alt="{{ child.fullName }}" ng-src="{{ child.img }}" class="md-avatar" />
-                        <p>{{ child.fullName }}</p>
+                
+                <md-list flex>
+                    <md-list-item class="md-3-line noright" ng-repeat="child in cctrl.children" ng-click="cctrl.goToChild(child.username)">
+                        <img alt="{{ child.fullName }}" class="md-avatar" ng-src="{{ child.img }}" class="md-avatar" />
+                        <div class="md-list-item-text" layout="column">{{ child.fullName }}</div>
                     </md-list-item>
                 </md-list>
+
                 <md-button class="reg-nav-button " ng-click="cctrl.showCreateChild()">Create Child</md-button>
             </md-card-content>
         </md-card>
     </div>
+</div> -->
+
+ <div class="content" flex-gt-sm="50" ng-controller="ChildController as cctrl" flex>
+    <md-toolbar layout="row" class="md-hue-3">
+      <div id="child" class="md-toolbar-tools">
+        <span>Child Accounts</span>
+      </div>
+    </md-toolbar>
+    <md-content>
+      <md-list flex>
+        <md-subheader class="md-no-sticky" ng-show="cctrl.childDetails.parent.username">{{cctrl.childDetails.parent.username}}'s child accounts</md-subheader>
+        <md-list-item class="md-3-line" ng-repeat="child in cctrl.children" ng-click="cctrl.goToChild(child.username)">
+          <img ng-src="{{ child.img }}" ng-show='{{child.img}}' class="md-avatar" alt="" />
+          <img ng-src="img/dp1.png" ng-hide='{{child.img}}' class="md-avatar" alt="" />
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ child.fullName }}</h3>
+            <h4>{{ child.username }}</h4>
+            <p>{{ child.childDetails.personas }}</p>
+          </div>
+          <md-divider ></md-divider>
+        </md-list-item>
+        <div class="bottom-sheet-demo inset" layout="row" layout-sm="column" layout-align="center" >
+        <md-button class="reg-nav-button " ng-click="cctrl.showCreateChild()">Create Child</md-button>
+        </div>
 </div>

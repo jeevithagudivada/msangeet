@@ -1,0 +1,7 @@
+{
+    "jscodehints.detectedExclusions": [
+        "G:/Workspace/Projects/mSangeet/source-code/public/lib/lodash/lib/fp/build-doc.js",
+        "G:/Workspace/Projects/mSangeet/source-code/public/application.js",
+        "G:/Workspace/Projects/mSangeet/source-code/public/user/services/user.client.service.js"
+    ]
+}

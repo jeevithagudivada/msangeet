@@ -2,19 +2,22 @@
 'use strict';
 
 // Create the 'user' controller
-angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', 'SessionService', 'UserService', 'SearchService',
-    function ($scope, $routeParams, $location, SessionService, UserService, SearchService) {
+angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', '$window', 'SessionService', 'UserService', 'SearchService', 'MarkerCreatorService',
+    function ($scope, $routeParams, $location, $window, SessionService, UserService, SearchService, MarkerCreatorService)
+    {
         var self = this;
         self.userDetails = SessionService.userDetails;
-        self.fullname = self.userDetails.firstName + " " + self.userDetails.lastName;
+        self.fullName = self.userDetails.firstName + " " + self.userDetails.lastName;
         self.profilePhoto = self.userDetails.profilePhoto;
-        console.log(self.userDetails.profilePhoto);
-        self.generaldetails = {
-            'Location': self.userDetails.residenceLocation.addressText,
-            'Musical Interests': self.userDetails.interests.join(),
-            'Influences': self.userDetails.influences.join()
-        };
-        self.about = self.userDetails.aboutSummary;
+        console.log(self.userDetails);
+        //self.generaldetails = {
+        //    'Location': self.userDetails.residenceLocation.addressText,
+        //    'Musical Interests': self.userDetails.interests.join(),
+        //    'Influences': self.userDetails.influences.join()
+        //};
+
+        //self.about = self.userDetails.aboutSummary;
+        self.about = "John the bookmaker was an Indian bookmaker who gave money to Australian cricketers Mark Waugh and Shane Warne in 1994–95 for pitch and weather information. One of the most publicised betting controversies in cricket in the 1990s, the matter was initially covered up by the Australian Cricket Board (ACB), which reported it to the International Cricket Council and quietly fined the players. The players and the ACB were later widely condemned by the media and public, but not generally by the sports community. The ACB requested an independent inquiry and appointed Rob O'Regan QC, who wrote that a suspension for a  would have been a more appropriate penalty. He strongly condemned the players' behaviour and recommended that cricketers be educated about the dangers of gambling and unauthorised bookmakers. The controversy prompted Pakistan to ask the two Australian players to appear in front of their own judicial inquiry into corruption; the hearings were held in Australia.";
         self.about_short = self.about.substring(0, 100);
         self.read_about = false;
 
@@ -111,6 +114,43 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
             //            if(site=='facebook')
         }
 
+        //        var cities = [
+        //            {
+        //                username: 'You',
+        //                desc: 'Your current Location',
+        //                lat: 23.200000,
+        //                long: 79.225487
+        //              },
+        //            {
+        //                username: 'VK1',
+        //                desc: 'Distance: 20km',
+        //                lat: 23.200000,
+        //                long: 79.225487
+        //              },
+        //            {
+        //                username: 'VK2',
+        //                desc: 'Distance: 30km',
+        //                lat: 28.500000,
+        //                long: 77.250000
+        //              },
+        //            {
+        //                username: 'VK3',
+        //                desc: 'Distance: 40km',
+        //                lat: 19.000000,
+        //                long: 72.90000
+        //              }
+        //          ];
+        //
+        //        self.searchResults = cities;
+
+
+
+        self.openInfoWindow = function (e, selectedMarker) {
+            console.log(selectedMarker);
+            e.preventDefault();
+            google.maps.event.trigger(selectedMarker, 'click');
+        }
+
         self.searchGuru = function () {
             console.log('searchGuru')
             $scope.searchDetails = self.searchDetails;
@@ -120,7 +160,54 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
                         $scope.searchDetails.latitude = position.coords.latitude;
                         $scope.searchDetails.longitude = position.coords.longitude;
                         console.log($scope.searchDetails);
-                        SearchService.searchGuru($scope.searchDetails);
+                        var check = new SearchService($scope.searchDetails);
+                        check.$save(function (response) {
+                            SessionService.searchResults = response.data;
+                            self.searchResults = response.data;
+                            console.log(response.data);
+
+                            var mapOptions = {
+                                zoom: 10,
+                                center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                                mapTypeId: google.maps.MapTypeId.TERRAIN
+                            }
+
+                            $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+                            $scope.markers = [];
+
+                            var infoWindow = new google.maps.InfoWindow();
+
+                            var createMarker = function (info) {
+                                var marker = new google.maps.Marker({
+                                    map: $scope.map,
+                                    options: {
+                                        animation: 1,
+                                        labelAnchor: "28 -5",
+                                        labelClass: 'marker_labels'
+                                    },
+                                    position: new google.maps.LatLng(info.location.latitude, info.location.longitude),
+                                    title: info.name
+                                });
+                                marker.content = '<div class="infoWindowContent">' +
+                                    ' Address: ' + info.location.locationName + '</br>' +
+                                    ' Distance: ' + Math.round(info.distance / 1000 * 100) / 100 + '</br></div>';
+
+                                google.maps.event.addListener(marker, 'click', function () {
+                                    infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                                    infoWindow.open($scope.map, marker);
+                                });
+
+                                $scope.markers.push(marker);
+                            }
+
+                            for (i = 0; i < self.searchResults.length; i++) {
+                                createMarker(self.searchResults[i]);
+                            }
+
+                        }, function (errorResponse) {
+
+                        });
                     });
                 });
             }
@@ -202,4 +289,25 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
                 });
             }
         };
-}]);
+
+        self.sendRequestViaMultiFriendSelector = function () {
+            console.log('sending request');
+
+            FB.ui({
+                method: 'apprequests',
+                message: 'Awesome application try it once'
+            }, function () {
+                $window.location.href = 'https://poised-shuttle-122514.appspot.com/';
+            });
+        };
+
+        self.initFB = function () {
+            FB.init({
+                appId: '1528748510753908',
+                frictionlessRequests: true
+            });
+            console.log("FB init");
+        };
+
+        self.initFB();
+    }]);

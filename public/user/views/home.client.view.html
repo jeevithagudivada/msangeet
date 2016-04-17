@@ -10,9 +10,9 @@
                         {{uctrl.fullname}}
         		          <nav style="float:right">
                               <ng-md-icon icon="facebook" size="24"></ng-md-icon>
-        		              <ng-md-icon icon="twitter" size="24"></ng-md-icon>
-        		              <ng-md-icon icon="google-plus" size="20"></ng-md-icon>
-        		          </nav>                
+                              <ng-md-icon icon="twitter" size="24"></ng-md-icon>
+                              <ng-md-icon icon="google-plus" size="20"></ng-md-icon>
+                          </nav>
         		          </span>
                 </md-card-title-text>
             </md-card-title>
@@ -33,7 +33,7 @@
         </md-card-title>
         <md-divider class="general-divider"></md-divider>
         <md-card-content>
-
+            <input type="button" name="invite_button" ng-click="uctrl.sendRequestViaMultiFriendSelector()" value="Click here" />
         </md-card-content>
     </md-card>
     <md-card layout="column">
@@ -43,7 +43,7 @@
             </md-card-title-text>
         </md-card-title>
         <md-divider class="general-divider"></md-divider>
-        <md-card-content>
+        <md-card-content layout="column" layout-align="space-around center">
             <form name="searchForm" ng-submit="uctrl.searchGuru()">
                 <div layout="row" layout-padding layout-wrap layout-fill style="padding-top: 10px;">
                     <div class="padded" flex-sm="50" flex-gt-sm="50" flex-gt-md="50" layout layout-align="center center">
@@ -73,8 +73,34 @@
                     </md-button>
                 </div>
                 <md-divider class="general-divider"></md-divider>
-                <div id="googleMap"></div>
             </form>
+            <div id="search-results" ng-hide="markers.length==0">
+                <md-toolbar layout="row" class="md-hue-3">
+                    <div id="child" class="md-toolbar-tools">
+                        <span>Search Results</span>
+                    </div>
+                </md-toolbar>
+                <md-content>
+                    <md-list flex>
+                        <md-list-item class="md-3-line" ng-repeat="result in uctrl.searchResults" ng-click="uctrl.openInfoWindow($event, result)">
+                            <!--
+                            <img ng-src="{{ result.img }}" ng-show='{{result.img}}' class="md-avatar" alt="" />
+                            <img ng-src="img/dp1.png" ng-hide='{{result.img}}' class="md-avatar" alt="" />
+-->
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ result.username }}</h3>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+                <div id="map"></div>
+                <div layout="row" id="repeat" ng-repeat="marker in markers | orderBy : 'title'">
+                    <a id="country_container" href="#" ng-click="uctrl.openInfoWindow($event, marker)">
+                        <label id="names">{{marker.title}}</label>
+                    </a>
+                </div>
+            </div>
         </md-card-content>
     </md-card>
 </div>

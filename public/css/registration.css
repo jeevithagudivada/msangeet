@@ -24,7 +24,16 @@ div#registration-card {
     border: none;
     outline: none;
 }
-
+md-card-title-text{
+	color:red;
+	font-weight:bold;
+}
+span#complete{
+	color:green;
+	font-weight:bolder;
+	font-family:'open sans';
+	font-size:36px;
+}
 .reg-next-arrow {
     padding-bottom: -5px;
 }

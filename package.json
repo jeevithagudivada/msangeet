@@ -1,49 +1,49 @@
 {
-  "name": "msangeet",
-  "version": "0.0.8",
-  "description": "msangeet profiling module",
-  "main": "server.js",
-  "bugs": {
-    "url": "https://github.com/dpkm95/msangeet/issues"
-  },
-  "repository": "https://github.com/dpkm95/msangeet.git",
-  "homepage": "https://github.com/dpkm95/msangeet#readme",
-  "keywords": [
+    "name": "msangeet",
+    "version": "0.0.8",
+    "description": "msangeet profiling module",
+    "main": "server.js",
+    "bugs": {
+        "url": "https://github.com/dpkm95/msangeet/issues"
+    },
+    "repository": "https://github.com/dpkm95/msangeet.git",
+    "homepage": "https://github.com/dpkm95/msangeet#readme",
+    "keywords": [
     "music"
   ],
-  "dependencies": {
-    "body-parser": "^1.15.0",
-    "compress": "^0.99.0",
-    "compression": "^1.6.1",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.1",
-    "ejs": "^2.4.1",
-    "express": "^4.13.3",
-    "express-session": "^1.13.0",
-    "method-override": "^2.3.5",
-    "mongoose": "^4.4.5",
-    "morgan": "^1.7.0",
-    "multer": "^1.1.0",
-    "passport": "^0.3.2",
-    "passport-facebook": "^2.1.0",
-    "passport-google-oauth": "^1.0.0",
-    "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4",
-    "twilio": "^2.9.1",
-    "urlencode": "^1.1.0"
-  },
-  "devDependencies": {
-    "should": "~4.0.4",
-    "supertest": "~0.13.0",
-    "karma": "~0.12.23",
-    "karma-jasmine": "~0.2.2",
-    "karma-phantomjs-launcher": "~0.1.4"
-  },
-  "engines": {
-    "node": "~4.2"
-  },
-  "scripts": {
-    "start": "node server.js",
-    "deploy": "gcloud preview app deploy app.yaml"
-  }
+    "dependencies": {
+        "body-parser": "^1.15.0",
+        "compress": "^0.99.0",
+        "compression": "^1.6.1",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.4.1",
+        "ejs": "^2.4.1",
+        "express": "^4.13.3",
+        "express-session": "^1.13.0",
+        "method-override": "^2.3.5",
+        "mongoose": "^4.4.5",
+        "morgan": "^1.7.0",
+        "multer": "^1.1.0",
+        "passport": "^0.3.2",
+        "passport-facebook": "^2.1.0",
+        "passport-google-oauth": "^1.0.0",
+        "passport-local": "^1.0.0",
+        "passport-twitter": "^1.0.4",
+        "twilio": "^2.9.1",
+        "urlencode": "^1.1.0"
+    },
+    "devDependencies": {
+        "should": "~4.0.4",
+        "supertest": "~0.13.0",
+        "karma": "~0.12.23",
+        "karma-jasmine": "~0.2.2",
+        "karma-phantomjs-launcher": "~0.1.4"
+    },
+    "engines": {
+        "node": "~4.2"
+    },
+    "scripts": {
+        "start": "node server.js",
+        "deploy": "gcloud preview app deploy app.yaml"
+    }
 }

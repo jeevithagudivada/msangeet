@@ -61,7 +61,7 @@ angular.module('user').controller('RegistrationController', ['$scope', 'Verifica
                 // If an user was created successfully, redirect the user to the user's page 
                 console.log(response);
                 if (response.$resolved) {
-                    Session.userDetails = resopnse;
+                    SessionService.userDetails = resopnse;
                     self.page = 3;
                 } else {
                     console.log('registration error');
