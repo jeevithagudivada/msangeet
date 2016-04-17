@@ -2,18 +2,19 @@
 'use strict';
 
 // Create the 'user' controller
-angular.module('user',['ngMdIcons']).controller('UserController', ['$scope', '$routeParams', '$location', '$window', 'SessionService', 'UserService', 'SearchService',
+angular.module('user', ['ngMdIcons']).controller('UserController', ['$scope', '$routeParams', '$location', '$window', 'SessionService', 'UserService', 'SearchService',
     function ($scope, $routeParams, $location, $window, SessionService, UserService, SearchService)
     {
         var self = this;
         self.userDetails = SessionService.userDetails;
         self.fullName = self.userDetails.firstName + " " + self.userDetails.lastName;
         self.profilePhoto = self.userDetails.profilePhoto;
-        console.log("user details:");console.log(self.userDetails)
-        if(!self.userDetails.residenceLocation)self.userDetails.residenceLocation={'addressText':''};
-        if(!self.userDetails.interests)self.userDetails.interests=[];
-        if(!self.userDetails.influences)self.userDetails.influences=[]; 
-        if(!self.userDetails.aboutSummary)self.userDetails.aboutSummary='';
+        console.log("user details:");
+        console.log(self.userDetails)
+        if (!self.userDetails.residenceLocation)self.userDetails.residenceLocation = {'addressText': ''};
+        if (!self.userDetails.interests)self.userDetails.interests = [];
+        if (!self.userDetails.influences)self.userDetails.influences = [];
+        if (!self.userDetails.aboutSummary)self.userDetails.aboutSummary = '';
 
         self.generaldetails = {
             'Location': self.userDetails.residenceLocation.addressText,
@@ -33,7 +34,7 @@ angular.module('user',['ngMdIcons']).controller('UserController', ['$scope', '$r
             var skill = qual[i].musicForm.genre + " " + qual[i].musicForm.medium;
             self.qualification[qual[i].qualificationName] = skill + "-" + qual[i].awardingOrg + "-" + qual[i].qualificationYear.toString();
         }
-        console.log("qual"+self.qualification)
+        console.log("qual" + self.qualification)
         self.training = {};
         var _training = self.userDetails.training;
         for (var i in _training)
@@ -146,58 +147,63 @@ angular.module('user',['ngMdIcons']).controller('UserController', ['$scope', '$r
                         console.log($scope.searchDetails);
 //                        SearchService.searchGuru($scope.searchDetails);
                         var check = new SearchService($scope.searchDetails);
-                        check.$save(function (response) {
+                        check.$save(function (response)
+                        {
                             SessionService.searchResults = response.data;
                             console.log(response.data);
-                            drawOnMap(position.coords,response.data);
-                        }, function (errorResponse) {
-                            
+                            drawOnMap(position.coords, response.data);
+                        }, function (errorResponse)
+                        {
+
                         });
                     });
                 });
             }
         }
-        
-        self.markClosestTeachers = function (LatLng){
-            var teacherCenter=new google.maps.LatLng(LatLng[0],LatLng[1]);
-            var mymarker=new google.maps.Marker({
-              position:teacherCenter,
-              });
+
+        self.markClosestTeachers = function (LatLng)
+        {
+            var teacherCenter = new google.maps.LatLng(LatLng[0], LatLng[1]);
+            var mymarker = new google.maps.Marker({
+                position: teacherCenter,
+            });
 
             mymarker.setMap(map);
         };
 
-        
-       self.drawOnMap = function (position,lat_long) {
-        var closest_teachers=[];   
-        for(var i=0;i<lat_long.length;++i)   
-          closest_teachers.push([lat_long[i]["location"]["latitude"],lat_long[i]["location"]["longitude"]]);
-		var maps = document.getElementById("googleMap");
-	    maps.style.width=window.innerWidth+"px";
-	    maps.style.height=window.innerHeight+"px";
-	    var myCenter=new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
-	    var mapProp = {
-	        center:myCenter,
-	        zoom:12,
-            mapTypeId:google.maps.MapTypeId.ROADMAP
-	      };
-	    var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
-	    var image = 'https://image.spreadshirtmedia.com/image-server/v1/designs/12108165,width=178,height=178,version=1348666398/Google-Map-marker.png';
-  		var mymarker=new google.maps.Marker({
-	      position:myCenter,
-	      map: map,
-    	  icon: image
-	      });
-	    mymarker.setMap(map);
-	    for(var i=0;i<closest_teachers.length;i++){
-	    	console.log(closest_teachers[i]);
-	    	markClosestTeachers(closest_teachers[i]);
-	    }
-	};
+
+        self.drawOnMap = function (position, lat_long)
+        {
+            var closest_teachers = [];
+            for (var i = 0; i < lat_long.length; ++i)
+                closest_teachers.push([lat_long[i]["location"]["latitude"], lat_long[i]["location"]["longitude"]]);
+            var maps = document.getElementById("googleMap");
+            maps.style.width = window.innerWidth + "px";
+            maps.style.height = window.innerHeight + "px";
+            var myCenter = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+            var mapProp = {
+                center: myCenter,
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var image = 'https://image.spreadshirtmedia.com/image-server/v1/designs/12108165,width=178,height=178,version=1348666398/Google-Map-marker.png';
+            var mymarker = new google.maps.Marker({
+                position: myCenter,
+                map: map,
+                icon: image
+            });
+            mymarker.setMap(map);
+            for (var i = 0; i < closest_teachers.length; i++)
+            {
+                console.log(closest_teachers[i]);
+                markClosestTeachers(closest_teachers[i]);
+            }
+        };
 
 
-	
-        self.viewProfile = function () {
+        self.viewProfile = function ()
+        {
             console.log(SessionService.userDetails.username);
             $location.path('/users/' + SessionService.userDetails.username);
         };
@@ -312,54 +318,77 @@ angular.module('user',['ngMdIcons']).controller('UserController', ['$scope', '$r
             console.log("FB init");
         };
 
-        self.Launch=function(url){
+        self.shareProfile = function ()
+        {
+            FB.ui({
+                method: 'share_open_graph',
+                action_type: 'og.likes',
+                action_properties: JSON.stringify({
+                    object: 'https://poised-shuttle-122514.appspot.com/#!/',
+                })
+            }, function (response)
+            {
+                // Debug response (optional)
+                console.log(response);
+            });
+        }
+        self.Launch = function (url)
+        {
             window.location.assign(url)
         }
 
 
-        self.tutorshipEdit=false;
-        self.discipleshipEdit=false;
-        self.artistryEdit=false;
-        self.setEditOption=function(option){
-            if(option=='DISCIPLESHIP')self.discipleshipEdit=true;
-            if(option=='ARTISTRY')self.artistryEdit=true;
-            if(option=='TUTORSHIP')self.tutorshipEdit=true;
+        self.tutorshipEdit = false;
+        self.discipleshipEdit = false;
+        self.artistryEdit = false;
+        self.setEditOption = function (option)
+        {
+            if (option == 'DISCIPLESHIP')self.discipleshipEdit = true;
+            if (option == 'ARTISTRY')self.artistryEdit = true;
+            if (option == 'TUTORSHIP')self.tutorshipEdit = true;
         }
-        self.resetEditOption=function(option){
-            if(option=='DISCIPLESHIP')self.discipleshipEdit=false;
-            if(option=='ARTISTRY')self.artistryEdit=false;
-            if(option=='TUTORSHIP')self.tutorshipEdit=false;
-        }
-
-        self.getEditVar=function(cardHead){
-            if(cardHead=='DISCIPLESHIP') return self.discipleshipEdit;
-            if(cardHead=='ARTISTRY') return self.artistryEdit;
-            if(cardHead=='TUTORSHIP') return self.tutorshipEdit;
-
+        self.resetEditOption = function (option)
+        {
+            if (option == 'DISCIPLESHIP')self.discipleshipEdit = false;
+            if (option == 'ARTISTRY')self.artistryEdit = false;
+            if (option == 'TUTORSHIP')self.tutorshipEdit = false;
         }
 
-        function isEmpty(obj) {
-            for(var prop in obj) {
-                if(obj.hasOwnProperty(prop))
+        self.getEditVar = function (cardHead)
+        {
+            if (cardHead == 'DISCIPLESHIP') return self.discipleshipEdit;
+            if (cardHead == 'ARTISTRY') return self.artistryEdit;
+            if (cardHead == 'TUTORSHIP') return self.tutorshipEdit;
+
+        }
+
+        function isEmpty(obj)
+        {
+            for (var prop in obj)
+            {
+                if (obj.hasOwnProperty(prop))
                     return false;
             }
             return true;
         }
 
-        self.fillFormData=function(field){
-            console.log("fill form for "+field);
+        self.fillFormData = function (field)
+        {
+            console.log("fill form for " + field);
             // fetching data from form goes here..
-            var form=document.forms['editForm'];
-            if(field=='DISCIPLESHIP'){
-                    console.log(form[0].value+form[1].value);
-                    // store form[0].value in self.userDetails.qualification
-                    // store form[1].value in self.userDetails.training
+            var form = document.forms['editForm'];
+            if (field == 'DISCIPLESHIP')
+            {
+                console.log(form[0].value + form[1].value);
+                // store form[0].value in self.userDetails.qualification
+                // store form[1].value in self.userDetails.training
             }
-            else if(field=="ARTISTRY"){
-                    console.log(form[0].value+form[1].value+form[2].value+form[3].value);
+            else if (field == "ARTISTRY")
+            {
+                console.log(form[0].value + form[1].value + form[2].value + form[3].value);
             }
-            
-            
+
+
             self.resetEditOption(field);
         }
 
