@@ -9,9 +9,15 @@
                     <span class="md-headline">
         		            {{uctrl.fullName}}
         		            <nav style="float:right">
-        		              <ng-md-icon icon="facebook" size="24" ng-click="redirect('facebook')"></ng-md-icon>
-        		              <ng-md-icon icon="twitter" size="24" ng-click="redirect('twitter')"></ng-md-icon>
-        		              <ng-md-icon icon="google-plus" size="20" ng-click="redirect('google')"></ng-md-icon>
+                                <md-button class="md-icon-button" aria-label="fb" ng-click="uctrl.shareProfile()">
+                                    <ng-md-icon icon="facebook"></ng-md-icon>
+                                </md-button>
+                                <md-button class="md-icon-button" aria-label="twitter" ng-click="uctrl.Launch('http://www.twitter.com')">
+                                    <ng-md-icon icon="twitter"></ng-md-icon>
+                                </md-button>
+                                <md-button class="md-icon-button" aria-label="gplus" ng-click="uctrl.Launch('http://plus.goog.com')">
+                                    <ng-md-icon icon="google-plus"></ng-md-icon>
+                                </md-button>
         		            </nav>                
         		          </span>
 
@@ -19,14 +25,14 @@
             </md-card-title>
             <md-divider class="general-divider"></md-divider>
             <md-card-content>
-                <div ng-repeat="(key,value) in uctrl.generaldetails">
-                    <div class="label"><span style="color:red">{{key}}:</span></br>{{value}}</div>
+                <div  ng-repeat="(key,value) in uctrl.generaldetails">
+                    <div class="label" ng-show='value.length!=0'><span style="color:red">{{key}}:</span></br>{{value}}</div>
                     </br>
                 </div>
             </md-card-content>
         </md-card>
     </div>
-    <md-card>
+    <md-card ng-show="uctrl.about!=''">
         <md-card-content ng-hide="uctrl.read_about">
             <div class="label"><span style="color:red">About:</span></br>{{uctrl.about_short}}</div>
             </br>
@@ -46,15 +52,38 @@
     <md-card class="card-discipleship" ng-repeat="(cardHead,subHead) in uctrl.musicdetails">
         <div id="card-red-span" class="md-headline">{{cardHead}}</div>
         <md-card-content layout="column" layout-align="space-between">
-            <div class="card-media" ng-repeat="(event,description) in subHead">
+            <div class="card-media" ng-repeat="(event,description) in subHead" >
                 <span class="redText">{{event}}</span>
                 <br>
-                <div ng-repeat="(key,value) in description"><span style="font-weight: bold;">{{key}}</span>{{" - "+value+"\n"}}</div>
+                <div ng-show="uctrl.isEmpty(description)" ng-repeat="(key,value) in description"><span style="font-weight: bold;">{{key}}</span>{{" - "+value+"\n"}}</div>
+                <div ng-hide="uctrl.isEmpty(description)">Nothing to show</div>
                 </br>
                 </br>
             </div>
+
+            <!-- editing section -->
+            <div><md-button class="md-raised md-primary" ng-show="!uctrl.getEditVar(cardHead)" style="float:right" ng-click="uctrl.setEditOption(cardHead)">Add</md-button></div>
+
+            <md-card ng-show="uctrl.getEditVar(cardHead)">
+                <form name="editForm" ng-submit="uctrl.fillFormData(cardHead)">
+                    <md-card-content ng-repeat="(field,val) in uctrl.musicdetails[cardHead]">
+                        <md-input-container>
+                            <label>{{field}}</label>
+                            <input name="field" required></input>
+                        </md-input-container>
+                    </md-card-content>
+
+                    <md-card-footer>
+                        <md-button type="submit" style="float:left" class="md-raised md-primary" style="float:right">Done</md-button>
+                        <md-button class="md-raised md-primary" style="float:right" ng-click="uctrl.resetEditOption(cardHead)">Cancel</md-button>
+                    </md-card-footer>
+                </form>
+            </md-card>
+
+            <!-- editing ends here -->
+
         </md-card-content>
-    </md-card>
+    </md-card> 
 
     <md-card class="card-tutorship">
         <div id="card-red-span" class="md-headline">TUTORSHIP</div>
@@ -72,11 +101,35 @@
                 </span>
                 </br>
             </div>
+
+            <!-- editing section -->
+            <div><md-button class="md-raised md-primary" ng-show="!uctrl.tutorshipEdit" style="float:right" ng-click="uctrl.setEditOption('TUTORSHIP')">Add</md-button></div>
+
+            <md-card ng-show="uctrl.tutorshipEdit">
+                <form name="tutorshipEditForm">
+                    <md-card-content>
+                    <md-input-container>
+                        <label>Field1</label>
+                        <input name="field" required>
+                    </md-input-container>
+                    </md-card-content>
+
+                    <md-card-footer>
+                        <md-button type="submit" style="float:left" class="md-raised md-primary" style="float:right">Done</md-button>
+                        <md-button class="md-raised md-primary" style="float:right" ng-click="uctrl.resetEditOption('TUTORSHIP')">Cancel</md-button>
+                    </md-card-footer>
+                </form>
+                
+                
+            </md-card>
+
+            <!-- editing ends here -->
         </md-card-content>
+
     </md-card>
 
     <br>
     <br>
     <br>    
-    <!-- editing section -->
+    
 </div>

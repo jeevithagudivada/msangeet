@@ -4,20 +4,30 @@
 // Create the 'user' controller
 angular.module('user').controller('UserController', ['$scope', '$routeParams', '$location', '$window', 'SessionService', 'UserService', 'SearchService', 'MarkerCreatorService',
     function ($scope, $routeParams, $location, $window, SessionService, UserService, SearchService, MarkerCreatorService)
+
     {
         var self = this;
         self.userDetails = SessionService.userDetails;
         self.fullName = self.userDetails.firstName + " " + self.userDetails.lastName;
         self.profilePhoto = self.userDetails.profilePhoto;
-        console.log(self.userDetails);
-        //self.generaldetails = {
-        //    'Location': self.userDetails.residenceLocation.addressText,
-        //    'Musical Interests': self.userDetails.interests.join(),
-        //    'Influences': self.userDetails.influences.join()
-        //};
 
-        //self.about = self.userDetails.aboutSummary;
-        self.about = "John the bookmaker was an Indian bookmaker who gave money to Australian cricketers Mark Waugh and Shane Warne in 1994–95 for pitch and weather information. One of the most publicised betting controversies in cricket in the 1990s, the matter was initially covered up by the Australian Cricket Board (ACB), which reported it to the International Cricket Council and quietly fined the players. The players and the ACB were later widely condemned by the media and public, but not generally by the sports community. The ACB requested an independent inquiry and appointed Rob O'Regan QC, who wrote that a suspension for a  would have been a more appropriate penalty. He strongly condemned the players' behaviour and recommended that cricketers be educated about the dangers of gambling and unauthorised bookmakers. The controversy prompted Pakistan to ask the two Australian players to appear in front of their own judicial inquiry into corruption; the hearings were held in Australia.";
+        console.log("user details:");
+        console.log(self.userDetails)
+        if (!self.userDetails.residenceLocation) self.userDetails.residenceLocation = {
+            'addressText': ''
+        };
+        if (!self.userDetails.interests) self.userDetails.interests = [];
+        if (!self.userDetails.influences) self.userDetails.influences = [];
+        if (!self.userDetails.aboutSummary) self.userDetails.aboutSummary = '';
+
+        self.generaldetails = {
+            'Location': self.userDetails.residenceLocation.addressText,
+            'Musical Interests': self.userDetails.interests.join(),
+            'Influences': self.userDetails.influences.join()
+        };
+
+        self.about = self.userDetails.aboutSummary;
+
         self.about_short = self.about.substring(0, 100);
         self.read_about = false;
 
@@ -27,6 +37,7 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
             var skill = qual[i].musicForm.genre + " " + qual[i].musicForm.medium;
             self.qualification[qual[i].qualificationName] = skill + "-" + qual[i].awardingOrg + "-" + qual[i].qualificationYear.toString();
         }
+        console.log("qual" + self.qualification)
         self.training = {};
         var _training = self.userDetails.training;
         for (var i in _training) {
@@ -35,6 +46,7 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
             var duration = _training[i].fromYear.toString() + " to " + _training[i].toYear.toString();
             self.training[teacher_name] = skill + "-" + qual[i].awardingOrg + "-" + qual[i].qualificationYear.toString();
         }
+
         self.awards = {};
         var _awards = self.userDetails.awards;
         for (var i in _awards) {
@@ -111,40 +123,8 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
         self.tutorship = teaching;
 
         self.redirect = function (site) {
-            //            if(site=='facebook')
+
         }
-
-        //        var cities = [
-        //            {
-        //                username: 'You',
-        //                desc: 'Your current Location',
-        //                lat: 23.200000,
-        //                long: 79.225487
-        //              },
-        //            {
-        //                username: 'VK1',
-        //                desc: 'Distance: 20km',
-        //                lat: 23.200000,
-        //                long: 79.225487
-        //              },
-        //            {
-        //                username: 'VK2',
-        //                desc: 'Distance: 30km',
-        //                lat: 28.500000,
-        //                long: 77.250000
-        //              },
-        //            {
-        //                username: 'VK3',
-        //                desc: 'Distance: 40km',
-        //                lat: 19.000000,
-        //                long: 72.90000
-        //              }
-        //          ];
-        //
-        //        self.searchResults = cities;
-
-
-
         self.openInfoWindow = function (e, selectedMarker) {
             console.log(selectedMarker);
             e.preventDefault();
@@ -165,7 +145,6 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
                             SessionService.searchResults = response.data;
                             self.searchResults = response.data;
                             console.log(response.data);
-
                             var mapOptions = {
                                 zoom: 10,
                                 center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
@@ -213,7 +192,9 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
             }
         }
 
+
         self.viewProfile = function () {
+
             console.log(SessionService.userDetails.username);
             $location.path('/users/' + SessionService.userDetails.username);
         };
@@ -296,8 +277,9 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
             FB.ui({
                 method: 'apprequests',
                 message: 'Awesome application try it once'
+
             }, function () {
-                $window.location.href = 'https://poised-shuttle-122514.appspot.com/';
+
             });
         };
 
@@ -308,6 +290,68 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
             });
             console.log("FB init");
         };
+
+        self.shareProfile = function () {
+            FB.ui({
+                method: 'share_open_graph',
+                action_type: 'og.likes',
+                action_properties: JSON.stringify({
+                    object: 'https://poised-shuttle-122514.appspot.com/#!/',
+                })
+            }, function (response) {
+                // Debug response (optional)
+                console.log(response);
+            });
+        }
+        self.Launch = function (url) {
+            window.location.assign(url)
+        }
+
+
+        self.tutorshipEdit = false;
+        self.discipleshipEdit = false;
+        self.artistryEdit = false;
+        self.setEditOption = function (option) {
+            if (option == 'DISCIPLESHIP') self.discipleshipEdit = true;
+            if (option == 'ARTISTRY') self.artistryEdit = true;
+            if (option == 'TUTORSHIP') self.tutorshipEdit = true;
+        }
+        self.resetEditOption = function (option) {
+            if (option == 'DISCIPLESHIP') self.discipleshipEdit = false;
+            if (option == 'ARTISTRY') self.artistryEdit = false;
+            if (option == 'TUTORSHIP') self.tutorshipEdit = false;
+        }
+
+        self.getEditVar = function (cardHead) {
+            if (cardHead == 'DISCIPLESHIP') return self.discipleshipEdit;
+            if (cardHead == 'ARTISTRY') return self.artistryEdit;
+            if (cardHead == 'TUTORSHIP') return self.tutorshipEdit;
+
+        }
+
+        function isEmpty(obj) {
+            for (var prop in obj) {
+                if (obj.hasOwnProperty(prop))
+                    return false;
+            }
+            return true;
+        }
+
+        self.fillFormData = function (field) {
+            console.log("fill form for " + field);
+            // fetching data from form goes here..
+            var form = document.forms['editForm'];
+            if (field == 'DISCIPLESHIP') {
+                console.log(form[0].value + form[1].value);
+                // store form[0].value in self.userDetails.qualification
+                // store form[1].value in self.userDetails.training
+            } else if (field == "ARTISTRY") {
+                console.log(form[0].value + form[1].value + form[2].value + form[3].value);
+            }
+
+
+            self.resetEditOption(field);
+        }
 
         self.initFB();
     }]);

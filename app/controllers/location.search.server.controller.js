@@ -51,8 +51,14 @@ var init = function (all_teachers, studentLocation, MRD, CLOSEST_TEACHERS_SIZE) 
             all_teachers[i].location.latitute,
             all_teachers[i].location.longitude
         ]);
-        console.log(all_teachers[i].distance);
+        console.log('MRD', MRD);
+        console.log('distance', all_teachers[i].distance);
+        if (all_teachers[i]['distance'] > MRD) {
+            all_teachers.splice(i, 1);
+        }
     }
+
+
 
     var lat_long_teachers = [];
 
@@ -81,7 +87,7 @@ exports.searchGuru = function (req, res, next) {
     console.log(req.body.latitude);
     console.log(req.teachers);
 
-    var MRD = parseInt(req.body.maxRadialDistance);
+    var MRD = parseFloat(req.body.maxRadialDistance) * 1000;
     var CLOSEST_TEACHERS_SIZE = parseInt(req.body.resultCount);
     var teachers = [];
     studentLocation = [req.body.latitude, req.body.latitude]
