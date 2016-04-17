@@ -57,7 +57,7 @@ describe('Location Model Unit Tests:', function() {
 		});
 	});
 
-	// Define a post-tests function
+	// Define a function for post-tests
 	afterEach(function(done) {
 		// Clean the database
 		Location.remove(function() {
