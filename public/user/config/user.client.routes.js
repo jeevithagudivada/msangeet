@@ -64,6 +64,19 @@ angular.module('user').config(['$routeProvider',
                     }]
             }
         }).
+//        when('/user/:username', {
+            //            templateUrl: 'user/views/profile-view.client.view.html',
+            //            resolve: {
+            //                auth: ['$q', '$location', 'UserService',
+            //                  function ($q, $location, SessionService) {
+            //                        return SessionService.getUser().then(
+            //                            function (success) {
+            //                                console.log(success);
+            //                            },
+            //                            function (err) {});
+            //                    }]
+            //            }
+            //        }).
         when('/user/:username/edit', {
             templateUrl: 'user/views/profile-update.client.view.html'
         }).

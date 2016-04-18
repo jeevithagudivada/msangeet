@@ -37,7 +37,9 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
             var skill = qual[i].musicForm.genre + " " + qual[i].musicForm.medium;
             self.qualification[qual[i].qualificationName] = skill + "-" + qual[i].awardingOrg + "-" + qual[i].qualificationYear.toString();
         }
-        console.log("qual" + self.qualification)
+
+        console.log("qual");
+        console.log(self.qualification)
         self.training = {};
         var _training = self.userDetails.training;
         for (var i in _training) {
@@ -236,6 +238,7 @@ angular.module('user').controller('UserController', ['$scope', '$routeParams', '
                 username: $routeParams.username
             });
             console.log($scope.user);
+            //SessionService.userDetails = $scope.user;
         };
 
         // Create a new controller method for updating a single user

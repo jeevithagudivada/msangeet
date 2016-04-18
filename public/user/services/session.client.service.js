@@ -14,6 +14,15 @@ angular.module('user').factory('SessionService', ['$resource', '$http',
                         return response;
                     });
             },
+            getUser: function () {
+                return $http.get('/api/user/:username', {
+                        username: '@username'
+                    })
+                    .then(function (response) {
+                        //service.userDetails = response.data.user;
+                        return response;
+                    });
+            },
             sendVerificationCode: function (codeDetails) {
                 console.log(codeDetails);
                 return $http.post('api/verification/create', codeDetails)
